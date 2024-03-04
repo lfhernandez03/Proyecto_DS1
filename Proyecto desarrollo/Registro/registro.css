@@ -12,7 +12,7 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url(/MULTIMEDIA/LOGIN.avif);
+    background: url(Multimedia/LOGIN.avif);
     background-size: cover;
     background-position: center center;
     height: 100vh;
