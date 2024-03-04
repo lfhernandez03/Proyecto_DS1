@@ -12,7 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: url(/Proyecto\ desarrollo/Multimedia/fondologin.avif);
+    background-image: url(/Proyecto\ desarrollo/Multimedia/FondoLogin.png);
     background-repeat: no-repeat;
     background-size: cover;
     
@@ -21,10 +21,10 @@ body {
 .div_container {
     width: 420px;
     background: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.918);
+    border: 2px blur(230, 222, 222, 0.144);
     box-shadow: 0 0 10px rgba(20, 20, 20, 0.2);
-    backdrop-filter: blur(20px);
-    color: rgb(241, 240, 240);
+    backdrop-filter: blur(50px);
+    color: rgb(241, 236, 236);
     border-radius: 10px;
     padding: 30px 40px;
 }
@@ -35,7 +35,7 @@ body {
 }
 
 .div_container .container {
-    box-shadow: 0 0 10px rgba(243, 241, 241, 0.3);
+    box-shadow: 0 0 10px rgba(221, 213, 213, 0.781);
     border-radius: 40px;
     position: relative;
     width: 100%;
@@ -49,7 +49,7 @@ body {
     background: transparent;
     border: none;
     outline: none;
-    border: 2px solid rgba(255, 255, 255, .2);
+    border: 2px solid rgba(238, 233, 233, 0.89);
     border-radius: 40px;
     font-size: 16px;
     color: rgb(31, 28, 28);
@@ -57,7 +57,7 @@ body {
 }
 
 .container input::placeholder {
-    color: rgb(252, 252, 252);
+    color: rgb(241, 236, 236);
 }
 
 .container i {
@@ -77,7 +77,7 @@ body {
 
 .recuerdame-olvidaste label input {
     cursor: pointer;
-    accent-color: #fff;
+    accent-color: #f7f0f0;
     margin-right: 3px;
     text-decoration: none;
 }
@@ -93,14 +93,14 @@ body {
 .div_container .btn {
     width: 100%;
     height: 45px;
-    background: #fff;
+    background: white;
     border: none;
     outline: none;
     border-radius: 40px;
     box-shadow: 0 0 10px rgba(247, 243, 243, 0.3);
     cursor: pointer;
     font-size: 16px;
-    color: #0f0e0e;
+    color: #0c0c0c;
     font-weight: 600;
 }
 
