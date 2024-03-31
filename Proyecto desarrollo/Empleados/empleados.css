@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+#inicio{
+    background: url(Multimedia/hcari1.jpg);
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+}
+
+#inicio .contenido header{
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    top: 0;
+}
+
+#inicio .contenido header .contenido_header{
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+#inicio .contenido header .contenido_header h1{
+    text-align: center;
+    color: brown;
+}
+
+#inicio .contenido header .contenido_header nav ul{
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+#inicio .contenido header .contenido_header nav ul li a{
+    text-decoration: none;
+    color: #fff;
+    margin: 0 12px;
+    font-weight: 400;
+    transition: 0.5s;
+}
+
+#inicio .contenido header .contenido_header nav ul a:hover{
+    color: #ff5080;
+}
