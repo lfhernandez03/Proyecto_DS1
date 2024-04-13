@@ -1,59 +1,62 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;600&display=swap');
 
-*{
+body, html {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat';
 }
 
-html{
-    scroll-behavior: smooth;
+.todo {
+    padding: 0;
+    margin: 0;
 }
 
-#inicio{
-    background: url(Multimedia/hcari1.jpg);
-    background-size: cover;
-    background-position: center center;
-    height: 100vh;
+.cabecera {
+    background-color: #000;
+    color: rgb(216, 115, 115);
+    height: 60px;
+    align-content: center;
 }
 
-#inicio .contenido header{
-    background-color: rgba(0, 0, 0, 0.8);
-    position: fixed;
-    width: 100%;
-    z-index: 100;
-    top: 0;
+.cuerpo {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    height: 87vh;
+    background-color: beige;
 }
 
-#inicio .contenido header .contenido_header{
-    max-width: 1100px;
-    margin: auto;
+
+.box {
+    margin: 15px;
+    border: 5px solid #000;
+    border-radius: 50px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 10px 20px;
+    font-size: 24px;
 }
 
-#inicio .contenido header .contenido_header h1{
-    text-align: center;
-    color: brown;
-}
-
-#inicio .contenido header .contenido_header nav ul{
-    list-style: none;
+.carta {
+    margin: 15px;
     display: flex;
+    justify-content: center;
     align-items: center;
+    font-size: 28px;
+    color: rgb(248, 95, 95);
 }
 
-#inicio .contenido header .contenido_header nav ul li a{
-    text-decoration: none;
-    color: #fff;
-    margin: 0 12px;
-    font-weight: 400;
-    transition: 0.5s;
+.box:hover{
+    background: rgb(238, 108, 108);
+    color: aliceblue;
 }
 
-#inicio .contenido header .contenido_header nav ul a:hover{
-    color: #ff5080;
+.box:active{
+    background: rgb(0, 0, 0);
+    color: aliceblue;
+}
+
+
+.bienvenidos {
+    position: relative;
+    left: 40%;
 }
