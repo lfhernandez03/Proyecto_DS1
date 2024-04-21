@@ -12,7 +12,7 @@ html{
 }
 
 #inicio{
-    background: url(/MULTIMEDIA/fondoinicio.jpg);
+    background: url(./Multimedia/fondoinicio.jpg);
     background-size: cover;
     background-position: center center;
     height: 100vh;
