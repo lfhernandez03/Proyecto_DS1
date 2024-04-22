@@ -5,6 +5,9 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat';
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
 }
 
 html{
@@ -19,67 +22,106 @@ html{
 }
 
 /*HEADER*/
-
-#inicio .contenido header{
-    background-color: rgba(0, 0, 0, 0.8);
-    position: fixed;
+nav{
+    background: #333;
+    height: 80px;
     width: 100%;
-    z-index: 100;
-    top: 0;
+    position: fixed;
 }
 
-#inicio .contenido header .contenido_header{
-    max-width: 1100px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
+.enlace1{
+    position: absolute;
+    padding: 10px 60px;
 }
 
-#inicio .contenido header .contenido_header h1{
-    text-align: center;
-    color: brown;
+.logo{
+    height: 60px;
+}
+nav ul{
+    float: right;
+    margin-right: 20px;
 }
 
-#inicio .contenido header .contenido_header nav ul{
-    list-style: none;
-    display: flex;
-    align-items: center;
-}
-
-#inicio .contenido header .contenido_header nav ul li a{
-    text-decoration: none;
-    color: #fff;
-    margin: 0 12px;
-    font-weight: 400;
-    transition: 0.5s;
-}
-
-#inicio .contenido header .contenido_header nav ul a:hover{
-    color: #ff5080;
-}
-
-#inicio .contenido header .contenido_header .redes a{
-    text-decoration: none;
-    color: #fff;
+nav ul li{
     display: inline-block;
-    margin-left: 10px;
-    transition: 0.5s;
+    line-height: 80px;
+    margin: 0 5px;
 }
 
-#inicio .contenido header .contenido_header .redes a:hover{
-    color: #ff5080;
+nav ul li a{
+    color: #fdfafa;
+    font-size: 18px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+li a.active, li a:hover{
+    background: #ff5080;
+    transition: .5s;
 }
 
+.checkbtn{
+    font-size: 30px;
+    color: rgb(250, 246, 246);
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
 
+#Check{
+    display: none;
+}
+/*Responsive*/
+@media (max-width: 952px){
+    .enlace1{
+        padding-left: 20px;
+    }
+    nav ul li a{
+        font-size: 16px;
+    }
+
+}
+@media (max-width: 858px){
+    .checkbtn{
+        display: block;
+    }
+    #inicio .contenido ul{
+        position: relative;
+        border-radius: 10px;
+        background: #333;
+        top: 80px;
+        left: 100%;
+        text-align: center;
+        transition: all .5s;
+        width: 30%;
+        height: 400px;
+        text-decoration: none;;
+        border-radius: 10px;
+    }
+    #inicio .contenido nav ul li{
+        display: block;
+        margin: 60px 0;
+        line-height: 30px;
+    }
+    #inicio .contenido nav ul li a{
+        font-size: 20px;
+    }
+    #inicio .contenido li a:hover, li a.active{
+        background: none;
+        color: #ff5080;
+    }
+    #Check:checked ~ ul{
+        left:0;
+    }
+}
 /*PRESENTACION*/
 #inicio .contenido .div_presentacion{
-    max-width: 850px;
     height: 60vh;
     margin: auto;
     margin-bottom: 0px;
-    color: #ffffff;
+    color: #111111;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -89,11 +131,11 @@ html{
 
 #inicio .contenido .div_presentacion .titulo{
     font-size: 34px;
-    margin-top: 20px;
+    margin-top: 25px;
     margin-bottom: 8px;
     text-transform: uppercase;
     letter-spacing: 3px;
-    color: antiquewhite;
+    color: #ff5080;
     font-weight: 600;
     text-align: center;
 }
@@ -102,7 +144,7 @@ html{
 #inicio .contenido .div_presentacion h2{
     font-size: 26px;
     margin-bottom: 15px;
-    color: antiquewhite;
+    color: rgb(7, 7, 7);
     font-weight: 400;
 }
 
@@ -124,8 +166,9 @@ html{
 #inicio .contenido .div_presentacion a{
     text-decoration: none;
     border: 1px solid #000;
+    background: white;
     border-radius: 10px;
-    color: #fff;
+    color: #070707;
     font-size: 24px;
     padding: 10px 20px;
     transition:  0.5s ;
@@ -133,7 +176,43 @@ html{
 
 #inicio .contenido .div_presentacion a:hover{
     background-color: #ff5080;
-    opacity: 0.7;
+    opacity: 0.3;
+}
+
+/*Redes*/
+#inicio .contenido .div_presentacion .redes{
+    padding: 5px 10px;
+    margin-left: 1500px;
+}
+#inicio .contenido .div_presentacion .redes a{
+    text-decoration: none;
+    color: #ff5080;
+    display: inline-block;
+    margin-left: 10px;
+    transition: 0.5s;
+}
+/*Responsive*/
+@media (max-width: 1250px){
+    #inicio .contenido .div_presentacion .redes{
+    padding: 5px 10px;
+    margin-left: 750px;
+}
+}
+
+@media (max-width: 950px){
+    #inicio .contenido .div_presentacion .redes{
+    padding: 5px 10px;
+    margin-left: 650px;
+}
+}
+@media (max-width: 858px){
+    #inicio .contenido .div_presentacion{
+        padding-top: 70px;
+    }
+    #inicio .contenido .div_presentacion .redes{
+    margin-left: 500px;
+    padding: 0px 10px;
+}
 }
 
 /*consultar disponibilidad*/
@@ -149,11 +228,13 @@ html{
     flex-direction: column;
     align-items: center;
     padding: 10px 20px;
-    background: url(/MULTIMEDIA/consulta.jpg);
-    border: 1px solid #808080;
+    background: transparent;
+    background-size: cover;
+    background-position: center center;
+    border: 1px solid #817e7e;
     border-radius: 10px;
     transition: opacity 0.5s ease, box-shadow 0.35s ease-in-out;
-    color: #fff;
+    color: #0c0c0c;
     opacity: 0.85;
     flex-wrap: wrap;
     box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2); 
@@ -206,13 +287,13 @@ html{
 #inicio .contenido .div_check .div_in input{
     padding: 5px;
     background-color: transparent; 
-    border: 1px solid #ccc;
+    border: 1px solid #111111;
     border-radius: 5px;
-    color: #fff;
+    color: #111111;
     
 }
 #inicio .contenido .div_check .div_in input::placeholder{
-    color: #fff;
+    color: #ac6161;
 }
 
 #inicio .contenido .div_check .div_in .div_btn{
@@ -225,7 +306,7 @@ html{
     padding: 6px 15px;
     border-radius: 10px;
     cursor: pointer;
-    color: #fff;
+    color: #030303;
     border: 1px solid #808080;
     transition: opacity 0.5s ease;
     opacity: 0.9;
@@ -237,6 +318,39 @@ html{
 #inicio .contenido .div_check .div_btn .btn:hover{
     opacity: 0.8;
     background-color: #ff5080;
+}
+
+@media (max-width: 858px){
+    #inicio .contenido .div_check{
+        margin-top: 70px;
+}
+}
+
+/*PANEL CONSULTA*/
+#consulta .panel{
+    display: flex;
+    margin: auto;
+    height: 400px;
+    width: 85%;
+    margin-top: 40px;
+    text-align: center; 
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    background: transparent;
+    border: 1px solid #817e7e;
+    border-radius: 10px;
+    color: #ff5080;
+    opacity: 0.85;
+    flex-wrap: wrap; 
+    display: none;
+}
+#consulta .panel .titulo{
+    justify-content: center;
+    position: static;
+    align-items: center;
+    text-align: center;
+    margin: auto auto;
 }
 
 /*----------------------SECCION QUIENES SOMOS---------------------------------*/
@@ -265,14 +379,14 @@ html{
 #quienes .div_quienes .titulo{
     font-size: 45px;
     font-weight: bold;
-    color: #111135;
+    color: #ff5080;
     margin-bottom: 10px;
 }
 
 #quienes .div_quienes h2{
     font-size: 24px;
     font-weight: 400;
-    color: #111135;
+    color: #080808;
     margin-bottom: 10px;
 }
 
@@ -290,12 +404,53 @@ html{
     margin-bottom: 10px;
 
 }
+/*Responsive*/
+@media (max-width: 858px){
+    #quienes {
+        padding: 50px 14px;
+    }
+    #quienes .div.foto{
+        max-width: 300px;
+        margin-right: 10px;
+    }
+    #quienes .div_foto img{
+        padding: 10px;
+        width: 300px;
+        height: 42vh;
+        border-radius: 20px;
+        background-color: #f3f3f3;
+    }
+    #quienes .div_quienes .titulo{
+        font-size: 26px;
+    }
+    
+    #quienes .div_quienes h2{
+        font-size: 16px;
+        font-weight: 200;
+    }
+    
+    #quienes .div_quienes h2 span{
+        font-size: 17px;
+    }
+    
+    #quienes .div_quienes .p_descripcion{
+        font-size: 13px;
+        font-weight: 200;
+        margin-bottom: 10px;
+    
+    }
+
+
+}
+
 
 /*-------------------------SECCION SERVICIOS--------------------------*/
 
 #servicios{ 
-    padding: 65px 15px;
+    padding: 75px 15px;
     text-align: center;
+    max-width: 1100px;
+    margin: auto;
     background-color: #f3f3f3;
 }
 
@@ -303,14 +458,14 @@ html{
     font-size: 26px;
     margin-bottom: 10px;
     font-weight: 600;
-    color: #111135;
+    color: #ff5080;
 }
 
 #servicios h3{
     font-size: 38px;
     margin-bottom: 10px;
     font-weight: 800;
-    color: #111135;
+    color: #ff5080;
 }
 
 #servicios .div_contenido{
@@ -323,7 +478,7 @@ html{
 
 #servicios .div_contenido .div_habitaciones{
     margin-top: 20px;
-    max-width: 355px;
+    max-width: 300px;
     margin-bottom: 20px; 
     background-color: #f9f9f9;
     border: 1px solid #ddd; 
@@ -350,7 +505,7 @@ html{
     font-size: 24px;
     margin-bottom: 10px;
     font-weight: 800;
-    color: #111135;
+    color: #0c0c0c;
 }
 
 
@@ -368,17 +523,17 @@ html{
 }
 
 #servicios .div_contenido .div_habitaciones .descripcion{
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 10px;
     font-weight: 300;
-    color: #111135;
+    color: #0d0d14;
 }
 
 #servicios .div_contenido .div_habitaciones h5{
     font-size: 25px;
     margin-bottom: 10px;
     font-weight: 400;
-    color: #111135;
+    color: #050505;
     transition: font-weight 0.18s ease-in-out;
 }
 
@@ -406,7 +561,7 @@ html{
 }
 
 #servicios .div_servicios .div_imagenes{
-    max-width: 600px;
+    max-width: 500px;
     display: flex;
     height: 430px;
 }
@@ -450,7 +605,7 @@ html{
     margin-bottom: 20px;
     margin-top: 25PX;
     font-weight: 300;
-    color: #111135;
+    color: #070707;
 }
 
 #servicios .div_servicios .div_informacion .iconos{
@@ -473,10 +628,41 @@ html{
     vertical-align: middle;
 }
 
+/*Responsive*/
+@media (max-width: 858px){
+    #servicios .div_contenido .div_habitaciones{
+        margin-top: 10px;
+        max-width: 200px;
+        margin-bottom: 20px; 
+    }
+    #servicios .div_contenido .div_habitaciones .descripcion{
+        font-size: 11px;
+    }
+    #servicios .div_contenido .div_habitaciones img{
+        max-width: 66%;
+        height: 14vh;
+        border-radius: 8px; 
+        margin-bottom: 10px;
+    }
+
+    #servicios .div_servicios .div_imagenes{
+        max-width: 200px;
+    }
+    #servicios .div_servicios .div_imagenes img{
+        width: 80px;
+    }
+    #servicios .div_servicios .div_informacion{
+        max-width: 280px;
+    }
+
+}
+
 /* --------------------Seccion Contacto ------------------------------*/
 
 #contacto{
-    padding: 10px 15px;
+    padding: 75px 15px 35px 10px;
+    text-align: center;
+    max-width: 1100px;
     margin: auto;
     background-color: #f3f3f3;
 }
@@ -486,7 +672,7 @@ html{
     justify-content:center;
     font-size: 32px;
     font-weight: 600;
-    color: #111135;
+    color: #ff5080;
     margin-bottom: 12px;
     text-align: center;
 
@@ -553,6 +739,7 @@ html{
     transition: 0.5s;
     padding: 10px 15px;
     font-size: 18px;
+    color: #000;
     border: 1px solid #919191;
     justify-content: center center;
     text-align: center;
@@ -570,7 +757,7 @@ html{
 footer {
     background-color: #333;
     color: #fff;
-    padding: 30px 0;
+    padding: 20px 0;
 }
 
 .container {
@@ -611,6 +798,7 @@ footer {
     color: #fff;
     text-decoration: none;
     transition: color 0.3s ease;
+    margin-left: 10px;
 }
 
 .footer-content ul li a:hover {
