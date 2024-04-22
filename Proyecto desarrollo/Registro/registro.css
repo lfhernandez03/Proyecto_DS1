@@ -12,32 +12,32 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: url(/Proyecto\ desarrollo/Multimedia/FondoLogin.png);
+    background: url(/MULTIMEDIA/LOGIN.avif);
     background-size: cover;
-    background-repeat: no-repeat;
+    background-position: center center;
     height: 100vh;
 }
 
 .div_container{
     width: 650px;
-    background-color: rgba(243, 236, 236, 0.007);
-    color: black;
-    border: 2px solid rgba(247, 242, 242, 0.2);
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid rgb(255, 255, 255, 0.2);
     border-radius: 30px;
     padding: 20px 25px;
-    opacity: 0.95;
+    opacity: 0.68;
     transition: 0.4s ease;
-    box-shadow: 1px 1px 4px rgb(250, 247, 247);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     margin: 600px 75px;
 }
 
 .div_container:hover{
     opacity: 1;
-    box-shadow: 3px 3px 6px #f1f0f0;
+    box-shadow: 1px 1px 3px #808080;
 }
 
 .div_container h1{
-    color: #faf5f5;
+    color: #fff;
     font-size: 36px;
     font-weight: 700;
     text-align: center;
@@ -48,7 +48,7 @@ body{
     width: 100%;
     height: 45px;
     margin-bottom: 13px;
-    color: #050505;
+    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,31 +61,31 @@ body{
     margin-top: 23px;
     height: 100%;
     font-size: 20px;
-    color: #e6e2e2;
+    color: #fff;
 }
 
 .div_container .container input{
     width: 45%;
     margin: 8px;
     height: 100%;
-    background: blur(2000px);
+    background: transparent;
     border: none;
     outline: none;
-    border: 2px solid rgba(15, 15, 15, 0.2);
+    border: 2px solid rgb(255, 255, 255, 0.2);
     border-radius: 15px;
     opacity: 0.45;
     transition: 0.5s ease;
-    color: #131212;
+    color: #fff;
     font-size: 20px;
 }
 
 .div_container .container input:hover{
-    opacity: 0.87; 
+    opacity: 1; 
 }
 
 .div_container .container input::placeholder{
     font-size: 23px;
-    color: #f0eded;
+    color: #fff;
     font-weight: 500;
     letter-spacing: 1px;
 }
@@ -108,17 +108,16 @@ body{
     padding: 10px 20px;
     border-radius: 14px;
     cursor: pointer;
-    color: rgb(7, 7, 7);
-    border: 1px solid rgba(255, 255, 255, 0.336);
+    color: #fff;
+    border: 1px solid #808080;
     transition: 0.5s ease;
     opacity: 0.9;
     font-size: 22px;
     font-weight: 550;
-    background-color: white;
-    box-shadow: 0 0 10px rgb(250, 247, 247);
+    background-color: transparent;
 }
 
 .div_container .div_btn input:hover{
     opacity: 0.8;
-    color: #0f0f0f;
+    color: #ff5080;
 } 
