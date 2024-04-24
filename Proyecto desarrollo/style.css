@@ -124,7 +124,7 @@ li a.active, li a:hover{
     margin: auto;
     padding: 70px 300px;
     margin-bottom: 0px;
-    color: #fff;
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -423,9 +423,12 @@ li a.active, li a:hover{
 }
 /*Responsive*/
 @media (max-width: 858px){
+    #quienes{
+        flex-direction: column;
+        align-items: center;
+    }
     #quienes .div_quienes{
-        margin-top: 85%;
-        margin-left: 0px;
+        margin-top: 20px;
         
     }
     #quienes .div.foto{
