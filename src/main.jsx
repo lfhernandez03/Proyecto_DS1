@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Container } from "./Login/login.jsx";
-import "./login.css";
+import { ContainerEmp } from "./Empleados/empleados.jsx";
+import "./empleados.css";
+import App from "./App.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
-    <Container />
+    <App/>
   </>
 );

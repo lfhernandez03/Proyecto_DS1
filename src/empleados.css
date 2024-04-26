@@ -1,0 +1,58 @@
+body, html {
+    height: auto;
+    margin: 0;
+}
+
+.Cuerpo {
+    border: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 623px;
+    text-align: center; /*Esto centra el contenido de texto horizontalmente*/
+}
+
+.ques {
+    padding-top: 25px;
+}
+
+.botones {
+    display: flex;
+    gap: 50px;
+}
+
+.forms{
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 80%;
+    height: 100%;
+    margin: 10px;
+    margin-left: 10%;
+    background-color: rgb(117, 115, 115);
+    padding: 10px;
+}
+
+
+.cuerpo-form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row: 1fr 1fr;
+    column-gap: 20%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.label-form{
+    display: flex;
+    top: 10px;
+    justify-content: center;
+    text-align: center;
+}
+
+.botones{
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+}
