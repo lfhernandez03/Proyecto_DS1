@@ -39,7 +39,7 @@ export const Container1 = () => {
 export const Container2 = () => {
   return (
     <EmpleadoLayout>
-     <div className="forms" id="2">
+      <div className="forms" id="2">
         <h1>Busqueda de Reserva</h1>
         <h3>Informacion del cliente</h3>
         <div className="cuerpo-form">
@@ -79,8 +79,18 @@ export const ContainerEmp = () => {
           <h4 className="ques">¿Que quieres hacer hoy?</h4>
 
           <div className="botones">
-          <Link to={'/make-reservation'}>Hacer reserva</Link>
-          <Link to={'/search-reservation'}>Buscar reserva</Link>
+            <Link to={"/make-reservation"}>
+              <ButtonEmplo
+                className="bot"
+                label="Hacer Reserva"
+              />
+            </Link>
+            <Link to={"/search-reservation"}>
+              <ButtonEmplo
+                className="bot"
+                label="Buscar Reserva"
+              />
+            </Link>
           </div>
         </div>
       </div>
