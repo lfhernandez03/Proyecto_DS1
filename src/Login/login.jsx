@@ -3,8 +3,7 @@ import { TextFields } from "./loginComponents";
 import { ButtonLogin } from "./loginComponents";
 import { Link } from "react-router-dom";
 
-
-export const Container = () => {
+export const LoginTab = () => {
   return (
     <body>
       <div className="container">
@@ -16,23 +15,26 @@ export const Container = () => {
           <div className="login-container">
             <h1>Login</h1>
             <form action="/login" method="get">
+              <TextFields label="Nombre de Usuario" name="usuario" />
               <TextFields
-                label="Nombre de Usuario" 
-                name="usuario" 
-              />
-              <TextFields 
-                label="Contraseña" 
+                label="Contraseña"
                 name="contraseña"
-                type="password" 
+                type="password"
               />
-              <ButtonLogin 
-                title="Iniciar Sesión"
-                type="submit" 
-                value="Iniciar Sesión" 
-              />       
+              <Link className="ToEmpleado" to="/Empleados">
+                <ButtonLogin
+                  title="Iniciar Sesión"
+                  type="submit"
+                  value="Iniciar Sesión"
+                />
+              </Link>
               <div className="footer">
-                <h5><Link className="ToRecoverTab" to="/CrearContraseña">¿Olvidaste tu contraseña?</Link></h5>
-              </div>      
+                <h5>
+                  <Link className="ToRecoverTab" to="/CrearContraseña">
+                    ¿Olvidaste tu contraseña?
+                  </Link>
+                </h5>
+              </div>
             </form>
           </div>
         </div>

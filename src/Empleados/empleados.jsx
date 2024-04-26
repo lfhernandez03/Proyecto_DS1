@@ -15,7 +15,7 @@ export const Container1 = () => {
           <TextFieldsEmplo label="Nombre" name="name" type="name" />
           <TextFieldsEmplo label="Identificación" name="id" type="id" />
           <TextFieldsEmplo
-            label="Correo eletronico"
+            label="Correo electrónico"
             name="email"
             type="email"
           />
@@ -79,13 +79,13 @@ export const ContainerEmp = () => {
           <h4 className="ques">¿Que quieres hacer hoy?</h4>
 
           <div className="botones">
-            <Link to={"/make-reservation"}>
+            <Link className="ToHacerReserva" to="/HacerReserva">
               <ButtonEmplo
-                className="bot"
-                label="Hacer Reserva"
-              />
+                  className="bot"
+                  label="Hacer Reserva"
+                />
             </Link>
-            <Link to={"/search-reservation"}>
+            <Link className="ToBuscarReserva" to="/BuscarReserva">
               <ButtonEmplo
                 className="bot"
                 label="Buscar Reserva"
