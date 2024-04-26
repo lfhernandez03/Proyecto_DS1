@@ -21,13 +21,14 @@ body, html {
     gap: 50px;
 }
 
+
 .forms{
     display: flexbox;
     justify-content: center;
     align-items: center;
     text-align: center;
     width: 80%;
-    height: 100%;
+    height: 615px;
     margin: 10px;
     margin-left: 10%;
     background-color: rgb(117, 115, 115);
