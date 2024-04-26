@@ -68,3 +68,9 @@ body{
     padding-top: 10px;
     padding-bottom: 30px;
 }
+
+.footer h5{
+    position: relative;
+    text-align: center;
+    top: 30px;
+}

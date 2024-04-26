@@ -9,7 +9,7 @@ export function ButtonLogin(props) {
       value={props.value}
       style={{ marginTop: "25px" }} 
       variant="outlined">
-        Iniciar Sesión
+        {props.title}
     </Button>
   );
 }

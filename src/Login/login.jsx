@@ -1,6 +1,8 @@
 import React from "react";
 import { TextFields } from "./loginComponents";
 import { ButtonLogin } from "./loginComponents";
+import { Link } from "react-router-dom";
+
 
 export const Container = () => {
   return (
@@ -24,9 +26,13 @@ export const Container = () => {
                 type="password" 
               />
               <ButtonLogin 
+                title="Iniciar Sesión"
                 type="submit" 
                 value="Iniciar Sesión" 
-              />
+              />       
+              <div className="footer">
+                <h5><Link className="ToRecoverTab" to="/CrearContraseña">¿Olvidaste tu contraseña?</Link></h5>
+              </div>      
             </form>
           </div>
         </div>
