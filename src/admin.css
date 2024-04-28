@@ -32,11 +32,48 @@ body{
 
 .menu {
     width: 100%;
-    background: rgba(66, 64, 64, 0.212);
+    background: rgba(247, 243, 243, 0.212);
     display: inline-flex;
     justify-content: center;
     padding: 0.2%;
     margin: 80px 150px 50px 0px;
     gap: 35px; /* Ajusta el espacio entre los elementos según sea necesario */
     color: black;
+}
+
+.forms{
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 80%;
+    height: 480px;
+    margin: 10px;
+    margin-left: 10%;
+    padding-top: 30px;
+    padding: 10px auto;
+    background: #797777;
+}
+
+
+.cuerpo-form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row: 1fr 1fr;
+    column-gap: 20%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.label-form{
+    display: flex;
+    top: 10px;
+    justify-content: center;
+    text-align: center;
+}
+
+.botones{
+    display: flex;
+    justify-content: center;
+    gap: 60px;
 }
