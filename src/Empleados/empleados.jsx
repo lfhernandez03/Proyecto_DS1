@@ -74,8 +74,8 @@ export const ContainerEmp = () => {
     <>
       <div className="Cuerpo">
         <div>
-          <h1>BIENVENIDO</h1>
-          <h1>Usuario</h1>
+          <h1>Bienvenido,</h1>
+          <h3>Usuario</h3>
           <h4 className="ques">¿Que quieres hacer hoy?</h4>
 
           <div className="botones">
