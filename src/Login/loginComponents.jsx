@@ -21,6 +21,8 @@ export function TextFields(props) {
       type={props.type}
       label={props.label}
       name={props.name}
+      value={props.value}
+      onChange={props.onChange}
       variant="standard"
       style={{ paddingBottom: "15px"}}
       required

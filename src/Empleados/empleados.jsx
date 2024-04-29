@@ -8,18 +8,29 @@ import { Link } from "react-router-dom";
 export const Container1 = () => {
   return (
     <EmpleadoLayout>
-      <div className="forms" id="1">
+      <div className="form-container" id="1">
         <h1>Formulario de Reserva</h1>
         <h3>Informacion del cliente</h3>
-        <div className="cuerpo-form">
-          <TextFieldsEmplo label="Nombre" name="name" type="name" />
-          <TextFieldsEmplo label="Identificación" name="id" type="id" />
+        <form>
+          <TextFieldsEmplo 
+            label="Nombre" 
+            name="name" 
+            type="name" />
+          <TextFieldsEmplo 
+            label="Identificación" 
+            name="id" 
+            type="id" />
           <TextFieldsEmplo
             label="Correo electrónico"
             name="email"
             type="email"
           />
-          <TextFieldsEmplo label="Telefono" name="tel" type="tel" />
+          <TextFieldsEmplo 
+            label="Telefono" 
+            name="tel" 
+            type="tel" />
+        </form> 
+         
         </div>
         <h3>Informacion de la reserva</h3>
         <div className="cuerpo-form">
@@ -31,7 +42,6 @@ export const Container1 = () => {
         <div>
           <ButtonEmplo type="submit" value="Reservar" label="Hacer reserva" />
         </div>
-      </div>
     </EmpleadoLayout>
   );
 };
@@ -72,28 +82,24 @@ export const Container2 = () => {
 export const ContainerEmp = () => {
   return (
     <>
-      <div className="Cuerpo">
+      <body className="cuerpo">
         <div>
-          <h1>BIENVENIDO</h1>
+          <h1>Bienvenido,</h1>
           <h1>Usuario</h1>
-          <h4 className="ques">¿Que quieres hacer hoy?</h4>
+          <h4 className="ques" style={{ paddingTop: "25px" }}>
+            ¿Qué quieres hacer hoy?
+          </h4>
 
           <div className="botones">
             <Link className="ToHacerReserva" to="/HacerReserva">
-              <ButtonEmplo
-                  className="bot"
-                  label="Hacer Reserva"
-                />
+              <ButtonEmplo className="bot" label="Hacer Reserva" />
             </Link>
             <Link className="ToBuscarReserva" to="/BuscarReserva">
-              <ButtonEmplo
-                className="bot"
-                label="Buscar Reserva"
-              />
+              <ButtonEmplo className="bot" label="Buscar Reserva" />
             </Link>
           </div>
         </div>
-      </div>
+      </body>
     </>
   );
 };

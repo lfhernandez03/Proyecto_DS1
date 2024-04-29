@@ -7,7 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "./login.css";
 import "./recoverTab.css";
-import "./empleados.css"
+import "./empleados.css";
 import { ContainerEmp, Container1, Container2 } from "./Empleados/empleados.jsx";
 
 
