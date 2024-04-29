@@ -28,7 +28,7 @@ export const LoginTab = () => {
     //Validación de campos
     if( formData.userName && formData.password){
       alert('Formulario válido. Redirigiendo...');
-      navigate('/Empleados');
+      navigate('/Admin');
     }else{
       alert( 'Por favor, completa todos los campos');
     }

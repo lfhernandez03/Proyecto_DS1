@@ -21,8 +21,8 @@ export const Admin = () => {
             name="Reservas"
             option1="Crear Reserva"
             option2="Buscar Reserva"
-            link1="/CrearReserva"
-            link2="/BuscarReserva"
+            link1="/CrearReservaAdmin"
+            link2="/BuscarReservaAdmin"
           />
           <BasicMenu
             name="Empleados"

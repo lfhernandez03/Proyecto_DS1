@@ -12,36 +12,26 @@ export const Container1 = () => {
         <h1>Formulario de Reserva</h1>
         <h3>Informacion del cliente</h3>
         <form>
-          <TextFieldsEmplo 
-            label="Nombre" 
-            name="name" 
-            type="name" />
-          <TextFieldsEmplo 
-            label="Identificación" 
-            name="id" 
-            type="id" />
+          <TextFieldsEmplo label="Nombre" name="name" type="name" />
+          <TextFieldsEmplo label="Identificación" name="id" type="id" />
           <TextFieldsEmplo
             label="Correo electrónico"
             name="email"
             type="email"
           />
-          <TextFieldsEmplo 
-            label="Telefono" 
-            name="tel" 
-            type="tel" />
-        </form> 
-         
-        </div>
-        <h3>Informacion de la reserva</h3>
-        <div className="cuerpo-form">
-          <TextFieldsEmplo label="Fecha entrada" name="Fecha-in" type="date" />
-          <TextFieldsEmplo label="Fecha salida" name="Fecha-out" type="date" />
-          <BasicSelect />
-          <TextFieldsEmplo label="ID" name="id" type="id" />
-        </div>
-        <div>
-          <ButtonEmplo type="submit" value="Reservar" label="Hacer reserva" />
-        </div>
+          <TextFieldsEmplo label="Telefono" name="tel" type="tel" />
+        </form>
+      </div>
+      <h3>Informacion de la reserva</h3>
+      <div className="cuerpo-form">
+        <TextFieldsEmplo label="Fecha entrada" name="Fecha-in" type="date" />
+        <TextFieldsEmplo label="Fecha salida" name="Fecha-out" type="date" />
+        <BasicSelect />
+        <TextFieldsEmplo label="ID" name="id" type="id" />
+      </div>
+      <div>
+        <ButtonEmplo type="submit" value="Reservar" label="Hacer reserva" />
+      </div>
     </EmpleadoLayout>
   );
 };
@@ -82,21 +72,21 @@ export const Container2 = () => {
 export const ContainerEmp = () => {
   return (
     <>
-      <body className="cuerpo">
+      <body>
         <div>
           <h1>BIENVENIDO</h1>
           <h1>Usuario</h1>
           <h4 className="ques">¿Que quieres hacer hoy?</h4>
-          </div>
+        </div>
 
-          <div className="botones">
-            <Link className="ToHacerReserva" to="/HacerReserva">
-              <ButtonEmplo className="bot" label="Hacer Reserva" />
-            </Link>
-            <Link className="ToBuscarReserva" to="/BuscarReserva">
-              <ButtonEmplo className="bot" label="Buscar Reserva" />
-            </Link>
-          </div>
+        <div className="botones">
+          <Link className="ToHacerReserva" to="/HacerReserva">
+            <ButtonEmplo className="bot" label="Hacer Reserva" />
+          </Link>
+          <Link className="ToBuscarReserva" to="/BuscarReserva">
+            <ButtonEmplo className="bot" label="Buscar Reserva" />
+          </Link>
+        </div>
       </body>
     </>
   );
