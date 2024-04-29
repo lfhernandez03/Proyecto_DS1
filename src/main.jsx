@@ -10,7 +10,7 @@ import { Admin, ContainerCrearReserva, ContainerBuscarReserva, ContainerBuscarEm
 
 import "./login.css";
 import "./recoverTab.css";
-import "./empleados.css";
+import "./empleados.css";;
 import "./admin.css";
 
 
