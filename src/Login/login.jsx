@@ -7,33 +7,71 @@ import { useNavigate } from 'react-router-dom';
 
 export const LoginTab = () => {
 
-    const [formData, setFormData] = useState({
-      userName: "",
-      password: ""
-    })
+  const [formData, setFormData] = useState({
+    userName: "",
+    password: ""
+  })
 
-    const navigate = useNavigate();
-  
+  const navigate = useNavigate();
+
   const handleChange = (event) => {
-    const{ name, value } = event.target;
-    setFormData({ ...formData, [name]: value});
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
     // si estan correctos hacer la llamada al backend para valdiar el usuario 
     // si la respuesta es exitosa redireccionar a home
     // si no es exitosa mostrar el error
   }
+
+  /*   const handleSubmit = (event) => {
+      event.preventDefault();
   
-  const handleSubmit = (event) =>{
+      //Validación de campos
+      if (formData.userName && formData.password) {
+        alert('Formulario válido. Redirigiendo...');
+        navigate('/Admin');
+      } else {
+        alert('Por favor, completa todos los campos');
+      }
+    } */
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    
-    //Validación de campos
-    if( formData.userName && formData.password){
-      alert('Formulario válido. Redirigiendo...');
-      navigate('/Admin');
-    }else{
-      alert( 'Por favor, completa todos los campos');
+
+    // Validación de campos
+    if (formData.userName && formData.password) {
+      fetch('http://localhost:3000/admin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+        .then(response => {
+          console.log(response);
+          if (!response.ok) {
+            throw new Error('Error en la respuesta del servidor');
+          }
+
+          return response.json();
+        })
+        .then(data => {
+          console.log('Este mensaje debería salir al darle a iniciar sesión');
+
+          if (data.success) {
+            alert('Formulario válido. Redirigiendo...');
+            navigate('/admin');
+          } else {
+            alert('Error: ' + data.message);
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+
+    } else {
+      alert('Por favor, completa todos los campos');
     }
   }
-  
 
   return (
     <body>
@@ -46,13 +84,13 @@ export const LoginTab = () => {
           <div className="login-container">
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
-              <TextFields 
-                label="Nombre de Usuario" 
+              <TextFields
+                label="Nombre de Usuario"
                 name="userName"
                 value={formData.userName}
                 onChange={handleChange}
               />
-                
+
               <TextFields
                 label="Contraseña"
                 name="password"
@@ -60,11 +98,11 @@ export const LoginTab = () => {
                 value={formData.password}
                 onChange={handleChange}
               />
-                <ButtonLogin
-                  title="Iniciar Sesión"
-                  type="submit"
-                  value="Iniciar Sesión"
-                />
+              <ButtonLogin
+                title="Iniciar Sesión"
+                type="submit"
+                value="Iniciar Sesión"
+              />
               <div className="footer">
                 <h5>
                   <Link className="ToRecoverTab" to="/CrearContraseña">
