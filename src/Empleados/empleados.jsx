@@ -30,20 +30,18 @@ export const Container1 = () => {
 
   return (
     <EmpleadoLayout>
-      <div className="form-container" id="1">
+      <div className="forms" id="1">
         <h1>Formulario de Reserva</h1>
         <h3>Informacion del cliente</h3>
-        <form>
+        <div className="cuerpo-form">
           <TextFieldsEmplo label="Nombre" name="name" type="name" />
           <TextFieldsEmplo label="Identificación" name="id" type="id" />
           <TextFieldsEmplo
             label="Correo electrónico"
             name="email"
-            type="email"
-          />
+            type="email"/>
           <TextFieldsEmplo label="Telefono" name="tel" type="tel" />
-        </form>
-      </div>
+        </div>
       <h3>Informacion de la reserva</h3>
       <div className="cuerpo-form">
         <TextFieldsEmplo label="Fecha entrada" name="Fecha-in" type="date" />
@@ -53,6 +51,7 @@ export const Container1 = () => {
       </div>
       <div>
         <ButtonEmplo type="submit" value="Reservar" label="Hacer reserva" />
+      </div>
       </div>
     </EmpleadoLayout>
   );
@@ -94,22 +93,28 @@ export const Container2 = () => {
 export const ContainerEmp = () => {
   return (
     <>
-      <body>
+      <div className="cuerpo">
         <div>
-          <h1>BIENVENIDO</h1>
-          <h1>Usuario</h1>
+          <h1>Bienvenido,</h1>
+          <h3>Usuario</h3>
           <h4 className="ques">¿Que quieres hacer hoy?</h4>
-        </div>
 
-        <div className="botones">
-          <Link className="ToHacerReserva" to="/HacerReserva">
-            <ButtonEmplo className="bot" label="Hacer Reserva" />
-          </Link>
-          <Link className="ToBuscarReserva" to="/BuscarReserva">
-            <ButtonEmplo className="bot" label="Buscar Reserva" />
-          </Link>
+          <div className="botones">
+            <Link className="ToHacerReserva" to="/HacerReserva">
+              <ButtonEmplo
+                  className="bot"
+                  label="Hacer Reserva"
+                />
+            </Link>
+            <Link className="ToBuscarReserva" to="/BuscarReserva">
+              <ButtonEmplo
+                className="bot"
+                label="Buscar Reserva"
+              />
+            </Link>
+          </div>
         </div>
-      </body>
+      </div>
     </>
   );
 };

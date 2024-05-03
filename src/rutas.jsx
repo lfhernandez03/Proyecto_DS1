@@ -8,19 +8,25 @@ import {
   Container1,
   Container2,
 } from "./Empleados/empleados.jsx";
+
 import {
-  Admin,
-  ContainerBuscarHabitación,
-  ContainerCrearHabitación,
+  Admin
 } from "./Administrador/administrador.jsx";
+
 import {
   ContainerBuscarReserva,
   ContainerCrearReserva,
 } from "./Administrador/admin_reservas.jsx";
+
 import {
   ContainerCrearEmpleado,
   ContainerBuscarEmpleado
 } from "./Administrador/admin_empleados.jsx";
+  
+import {
+  ContainerBuscarHabitación,
+  ContainerCrearHabitación,
+} from "./Administrador/admin_habitacion.jsx"
 
 
 // ReactDOM.createRoot(document.getElementById("root")).render(
