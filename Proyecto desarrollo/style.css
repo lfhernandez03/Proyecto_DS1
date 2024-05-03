@@ -124,7 +124,7 @@ li a.active, li a:hover{
     margin: auto;
     padding: 70px 300px;
     margin-bottom: 0px;
-    color: #ffffff;
+    color: #fcfbfd;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -171,7 +171,7 @@ li a.active, li a:hover{
     border: 1px solid #000;
     background: #ff5080;
     border-radius: 10px;
-    color: #070707;
+    color: #f1efef;
     font-size: 24px;
     padding: 10px 20px;
     transition:  0.5s ;
@@ -244,7 +244,7 @@ li a.active, li a:hover{
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    padding: 10px 20px;
+    padding: 20px 20px;
     background: #fdfafa;
     background-size: cover;
     background-position: center center;
