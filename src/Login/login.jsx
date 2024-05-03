@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export const LoginTab = () => {
+  
   const [formData, setFormData] = useState({
     id: "",
-    password: ""
+    pass: "",
   });
 
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export const LoginTab = () => {
     // si no es exitosa mostrar el error
   };
 
-  const handleSubmit = (event) => {
+  /*const handleSubmit = (event) => {
     event.preventDefault();
 
     //Validación de campos
@@ -30,46 +31,42 @@ export const LoginTab = () => {
     } else {
       alert("Por favor, completa todos los campos");
     }
-  };
+  };*/
 
-  /*const handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     // Validación de campos
     if (formData.id && formData.password) {
-      fetch('http://localhost:3000/admin', {
-        method: 'POST',
+      fetch("http://localhost:3000/api/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          id: formData.id,
+          pass: formData.password,
+        }),
       })
-        .then(response => {
-          console.log(response);
-          if (!response.ok) {
-            throw new Error('Error en la respuesta del servidor');
-          }
-
-          return response.json();
-        })
-        .then(data => {
-          console.log('Este mensaje debería salir al darle a iniciar sesión');
-
-          if (data.success) {
-            alert('Formulario válido. Redirigiendo...');
-            navigate('/admin');
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.existe && data.correcto) {
+            console.log("Usuario encontrado y contraseña correcta");
+            navigate("/Admin");
+          } else if (data.existe && !data.correcto) {
+            console.log("Contraseña incorrecta");
+            alert("Contraseña incorrecta");
           } else {
-            alert('Error: ' + data.message);
+            console.log("Usuario no encontrado");
           }
         })
         .catch((error) => {
-          console.error('Error:', error);
+          console.error("Error:", error);
         });
-
     } else {
-      alert('Por favor, completa todos los campos');
+      alert("Por favor, completa todos los campos");
     }
-  }*/
+  };
 
   return (
     <div className="container">
@@ -87,7 +84,6 @@ export const LoginTab = () => {
               value={formData.id}
               onChange={handleChange}
             />
-
             <TextFields
               label="Contraseña"
               name="password"

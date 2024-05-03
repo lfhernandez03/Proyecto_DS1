@@ -7,14 +7,6 @@
     box-sizing: border-box;
 }
 
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: white;
-}
-
 .container{
    display: grid;
    grid-template-columns: 1fr 1fr;
@@ -27,12 +19,14 @@ body{
     display: inline-block;
     color: black;
 }
+
 .left-container h1{
     font-size: 50px;
     top: 40%;
     left: 8%;
     position: absolute;
 }
+
 .left-container h2{
     font-size: xx-large;
     top: 50%;
