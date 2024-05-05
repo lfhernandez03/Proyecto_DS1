@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import {
   ButtonAdmin,
   TextFieldsAdmin,
-  BasicSelect,
-  BasicSelectTipo // Suponiendo que este es el componente que falta
+  BasicSelectTipo, // Suponiendo que este es el componente que falta
 } from "./administradorComponents";
 import { AdminLayout } from "./AdministradorLayout";
 import { useNavigate } from "react-router-dom";
+import { Inputs } from "./administradorComponents";
+import { SelectBoxEmp } from "./administradorComponents";
 
 export const ContainerCrearEmpleado = () => {
   const [formData, setFormData] = useState({
@@ -53,63 +54,106 @@ export const ContainerCrearEmpleado = () => {
   return (
     <>
       <AdminLayout>
-        <div className="forms" id="1">
-          <h1>Formulario de Empleado</h1>
-          <h3>Informacion del empleado</h3>
-          <form onSubmit={handleSubmit}>
-            <TextFieldsAdmin 
-              label="Nombre" 
-              name="nombre_empleado" 
-              type="text"
-              onChange={handleChange} />
-            <TextFieldsAdmin 
-              label="Identificación" 
-              name="id" 
-              type="number"
-              onChange={handleChange} />
-            <TextFieldsAdmin
-              label="Correo electrónico"
-              name="correo_electronico"
-              type="email"
-              onChange={handleChange}
-            />
-            <TextFieldsAdmin 
-              label="Telefono" 
-              name="telefono" 
-              type="number"
-              onChange={handleChange} />
-            <TextFieldsAdmin
-              label="Fecha inicio"
-              name="fecha_inicio"
-              type="date"
-              onChange={handleChange}
-            />
-            <TextFieldsAdmin
-              label="Fecha nacimiento"
-              name="fecha_nacimiento"
-              type="date"
-              onChange={handleChange}
-            />
-            <TextFieldsAdmin 
-              label="Salario" 
-              name="salario" 
-              type="number"
-              onChange={handleChange} />
-            <TextFieldsAdmin 
-              label="Contraseña" 
-              name="password" 
-              type="password"
-              onChange={handleChange} />
-            <BasicSelectTipo />
-            <div>
-              <ButtonAdmin
-                type="submit"
-                value="crear-empleado"
-                label="Crear Empleado"
-              />
+        <section className="form-container">
+          <div className="container">
+            <div className="left">
+              <div className="form-wrapper">
+                <div className="form-heading">
+                  <h1>Crear Empleado</h1>
+                </div>
+                <form className="form" onSubmit={handleSubmit}>
+                  <div className="titles">
+                    <h3>Información del empleado</h3>
+                  </div>
+                  <div className="input-wrap">
+                    <Inputs
+                      className="contact-input"
+                      name="nombre_cliente"
+                      type="text"
+                      placeholder="Nombre"
+                      value={formData.nombre_empleado}
+                      onChange={handleChange}
+                    />
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Identificación"
+                      name="id"
+                      type="number"
+                      value={formData.id}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="correo">
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Correo electrónico"
+                      name="correo_electronico"
+                      type="email"
+                      value={formData.correo_electronico}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="telefono">
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Teléfono"
+                      name="telefono"
+                      type="number"
+                      value={formData.telefono}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="tipo">
+                    <SelectBoxEmp value={formData.tipo}/>
+                  </div>
+                  <div className="fechas">
+                    <Inputs
+                      className="fechas-input"
+                      name="fecha_entrada"
+                      type="date"
+                      value={formData.fecha_inicio}
+                      onChange={handleChange}
+                    />
+                    <Inputs
+                      className="fechas-input"
+                      name="fecha_nacimiento"
+                      type="date"
+                      value={formData.fecha_nacimiento}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="salario">
+                  <Inputs
+                      className="contact-input"
+                      placeholder="Salario"
+                      name="salario"
+                      type="number"
+                      value={formData.salario}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="contraseña">
+                  <Inputs
+                    className="contact-input"
+                    placeholder="Contraseña"
+                    name="password"
+                    type="text"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                </div>
+                </form>
+                <div className="button-wrap">
+                  <ButtonAdmin
+                    type="submit"
+                    value="Crear-empleado"
+                    label="Crear"
+                  />
+                </div>
+              </div>
             </div>
-          </form>
-        </div>
+          </div>
+        </section>
       </AdminLayout>
     </>
   );
@@ -140,10 +184,11 @@ export const ContainerBuscarEmpleado = () => {
 
     // Validación de campos
     if (
-      formData.id || 
-      formData.nombre_empleado || 
-      formData.correo_electronico || 
-      formData.password) {
+      formData.id ||
+      formData.nombre_empleado ||
+      formData.correo_electronico ||
+      formData.password
+    ) {
       alert("Formulario válido. Redirigiendo...");
       navigate("/Admin");
     } else {
@@ -154,50 +199,116 @@ export const ContainerBuscarEmpleado = () => {
   return (
     <>
       <AdminLayout>
-        <div className="forms" id="2">
-          <h1>Búsqueda de Empleado</h1>
-          <h3>Información del Empleado</h3>
-          <form onSubmit={handleSubmit}>
-            <div className="cuerpo-form">
-              <TextFieldsAdmin 
-                label="Identificación" 
-                name="id" 
-                type="number"
-                onChange={handleChange} />
+      <section className="form-container">
+          <div className="container">
+            <div className="left">
+              <div className="form-wrapper">
+                <div className="form-heading">
+                  <h1>Buscar Empleado</h1>
+                </div>
+
+                <form className="form" onSubmit={handleSubmit}>
+                <div className="titles">
+                    <h3>Buscar por identificación</h3>
+                  </div>
+                  <Inputs
+                      className="contact-input"
+                      placeholder="Identificación"
+                      name="id"
+                      type="number"
+                      value={formData.id}
+                      onChange={handleChange}
+                    />
+                  <div className="titles">
+                    <h3>Información del empleado</h3>
+                  </div>
+                  <div className="input-wrap">
+                    <Inputs
+                      className="contact-input"
+                      name="nombre_cliente"
+                      type="text"
+                      placeholder="Nombre"
+                      value={formData.nombre_empleado}
+                      onChange={handleChange}
+                    />
+                    
+                  </div>
+                  <div className="correo">
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Correo electrónico"
+                      name="correo_electronico"
+                      type="email"
+                      value={formData.correo_electronico}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="telefono">
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Teléfono"
+                      name="telefono"
+                      type="number"
+                      value={formData.telefono}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="tipo">
+                    <SelectBoxEmp value="tipo"/>
+                  </div>
+                  <div className="fechas">
+                    <Inputs
+                      className="fechas-input"
+                      name="fecha_entrada"
+                      type="date"
+                      value={formData.fecha_inicio}
+                      onChange={handleChange}
+                    />
+                    <Inputs
+                      className="fechas-input"
+                      name="fecha_salida"
+                      type="date"
+                      value={formData.fecha_nacimiento}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="salario">
+                  <Inputs
+                      className="contact-input"
+                      placeholder="Salario"
+                      name="salario"
+                      type="number"
+                      value={formData.salario}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="contraseña">
+                  <Inputs
+                    className="contact-input"
+                    placeholder="Contraseña"
+                    name="password"
+                    type="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                </div>
+                </form>
+                <div className="button-wrap">
+                  <ButtonAdmin
+                    type="submit"
+                    value="Modificar-empleado"
+                    label="Modificar"
+                  />
+                  <ButtonAdmin
+                    type="submit"
+                    value="Eliminar-empleado"
+                    label="Eliminar"
+                  />
+                </div>
+              </div>
             </div>
-            <h3>Información del Empleado</h3>
-            <div className="cuerpo-form">
-              <TextFieldsAdmin 
-                label="Nombre empleado" 
-                name="nombre_empleado" 
-                type="text"
-                onChange={handleChange} />
-              <TextFieldsAdmin 
-                label="Correo" 
-                name="correo_electronico" 
-                type="email"
-                onChange={handleChange} />
-              <BasicSelectTipo />
-              <TextFieldsAdmin 
-                label="Contraseña" 
-                name="password" 
-                type="password"
-                onChange={handleChange} />
-            </div>
-            <div className="botones">
-              <ButtonAdmin
-                type="submit"
-                value="Eliminar-empleado"
-                label="Eliminar"
-              />
-              <ButtonAdmin
-                type="submit"
-                value="Modificar-empleado"
-                label="Modificar"
-              />
-            </div>
-          </form>
-        </div>
+          </div>
+        </section>
       </AdminLayout>
     </>
   );

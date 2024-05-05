@@ -6,98 +6,19 @@ import {
 } from "./administradorComponents";
 import { AdminLayout } from "./AdministradorLayout";
 import { useNavigate } from "react-router-dom";
-
+import { Inputs } from "./administradorComponents";
+import { SelectBoxReserva } from "./administradorComponents";
 
 export const ContainerCrearHabitación = () => {
-    const[formData, setFormData] = useState({
-        TIPO: "",
-        ID: "",
-        CAPACIDAD: "",
-        PRECIO: "",
-        ESTADO: "",
- });
+  const [formData, setFormData] = useState({
+    tipo: "",
+    id_habitacion: "",
+    capacidad: "",
+    precio: "",
+    estado: "",
+  });
 
-    const navigate = useNavigate();
-
-    const handleChange = (event) => {
-        const {name, value} = event.target;
-        setFormData({ ...formData, [name]: value});
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        if (
-            formData.TIPO &&
-            formData.ID &&
-            formData.CAPACIDAD &&
-            formData.PRECIO &&
-            formData.ESTADO
-        ) {
-            alert("Formulario válido. Redirigiendo...");
-            navigate("/Admin");
-        } else {
-        alert("Por favor, completa todos los campos");
-        }
-    };
-
-    return (
-        <>
-      <AdminLayout>
-        <div className="forms" id="2">
-          <h1>Formulario de Habitacion</h1>
-          <h3>Información de la Habitación</h3>
-          <form onSubmit={handleSubmit}>
-            <TextFieldsAdmin 
-            label="Tipo Habitación" 
-            name="TIPO" 
-            type="text" 
-            onChange={handleChange}
-            />
-            <TextFieldsAdmin 
-            label="Id" 
-            name="ID" 
-            type="number"
-            onChange={handleChange}
-            />
-            <TextFieldsAdmin 
-            label="Capacidad" 
-            name="CAPACIDAD" 
-            type="number"
-            onChange={handleChange} 
-            />
-            <TextFieldsAdmin 
-            label="Precio" 
-            name="PRECIO" 
-            type="number" 
-            onChange={handleChange}
-            />
-            <BasicSelect />
-          <div>
-          <ButtonAdmin
-            type="submit"
-            value="crear_habitacion"
-            label="Crear Habitación"
-          />
-        </div>
-        </form>
-        </div>
-      </AdminLayout>
-    </>
-    );
-};
-
-
-export const ContainerBuscarHabitación = () => {
-    const [ formData, setFormData] = useState({
-        TIPO: "",
-        ID: "",
-        CAPACIDAD: "",
-        PRECIO: "",
-        ESTADO: "",
-    });
-
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -107,60 +28,197 @@ export const ContainerBuscarHabitación = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if(
-        formData.TIPO &&
-        formData.ID &&
-        formData.CAPACIDAD &&
-        formData.PRECIO &&
-        formData.ESTADO
+    if (
+      formData.tipo &&
+      formData.id_habitacion &&
+      formData.capacidad &&
+      formData.precio &&
+      formData.estado
     ) {
-        alert("Formulario válido. Redirigiendo...");
-        navigate("/Admin");
+      alert("Formulario válido. Redirigiendo...");
+      navigate("/Admin");
     } else {
-        alert("por favor, completa todos los campos");
+      alert("Por favor, completa todos los campos");
+    }
+  };
+
+  return (
+    <>
+      <AdminLayout>
+        <section className="form-container">
+          <div className="container">
+            <div className="left">
+              <div className="form-wrapper">
+                <div className="form-heading">
+                  <h1>Crear Habitación</h1>
+                </div>
+                <form className="form" onSubmit={handleSubmit}>
+                  <div className="titles">
+                    <h3>Información de la habitación</h3>
+                  </div>
+                  <div className="input-wrap">
+                    <Inputs
+                      className="contact-input"
+                      name="tipo-habitacion"
+                      type="text"
+                      placeholder="Tipo de habitación"
+                      value={formData.tipo}
+                      onChange={handleChange}
+                    />
+                    <Inputs
+                      className="contact-input"
+                      placeholder="ID"
+                      name="id"
+                      type="number"
+                      value={formData.id_habitacion}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="correo">
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Capacidad"
+                      name="Capacidad"
+                      type="text"
+                      value={formData.capacidad}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="telefono">
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Precio"
+                      name="Precio"
+                      type="number"
+                      value={formData.precio}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="status">
+                    <SelectBoxReserva value={formData.estado}/>
+                  </div>
+                </form>
+                <div className="button-wrap">
+                  <ButtonAdmin
+                    type="submit"
+                    value="Crear-hbitacion"
+                    label="Crear"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </AdminLayout>
+    </>
+  );
+};
+
+export const ContainerBuscarHabitación = () => {
+  const [formData, setFormData] = useState({
+    tipo: "",
+    id_habitacion: "",
+    capacidad: "",
+    precio: "",
+    estado: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    if (
+      formData.tipo &&
+      formData.id_habitacion &&
+      formData.capacidad &&
+      formData.precio &&
+      formData.estado
+    ) {
+      alert("Formulario válido. Redirigiendo...");
+      navigate("/Admin");
+    } else {
+      alert("por favor, completa todos los campos");
     }
   };
   return (
     <>
       <AdminLayout>
-      <div className="forms" id="2">
-          <h1>Busqueda de Habitación</h1>
-          <h3>Información de la habitación</h3>
-          <div className="cuerpo-form">
-            <TextFieldsAdmin 
-            label="Identificación" 
-            name="ID" 
-            type="number" />
+        <section className="form-container">
+          <div className="container">
+            <div className="left">
+              <div className="form-wrapper">
+                <div className="form-heading">
+                  <h1>Crear Habitación</h1>
+                </div>
+                <form className="form" onSubmit={handleSubmit}>
+                  <div className="titles">
+                    <h3>Buscar por ID</h3>
+                  </div>
+                  <div className="id">
+                    <Inputs
+                      className="contact-input"
+                      placeholder="ID"
+                      name="id"
+                      type="number"
+                      value={formData.id_habitacion}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <div className="titles">
+                    <h3>Información de la habitación</h3>
+                  </div>
+                  <div className="input-wrap">
+                    <Inputs
+                      className="contact-input"
+                      name="tipo-habitacion"
+                      type="text"
+                      placeholder="Tipo de habitación"
+                      value={formData.tipo}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="capacidad">
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Capacidad"
+                      name="Capacidad"
+                      type="text"
+                      value={formData.capacidad}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="precio">
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Precio"
+                      name="Precio"
+                      type="number"
+                      value={formData.precio}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="status">
+                    <SelectBoxReserva value={formData.estado} />
+                  </div>
+                </form>
+                <div className="button-wrap">
+                  <ButtonAdmin
+                    type="submit"
+                    value="Crear-hbitacion"
+                    label="Crear"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-          <h3>Informacion de la habitacion</h3>
-          <div className="cuerpo-form">
-            <TextFieldsAdmin 
-            label="Tipo" 
-            name="TIPO" 
-            type="type" />
-            <TextFieldsAdmin 
-            label="Capacidad" 
-            name="CAPACIDAD" 
-            type="number" />
-            <TextFieldsAdmin 
-            label="Precio" 
-            name="PRECIO" 
-            type="number" />
-            <BasicSelect />
-          </div>
-          <div className="botones">
-            <ButtonAdmin
-              type="submit"
-              value="Eliminar-habitacion"
-              label="Eliminar"
-            />
-            <ButtonAdmin
-              type="submit"
-              value="Modificar-habitacion"
-              label="Modificar"
-            />
-          </div>
-          </div>
+        </section>
       </AdminLayout>
     </>
   );

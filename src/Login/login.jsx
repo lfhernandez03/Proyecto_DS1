@@ -8,7 +8,7 @@ export const LoginTab = () => {
   
   const [formData, setFormData] = useState({
     id: "",
-    pass: "",
+    password: ""
   });
 
   const navigate = useNavigate();
@@ -57,6 +57,7 @@ export const LoginTab = () => {
             console.log("Contraseña incorrecta");
             alert("Contraseña incorrecta");
           } else {
+            alert("Usuario no encontrado")
             console.log("Usuario no encontrado");
           }
         })

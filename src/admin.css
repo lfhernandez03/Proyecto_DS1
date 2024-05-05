@@ -7,73 +7,72 @@
     box-sizing: border-box;
 }
 
-body{
+header{
     display: flex;
-    justify-content: center;
+    position: fixed;
     align-items: center;
-    min-height: 100vh;
-    background: white;
-}
-
-.cuerpo {
-    border: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 623px;
-    text-align: center; /*Esto centra el contenido de texto horizontalmente*/
-    font-size: 35px;
-    color: black;
-}
-
-.ques {
-    padding-top: 18%;
-}
-
-.menu {
+    z-index: 4;
     width: 100%;
-    background: rgba(247, 243, 243, 0.212);
-    display: inline-flex;
-    justify-content: center;
-    padding: 0.2%;
-    margin: 80px 150px 50px 0px;
-    gap: 35px; /* Ajusta el espacio entre los elementos según sea necesario */
+    top:0;
+    left: 0;
+    padding: 20px 100px;
+
+}
+
+header .container-menu{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-left: auto;
+    gap: 20px;
+}
+
+header .logo{
+    display: flex;
+    justify-content: start;
+    font-size: 15px;
+    font-weight: 700;
     color: black;
 }
 
-.forms{
-    display: flexbox;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 80%;
-    height: 480px;
-    margin: 10px;
-    margin-left: 10%;
-    padding-top: 30px;
-    padding: 10px auto;
-    background: #797777;
-}
-
-
-.cuerpo-form{
+/*.right{
+    position: absolute;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-row: 1fr 1fr;
-    column-gap: 20%;
-    padding-left: 10%;
-    padding-right: 10%;
+    grid-template-columns: repeat(2, 1fr);
+    overflow: hidden;
+}
+.img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 60%;
+    object-fit: cover;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+
+}
+.right .image-wrapper{
+    position: relative;
+    grid-column: 2;
 }
 
-.label-form{
-    display: flex;
-    top: 10px;
-    justify-content: center;
-    text-align: center;
+.wave-wrapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 50%;
+    background-color: blue;
 }
-
-.botones{
-    display: flex;
-    justify-content: center;
-    gap: 60px;
+.wave-wrapper svg{
+    background-color: aqua;
+    height: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%);
+    left: (100% - 2px);
 }
+#wave{
+    fill: red;
+    height: 100%;
+}*/

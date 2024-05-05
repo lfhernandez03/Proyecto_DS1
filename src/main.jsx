@@ -7,6 +7,7 @@ import "./login.css";
 import "./recoverTab.css";
 import "./empleados.css";
 import "./admin.css";
+import "./admin_reservas.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>

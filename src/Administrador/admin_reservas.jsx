@@ -3,6 +3,8 @@ import {
   ButtonAdmin,
   TextFieldsAdmin,
   BasicSelect,
+  Inputs,
+  SelectBoxReserva,
 } from "./administradorComponents";
 import { AdminLayout } from "./AdministradorLayout";
 import { useNavigate } from "react-router-dom";
@@ -50,63 +52,99 @@ export const ContainerCrearReserva = () => {
   return (
     <>
       <AdminLayout>
-        <div className="forms" id="1">
-          <h1>Formulario de Reserva</h1>
-          <h3>Informacion del cliente</h3>
-          <form onSubmit={handleSubmit}>
-            <TextFieldsAdmin
-              label="Nombre"
-              name="name"
-              type="name"
-              onChange={handleChange}
-            />
-            <TextFieldsAdmin
-              label="Identificación"
-              name="id"
-              type="id"
-              onChange={handleChange}
-            />
-            <TextFieldsAdmin
-              label="Correo electrónico"
-              name="email"
-              type="email"
-              onChange={handleChange}
-            />
-            <TextFieldsAdmin
-              label="Telefono"
-              name="tel"
-              type="number"
-              onChange={handleChange}
-            />
-            <h3>Informacion de la reserva</h3>
-            <TextFieldsAdmin
-              label="Fecha entrada"
-              name="Fecha-in"
-              type="date"
-              onChange={handleChange}
-            />
-            <TextFieldsAdmin
-              label="Fecha salida"
-              name="Fecha-out"
-              type="date"
-              onChange={handleChange}
-            />
-            <BasicSelect />
-            <TextFieldsAdmin
-              label="ID"
-              name="id"
-              type="number"
-              onChange={handleChange}
-            />
-            <div>
-              <ButtonAdmin
-                type="submit"
-                value="Reservar"
-                label="Hacer reserva"
-              />
+        <section className="form-container">
+          <div className="container">
+            <div className="left">
+              <div className="form-wrapper">
+                <div className="form-heading">
+                  <h1>Crear Reserva</h1>
+                </div>
+                <form className="form" onSubmit={handleSubmit}>
+                  <div className="titles">
+                    <h3>Información del cliente</h3>
+                  </div>
+                  <div className="input-wrap">
+                    <Inputs
+                      className="contact-input"
+                      name="nombre_cliente"
+                      type="text"
+                      value={formData.nombre_cliente}
+                      placeholder="Nombre"
+                      onChange={handleChange}
+                    />
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Identificación"
+                      name="id"
+                      type="number"
+                      value={formData.id}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="correo">
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Correo electrónico"
+                      name="correo_electronico"
+                      type="email"
+                      value={formData.correo_electronico}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="telefono">
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Teléfono"
+                      name="telefono"
+                      type="number"
+                      value={formData.telefono}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="titles">
+                    <h3>Información de la reserva</h3>
+                  </div>
+                  <div className="fechas">
+                    <Inputs
+                      className="fechas-input"
+                      name="fecha_entrada"
+                      type="date"
+                      value={formData.fecha_entrada}
+                      onChange={handleChange}
+                    />
+                    <Inputs
+                      className="fechas-input"
+                      name="fecha_salida"
+                      type="date"
+                      value={formData.fecha_salida}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="id-reserva">
+                    <Inputs
+                      className="reserva-input"
+                      placeholder="ID de la reserva"
+                      name="id_reserva"
+                      type="id"
+                      value={formData.id_reserva}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="status">
+                    <SelectBoxReserva value={formData.estado} />
+                  </div>
+                </form>
+                <div className="button-wrap">
+                  <ButtonAdmin
+                    type="submit"
+                    value="Crear-reserva"
+                    label="Crear reserva"
+                  />
+                </div>
+              </div>
             </div>
-          </form>
-        </div>
+          </div>
+        </section>
       </AdminLayout>
     </>
   );
@@ -154,40 +192,100 @@ export const ContainerBuscarReserva = () => {
   return (
     <>
       <AdminLayout>
-        <div className="forms" id="2">
-          <h1>Busqueda de Reserva</h1>
-          <h3>Informacion del cliente</h3>
-          <div className="cuerpo-form">
-            <TextFieldsAdmin label="Identificación" name="id" type="number" />
+      <section className="form-container">
+          <div className="container">
+            <div className="left">
+              <div className="form-wrapper">
+                <div className="form-heading">
+                  <h1>Buscar</h1>
+                </div>
+                <form className="form" onSubmit={handleSubmit}>
+                  <div className="titles">
+                    <h3>Información del cliente</h3>
+                  </div>
+                  <div className="input-wrap">
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Identificación"
+                      name="id"
+                      type="number"
+                      value={formData.id}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  
+                  <div className="titles">
+                    <h3>Información de la reserva</h3>
+                  </div>
+                  <Inputs
+                      className="contact-input"
+                      name="nombre_cliente"
+                      type="text"
+                      placeholder="Nombre"
+                      value={formData.nombre_cliente}
+                      onChange={handleChange}
+                    />
+                    <div className="telefono">
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Teléfono"
+                      name="telefono"
+                      type="number"
+                      value={formData.telefono}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="correo">
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Correo electrónico"
+                      name="correo_electronico"
+                      type="email"
+                      value={formData.correo_electronico}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="fechas">
+                    <Inputs
+                      className="fechas-input"
+                      name="fecha_entrada"
+                      type="date"
+                      value={formData.fecha_entrada}
+                      onChange={handleChange}
+                    />
+                    <Inputs
+                      className="fechas-input"
+                      name="fecha_salida"
+                      type="date"
+                      value={formData.fecha_salida}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="id-reserva">
+                    <Inputs
+                      className="reserva-input"
+                      placeholder="ID de la reserva"
+                      name="id_reserva"
+                      type="id"
+                      value={formData.id_reserva}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="status">
+                  <SelectBoxReserva value={formData.estado} />
+                  </div>
+                </form>
+                <div className="button-wrap">
+                  <ButtonAdmin
+                    type="submit"
+                    value="Crear-reserva"
+                    label="Crear reserva"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-          <h3>Informacion de la reserva</h3>
-          <div className="cuerpo-form">
-            <TextFieldsAdmin
-              label="Fecha entrada"
-              name="Fecha-in"
-              type="date"
-            />
-            <TextFieldsAdmin
-              label="Fecha salida"
-              name="Fecha-out"
-              type="date"
-            />
-            <BasicSelect />
-            <TextFieldsAdmin label="ID" name="id" type="id" />
-          </div>
-          <div className="botones">
-            <ButtonAdmin
-              type="submit"
-              value="Eliminar-reserva"
-              label="Eliminar reserva"
-            />
-            <ButtonAdmin
-              type="submit"
-              value="Modificar-reserva"
-              label="Modificar reserva"
-            />
-          </div>
-        </div>
+        </section>
       </AdminLayout>
     </>
   );
