@@ -18,7 +18,7 @@ html{
     background: url(Multimedia/FondoInicioBlur.png) no-repeat;
     background-size:cover;
     background-position: center center;
-    height: 100vh;
+    height: 110vh;
 }
 
 /*HEADER*/
@@ -147,7 +147,7 @@ li a.active, li a:hover{
 #inicio .contenido .div_presentacion{
     height: 60vh;
     margin: auto;
-    padding: 70px 300px;
+    padding: 80px 180px;
     margin-bottom: 0px;
     color: #ffffff;
     display: flex;
