@@ -15,7 +15,7 @@ html{
 }
 
 #inicio{
-    background: url(/Proyecto\ desarrollo/Multimedia/FondoInicioBlur.png) no-repeat;
+    background: url(Multimedia/FondoInicioBlur.png) no-repeat;
     background-size:cover;
     background-position: center center;
     height: 100vh;
@@ -23,7 +23,7 @@ html{
 
 /*HEADER*/
 nav{
-    background: #333;
+    background: #386dbd;
     height: 80px;
     width: 100%;
     position: fixed;
@@ -42,6 +42,7 @@ nav{
 nav ul{
     float: right;
     margin-right: 20px;
+    font-style: bold;
 }
 
 nav ul li{
@@ -51,14 +52,14 @@ nav ul li{
 }
 
 nav ul li a{
-    color: #fdfafa;
+    color: rgb(252, 252, 252);
     font-size: 18px;
     padding: 7px 13px;
     border-radius: 3px;
     text-transform: uppercase;
 }
 li a.active, li a:hover{
-    background: #ff5080;
+    background: #009ddd;
     transition: .5s;
 }
 
@@ -75,6 +76,7 @@ li a.active, li a:hover{
 #Check{
     display: none;
 }
+
 /*Responsive*/
 @media (max-width: 952px){
     .enlace1{
@@ -83,7 +85,6 @@ li a.active, li a:hover{
     nav ul li a{
         font-size: 16px;
     }
-
 }
 @media (max-width: 858px){
     .checkbtn{
@@ -92,15 +93,14 @@ li a.active, li a:hover{
     #inicio .contenido ul{
         position: relative;
         border-radius: 10px;
-        background: #333;
+        background: #386dbd;
         top: 80px;
         left: 100%;
         text-align: center;
         transition: all .5s;
-        width: 30%;
-        height: 400px;
-        text-decoration: none;;
-        border-radius: 10px;
+        width: 80%; /* Cambiado a 80% para que sea más flexible */
+        height: auto; /* Cambiado a auto para que sea más flexible */
+        text-decoration: none;
     }
     #inicio .contenido nav ul li{
         display: block;
@@ -112,10 +112,35 @@ li a.active, li a:hover{
     }
     #inicio .contenido li a:hover, li a.active{
         background: none;
-        color: #ff5080;
+        color: #05d3f8;
     }
     #Check:checked ~ ul{
         left:0;
+    }
+}
+
+@media (max-width: 375px){
+    .enlace1{
+        padding-left: 20px;
+    }
+    nav ul li a{
+        font-size: 14px;
+    }
+    .checkbtn{
+        display: block;
+    }
+    #inicio .contenido ul{
+        position: relative;
+        border-radius: 10px;
+        top: 80px;
+        left: 100%;
+        text-align: center;
+        transition: all .5s;
+        width: 100%;
+        height: auto;
+    }
+    #inicio .contenido nav ul li{
+        display: block;
     }
 }
 /*PRESENTACION*/
@@ -124,7 +149,7 @@ li a.active, li a:hover{
     margin: auto;
     padding: 70px 300px;
     margin-bottom: 0px;
-    color: #fcfbfd;
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -138,7 +163,7 @@ li a.active, li a:hover{
     margin-bottom: 8px;
     text-transform: uppercase;
     letter-spacing: 3px;
-    color: #ff5080;
+    color: #05d3f8;
     font-weight: 600;
     text-align: center;
 }
@@ -147,14 +172,14 @@ li a.active, li a:hover{
 #inicio .contenido .div_presentacion h2{
     font-size: 28px;
     margin-bottom: 15px;
-    color:rgb(250, 246, 246);
+    color:#ffffff;
     font-weight: 400;
 }
 
 #inicio .contenido .div_presentacion h2 span{
     font-size: 30px;
     margin-bottom: 20px;
-    color: #ff5080;
+    color: #05d3f8;
     text-transform: uppercase;
     letter-spacing: 3px;
     font-weight: 700;
@@ -169,27 +194,27 @@ li a.active, li a:hover{
 #inicio .contenido .div_presentacion a{
     text-decoration: none;
     border: 1px solid #000;
-    background: #ff5080;
+    background: #386dbd;
     border-radius: 10px;
-    color: #f1efef;
+    color: #ffffff;
     font-size: 24px;
     padding: 10px 20px;
     transition:  0.5s ;
-    opacity: 0.5;
+    opacity: 0.6;
 }
 
 #inicio .contenido .div_presentacion a:hover{
-    background-color: #ff5080;
+    background-color: #386dbd;
     opacity: 0.9;
 }
 
 /*Redes*/
 #inicio .contenido .div_presentacion .redes{
     padding: 5px 10px;
-    margin-left: 1500px;
+    margin-left: 0; /* Elimina el margen izquierdo */
     position: fixed;
     bottom: 20px;
-    left: 165px;
+    right: 5px; /* Ajusta este valor si es necesario */
     z-index: 1000;
 }
 #inicio .contenido .div_presentacion .redes a{
@@ -198,38 +223,65 @@ li a.active, li a:hover{
     display: inline-block;
     margin-left: 10px;
     transition: 0.5s;
-    background: #ff5080;
+    background: #05d3f8;
 }
 #inicio .contenido .div_presentacion .redes a:hover{
     opacity: 1;
+    background-color: #009ddd;
 }
 
 /*Responsive*/
 @media (max-width: 1250px){
     #inicio .contenido .div_presentacion .redes{
-    padding: 5px 10px;
-    margin-left: 750px;
-}
+        padding: 5px 10px;
+        margin-left: 600px; /* Ajusta el margen izquierdo para pantallas más grandes */
+    }
+    #inicio .contenido .div_presentacion{
+        padding: 0px;
+        padding-top:10px;
+    }
+    #inicio .contenido .div_presentacion a{
+        margin-bottom: 10px;
+    }
 }
 
-@media (max-width: 950px){
+@media (max-width: 952px){
     #inicio .contenido .div_presentacion .redes{
-    padding: 5px 10px;
-    margin-left: 650px;
+        padding: 5px 10px;
+        margin-left: 550px; /* Ajusta el margen izquierdo para pantallas más pequeñas */
+        left: 20px; /* Ajusta la posición izquierda para pantallas aún más pequeñas */
+        z-index: 1000;
+    }
+    #inicio .contenido .div_presentacion{
+        padding: 0px;
+        padding-top:150px;
+    }
+    #inicio .contenido .div_presentacion a{
+        margin-bottom: 10px;
+    }
 }
-}
+
 @media (max-width: 858px){
     #inicio .contenido .div_presentacion{
         padding: 0px;
         padding-top:20%;
     }
+    #inicio .contenido .div_presentacion a{
+        margin-bottom: 28px;
+    }
     #inicio .contenido .div_presentacion .redes{
-    margin-left: 0;
-    padding: 0px 10px;
-    bottom: 10px;
-    left: 340px;
-    z-index: 1000;
+        margin-left: 0;
+        padding: 0px 10px;
+        bottom: 10px;
+        right: 1000px;
+    }
 }
+
+@media (max-width: 375px){
+    #inicio .contenido .div_presentacion .redes{
+        padding: 5px 10px;
+        right: 50px; /* Ajusta la posición derecha para pantallas muy pequeñas */
+    }
 }
 
 /*consultar disponibilidad*/
@@ -248,7 +300,7 @@ li a.active, li a:hover{
     background: #fdfafa;
     background-size: cover;
     background-position: center center;
-    border: 1px solid #817e7e;
+    border: 1px solid #000000;
     border-radius: 10px;
     transition: opacity 0.5s ease, box-shadow 0.35s ease-in-out;
     color: #0c0c0c;
@@ -292,7 +344,7 @@ li a.active, li a:hover{
 
 #inicio .contenido .div_check .div_in span{
     margin-right: 10px;
-    color: #ff5080;
+    color: #386dbd;
 }
 
 #inicio .contenido .div_check .div_in label{
@@ -302,72 +354,91 @@ li a.active, li a:hover{
 }
 
 #inicio .contenido .div_check .div_in input{
-    padding: 5px;
+    padding: 10px;
     background-color: transparent; 
     border: 1px solid #111111;
     border-radius: 5px;
-    color: #111111;
+    color: #386dbd;
     
 }
 #inicio .contenido .div_check .div_in input::placeholder{
-    color: #ac6161;
+    color: #386dbd;
 }
 
 #inicio .contenido .div_check .div_in .div_btn{
     text-align: center;
     justify-content: center;
-    margin: auto;
+    margin-top: 1px;
 }
 
 #inicio .contenido .div_check .div_btn .btn{
     padding: 6px 15px;
     border-radius: 10px;
     cursor: pointer;
-    color: #030303;
-    border: 1px solid #808080;
+    color: #ffffff;
+    border: 1px solid #000000;
     transition: opacity 0.5s ease;
     opacity: 0.9;
     font-size: 22px;
     font-weight: 500px;
-    background-color: transparent;
+    background-color: #386dbd;
 }
 
 #inicio .contenido .div_check .div_btn .btn:hover{
-    opacity: 0.8;
-    background-color: #ff5080;
+    opacity: 0.7;
+    background-color: #386dbd;
+}
+
+@media (max-width: 952px){
+    #inicio .contenido .div_check{
+        margin-top: 60px; /* Ajusta el margen superior para pantallas más pequeñas */
+    }
 }
 
 @media (max-width: 858px){
     #inicio .contenido .div_check{
-        margin-top: 70px;
+        margin-top: 50px; /* Ajusta el margen superior para pantallas aún más pequeñas */
+    }
 }
+
+@media (max-width: 375px){
+    #inicio .contenido .div_check{
+        margin-top: 40px; /* Ajusta el margen superior para pantallas muy pequeñas */
+    }
 }
 
 /*PANEL CONSULTA*/
-#consulta .panel{
+#consulta {
     display: flex;
-    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+#consulta .panel{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 50px;
+    padding: 10px 20px;
     height: 400px;
     width: 85%;
-    margin-top: 40px;
-    text-align: center; 
-    justify-content: center;
-    align-items: center;
-    padding: 10px 20px;
-    background: transparent;
-    border: 1px solid #817e7e;
+    padding: 20px;
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+    border: 1px solid #00000057;
     border-radius: 10px;
-    color: #ff5080;
-    opacity: 0.85;
-    flex-wrap: wrap; 
-    display: none;
 }
+
 #consulta .panel .titulo{
-    justify-content: center;
-    position: static;
-    align-items: center;
-    text-align: center;
-    margin: auto auto;
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #0f4571;
+}
+
+#consulta .panel p{
+    margin-bottom: 10px;
+    text-align: justify;
+    color: #000;
 }
 
 /*----------------------SECCION QUIENES SOMOS---------------------------------*/
@@ -375,7 +446,7 @@ li a.active, li a:hover{
 #quienes{
     max-width: 1100px;
     margin: auto;
-    padding: 70px 15px;
+    padding: 85px 10px;
     color: #111135;
     display: flex;
 }
@@ -390,27 +461,27 @@ li a.active, li a:hover{
     width: 500px;
     height: 65vh;
     border-radius: 20px;
-    background-color: #f3f3f3;
+    background-color: #009ddd;
 }
 
 #quienes .div_quienes .titulo{
     font-size: 45px;
     font-weight: bold;
-    color: #ff5080;
+    color: #0f4571;
     margin-bottom: 10px;
 }
 
 #quienes .div_quienes h2{
     font-size: 24px;
-    font-weight: 400;
-    color: #080808;
+    color: #000000;
     margin-bottom: 10px;
+    font-weight: bolder;
 }
 
 #quienes .div_quienes h2 span{
     font-size: 29px;
     font-weight: bold;
-    color: #ff5080;
+    color: #0f4571;
     margin-bottom: 10px;
     letter-spacing: 2px;
 }
@@ -421,6 +492,7 @@ li a.active, li a:hover{
     margin-bottom: 10px;
 
 }
+
 /*Responsive*/
 @media (max-width: 858px){
     #quienes{
@@ -429,7 +501,6 @@ li a.active, li a:hover{
     }
     #quienes .div_quienes{
         margin-top: 20px;
-        
     }
     #quienes .div.foto{
         max-width: 300px;
@@ -441,8 +512,8 @@ li a.active, li a:hover{
     }
     #quienes .div_foto img{
         padding: 10px;
-        width: 500px;
-        height: 60vh;
+        width: 100%; /* Ajusta el ancho al 100% para mantener la proporción de la imagen */
+        height: auto; /* Cambia a auto para mantener la proporción de la imagen */
     }
     #quienes .div_quienes .titulo{
         margin: auto;
@@ -462,7 +533,49 @@ li a.active, li a:hover{
         font-size: 20px;
         font-weight: 200;
         margin-bottom: 10px;
+    }
+}
+
+
+@media (max-width: 480px){
+    #quienes{
+        flex-direction: column;
+        align-items: center;
+    }
+    #quienes .div_quienes{
+        margin-top: 20px;
+    }
+    #quienes .div.foto{
+        max-width: 280px; /* Ajusta el ancho máximo para pantallas más pequeñas */
+        margin-right: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+        text-align: center;
+    }
+    #quienes .div_foto img{
+        padding: 10px;
+        width: 100%; /* Ajusta el ancho al 100% para mantener la proporción de la imagen */
+        height: auto; /* Cambia a auto para mantener la proporción de la imagen */
+    }
+    #quienes .div_quienes .titulo{
+        margin: auto;
+        font-size: 24px; /* Ajusta el tamaño de la fuente para pantallas más pequeñas */
+    }
     
+    #quienes .div_quienes h2{
+        font-size: 20px; /* Ajusta el tamaño de la fuente para pantallas más pequeñas */
+        font-weight: 200;
+    }
+    
+    #quienes .div_quienes h2 span{
+        font-size: 20px; /* Ajusta el tamaño de la fuente para pantallas más pequeñas */
+    }
+    
+    #quienes .div_quienes .p_descripcion{
+        font-size: 18px; /* Ajusta el tamaño de la fuente para pantallas más pequeñas */
+        font-weight: 200;
+        margin-bottom: 10px;
     }
 }
 
@@ -481,7 +594,7 @@ li a.active, li a:hover{
     font-size: 26px;
     margin-bottom: 10px;
     font-weight: 600;
-    color: #ff5080;
+    color: #009ddd;
 }
 
 #servicios h3{
@@ -518,7 +631,7 @@ li a.active, li a:hover{
 }
 
 #servicios .div_contenido .div_habitaciones:hover .div_iconos span i{
-    color: #ff5080;
+    color: #386dbd;
 }
 #servicios .div_contenido .div_habitaciones:hover h5{
     font-weight: 600;
@@ -541,7 +654,7 @@ li a.active, li a:hover{
 
 #servicios .div_contenido .div_habitaciones .div_iconos i{
     margin-bottom: 10px;
-    color: #111135;
+    color: #386dbd;
     transition: 0.5s;
     font-size: 23px;
 }
@@ -579,7 +692,7 @@ li a.active, li a:hover{
 }
 
 #servicios .div_contenido .div_habitaciones .btn_reservar:hover{
-    background-color: #ff5080;
+    background-color: #009ddd;
 }
 
 #servicios .div_servicios{
@@ -627,7 +740,7 @@ li a.active, li a:hover{
     margin-bottom: 10px;
     margin-top: 25PX;
     font-weight: 550;
-    color: #ff5080;
+    color: #0f4571;
 }
 
 #servicios .div_servicios .div_informacion h2{
@@ -648,19 +761,19 @@ li a.active, li a:hover{
     margin: auto;
     font-size: 22px;
     font-weight: 400;
-    color: #111135;
+    color: #000000;
     margin-bottom: 25px;
 }
 
 #servicios .div_servicios .div_informacion .iconos span i{
     margin-right: 5px;
-    color: #111135; 
+    color: #009ddd; 
     font-size: 28px; 
     vertical-align: middle;
 }
 
 /*Responsive*/
-@media (max-width: 900px){
+@media (max-width: 880px){
     #servicios .div_contenido .div_habitaciones{
         margin-top: 10px;
         max-width: 300px;
@@ -672,52 +785,63 @@ li a.active, li a:hover{
         font-size: 20px;
     }
     #servicios .div_contenido .div_habitaciones img{
-        max-width: 66%;
-        height: 14vh;
+        max-width: 100%; /* Ajusta el ancho al 100% para mantener la proporción de la imagen */
+        height: auto; /* Cambia a auto para mantener la proporción de la imagen */
         border-radius: 8px; 
         margin-bottom: 10px;
     }
 
+    #servicios .div_servicios{
+        display: flex; /* Hacer que el contenedor sea un contenedor flex */
+        flex-wrap: wrap; /* Permitir que los elementos se envuelvan en múltiples líneas */
+        justify-content: space-between; /* Espaciar los elementos uniformemente */
+    }
     #servicios .div_servicios .div_imagenes{
         max-width: 200px;
-    }
-    #servicios .div_servicios .div_imagenes img{
-        width: 80px;
+        flex: 1 0 auto; /* Permitir que el elemento crezca y se encoja, pero no permitir que se encoja por debajo de su tamaño de contenido */
     }
     #servicios .div_servicios .div_informacion{
         max-width: 280px;
+        flex: 1 0 auto; /* Permitir que el elemento crezca y se encoja, pero no permitir que se encoja por debajo de su tamaño de contenido */
     }
-
 }
-@media (max-width: 858px){
+
+
+@media (max-width: 680px){ /* Ajusta para pantallas más pequeñas */
     #servicios .div_contenido .div_habitaciones{
         margin-top: 10px;
-        max-width: 300px;
-        margin-left: 25%;
-        max-height: 700px;
+        max-width: 100%; /* Ajusta el ancho al 100% para que no se salga del contenedor */
+        margin-left: 0; /* Elimina el margen izquierdo para que no se salga del contenedor */
+
         margin-bottom: 20px; 
     }
     #servicios .div_contenido .div_habitaciones .descripcion{
-        font-size: 20px;
+        font-size: 18px; /* Ajusta el tamaño de la fuente para pantallas más pequeñas */
     }
     #servicios .div_contenido .div_habitaciones img{
-        max-width: 66%;
-        height: 14vh;
+        max-width: 100%; /* Ajusta el ancho al 100% para mantener la proporción de la imagen */
+        height: auto; /* Cambia a auto para mantener la proporción de la imagen */
         border-radius: 8px; 
         margin-bottom: 10px;
     }
 
+    #servicios .div_servicios{
+        flex-direction: column; /* Hacer que los elementos se apilen verticalmente */
+    }
     #servicios .div_servicios .div_imagenes{
-        max-width: 280px;
+        max-width: 100%; /* Ajusta el ancho al 100% para que no se salga del contenedor */
     }
     #servicios .div_servicios .div_imagenes img{
-        width: 100px;
+        width: 20%; /* Ajusta el ancho al 100% para mantener la proporción de la imagen */
     }
     #servicios .div_servicios .div_informacion{
-        max-width: 380px;
+        max-width: 100%; /* Ajusta el ancho al 100% para que no se salga del contenedor */
     }
-
+    #servicios .div_servicios .div_informacion{
+        max-width: 100%; /* Ajusta el ancho al 100% para que no se salga del contenedor */
+    }
 }
+
 
 /* --------------------Seccion Contacto ------------------------------*/
 
@@ -738,7 +862,7 @@ li a.active, li a:hover{
     justify-content:center;
     font-size: 32px;
     font-weight: 600;
-    color: #ff5080;
+    color: #0f4571;
     margin-bottom: 12px;
     text-align: center;
 
@@ -775,7 +899,7 @@ li a.active, li a:hover{
 
 #contacto .contactos .div_contacto i{
     font-size: 40px; 
-    color: #ff5080;
+    color: #386dbd;
     margin-bottom: 15px;
 }
 
@@ -815,14 +939,14 @@ li a.active, li a:hover{
 }
 
 #contacto .contactos .div_contacto .btn_enviar:hover{
-    background-color: #ff5080;
-    color: #fff;
+    background-color: #05d3f8;
+    color: #000000;
 }
 
 /*-------------footer--------------------*/
 
 footer {
-    background-color: #333;
+    background-color: #386dbd;
     color: #fff;
     padding: 20px 0;
 }
@@ -869,7 +993,7 @@ footer {
 }
 
 .footer-content ul li a:hover {
-    color: #ff5080;
+    color: #05d3f8;
 }
 
 .redes {
@@ -886,11 +1010,11 @@ footer {
 }
 
 .redes a:hover {
-    color: #ff5080;
+    color: #05d3f8;
 }
 
 .footer-bottom {
-    background-color: #222;
+    background-color: #0f4571;
     padding: 10px 0;
     text-align: center;
     color: #fff;
