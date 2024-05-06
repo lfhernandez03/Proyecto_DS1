@@ -92,11 +92,13 @@ export const LoginTab = () => {
               value={formData.password}
               onChange={handleChange}
             />
-            <ButtonLogin
+            <Link to="/Admin">
+              <ButtonLogin
               title="Iniciar Sesión"
               type="submit"
               value="Iniciar Sesión"
-            />
+              />
+            </Link>
             <div className="footer">
               <h5>
                 <Link className="ToRecoverTab" to="/CrearContraseña">
