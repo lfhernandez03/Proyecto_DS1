@@ -92,7 +92,7 @@ export const LoginTab = () => {
               value={formData.password}
               onChange={handleChange}
             />
-            <ButtonLogin
+              <ButtonLogin
               title="Iniciar Sesión"
               type="submit"
               value="Iniciar Sesión"

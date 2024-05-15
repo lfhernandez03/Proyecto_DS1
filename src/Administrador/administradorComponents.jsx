@@ -22,7 +22,7 @@ export function BasicMenu(props) {
   return (
     <div>
       <Button
-        style={{ color: "black" }}
+        style={{ color: "#0F4571" }}
         id="basic-button"
         aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
@@ -95,7 +95,9 @@ export const Inputs = (props) => {
         name={props.name}
         autoComplete="off"
         required
-        style={{textAlign: "center"}}
+        style={{
+          textAlign: "center"
+        }}
       />
       <label>
         <span>{props.label}</span>
