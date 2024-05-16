@@ -104,7 +104,7 @@ export const ContainerCrearEmpleado = () => {
                     />
                   </div>
                   <div className="tipo">
-                    <SelectBoxEmp value={formData.tipo}/>
+                    <SelectBoxEmp value={formData.tipo} />
                   </div>
                   <div className="fechas">
                     <Inputs
@@ -123,7 +123,7 @@ export const ContainerCrearEmpleado = () => {
                     />
                   </div>
                   <div className="salario">
-                  <Inputs
+                    <Inputs
                       className="contact-input"
                       placeholder="Salario"
                       name="salario"
@@ -133,15 +133,15 @@ export const ContainerCrearEmpleado = () => {
                     />
                   </div>
                   <div className="contraseña">
-                  <Inputs
-                    className="contact-input"
-                    placeholder="Contraseña"
-                    name="password"
-                    type="text"
-                    value={formData.password}
-                    onChange={handleChange}
-                  />
-                </div>
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Contraseña"
+                      name="password"
+                      type="text"
+                      value={formData.password}
+                      onChange={handleChange}
+                    />
+                  </div>
                 </form>
                 <div className="button-wrap">
                   <ButtonAdmin
@@ -199,26 +199,25 @@ export const ContainerBuscarEmpleado = () => {
   return (
     <>
       <AdminLayout>
-      <section className="form-container">
+        <section className="form-container">
           <div className="container">
             <div className="left">
               <div className="form-wrapper">
                 <div className="form-heading">
                   <h1>Buscar Empleado</h1>
                 </div>
-
                 <form className="form" onSubmit={handleSubmit}>
-                <div className="titles">
+                  <div className="titles">
                     <h3>Buscar por identificación</h3>
                   </div>
                   <Inputs
-                      className="contact-input"
-                      placeholder="Identificación"
-                      name="id"
-                      type="number"
-                      value={formData.id}
-                      onChange={handleChange}
-                    />
+                    className="contact-input"
+                    placeholder="Identificación"
+                    name="id"
+                    type="number"
+                    value={formData.id}
+                    onChange={handleChange}
+                  />
                   <div className="titles">
                     <h3>Información del empleado</h3>
                   </div>
@@ -231,7 +230,6 @@ export const ContainerBuscarEmpleado = () => {
                       value={formData.nombre_empleado}
                       onChange={handleChange}
                     />
-                    
                   </div>
                   <div className="correo">
                     <Inputs
@@ -254,7 +252,7 @@ export const ContainerBuscarEmpleado = () => {
                     />
                   </div>
                   <div className="tipo">
-                    <SelectBoxEmp value="tipo"/>
+                    <SelectBoxEmp value="tipo" />
                   </div>
                   <div className="fechas">
                     <Inputs
@@ -273,7 +271,7 @@ export const ContainerBuscarEmpleado = () => {
                     />
                   </div>
                   <div className="salario">
-                  <Inputs
+                    <Inputs
                       className="contact-input"
                       placeholder="Salario"
                       name="salario"
@@ -283,15 +281,15 @@ export const ContainerBuscarEmpleado = () => {
                     />
                   </div>
                   <div className="contraseña">
-                  <Inputs
-                    className="contact-input"
-                    placeholder="Contraseña"
-                    name="password"
-                    type="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                  />
-                </div>
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Contraseña"
+                      name="password"
+                      type="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                    />
+                  </div>
                 </form>
                 <div className="button-wrap">
                   <ButtonAdmin

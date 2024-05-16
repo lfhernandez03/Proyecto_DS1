@@ -143,6 +143,8 @@ export const ContainerCrearReserva = () => {
                 </div>
               </div>
             </div>
+
+            
           </div>
         </section>
       </AdminLayout>
@@ -192,7 +194,7 @@ export const ContainerBuscarReserva = () => {
   return (
     <>
       <AdminLayout>
-      <section className="form-container">
+        <section className="form-container">
           <div className="container">
             <div className="left">
               <div className="form-wrapper">
@@ -213,19 +215,18 @@ export const ContainerBuscarReserva = () => {
                       onChange={handleChange}
                     />
                   </div>
-                  
                   <div className="titles">
                     <h3>Información de la reserva</h3>
                   </div>
                   <Inputs
-                      className="contact-input"
-                      name="nombre_cliente"
-                      type="text"
-                      placeholder="Nombre"
-                      value={formData.nombre_cliente}
-                      onChange={handleChange}
-                    />
-                    <div className="telefono">
+                    className="contact-input"
+                    name="nombre_cliente"
+                    type="text"
+                    placeholder="Nombre"
+                    value={formData.nombre_cliente}
+                    onChange={handleChange}
+                  />
+                  <div className="telefono">
                     <Inputs
                       className="contact-input"
                       placeholder="Teléfono"
@@ -272,7 +273,7 @@ export const ContainerBuscarReserva = () => {
                     />
                   </div>
                   <div className="status">
-                  <SelectBoxReserva value={formData.estado} />
+                    <SelectBoxReserva value={formData.estado} />
                   </div>
                 </form>
                 <div className="button-wrap">
