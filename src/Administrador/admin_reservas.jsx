@@ -17,35 +17,53 @@ export const ContainerCrearReserva = () => {
     telefono: "",
     fecha_entrada: "",
     fecha_salida: "",
-    estado: "",
     id_reserva: "",
-  });
+    estado: ""
+  })
 
   const navigate = useNavigate();
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value
+    });
+  };
+
+  const isFormValid = () => {
+    for (const key in formData) {
+      if (formData[key] === "") {
+        return false;
+      }
+    }
+    return true;
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    //Validación de campos
-    if (
-      formData.nombre_cliente &&
-      formData.id &&
-      formData.correo_electronico &&
-      formData.telefono &&
-      formData.fecha_entrada &&
-      formData.fecha_salida &&
-      formData.estado &&
-      formData.id_reserva
-    ) {
+    console.log(formData);
+    if (isFormValid()) {
+      fetch("http://localhost:3000/api/reserva/insertar",{
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nombre_cliente: formData.nombre_cliente,
+          id: formData.id,
+          correo_electronico: formData.correo_electronico,
+          telefono: formData.telefono,
+          fecha_entrada: formData.fecha_entrada,
+          fecha_salida: formData.fecha_salida,
+          id_reserva: formData.id_reserva,
+          estado: formData.estado
+        })
+      })
       alert("Formulario válido. Redirigiendo...");
       navigate("/Admin");
     } else {
       alert("Por favor, completa todos los campos");
+      console.log(formData);
     }
   };
 
@@ -131,20 +149,22 @@ export const ContainerCrearReserva = () => {
                     />
                   </div>
                   <div className="status">
-                    <SelectBoxReserva value={formData.estado} />
+                    <SelectBoxReserva
+                      name="estado"
+                      value={formData.estado}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="button-wrap">
+                    <ButtonAdmin
+                      type="submit"
+                      value="Crear-reserva"
+                      label="Crear reserva"
+                    />
                   </div>
                 </form>
-                <div className="button-wrap">
-                  <ButtonAdmin
-                    type="submit"
-                    value="Crear-reserva"
-                    label="Crear reserva"
-                  />
-                </div>
               </div>
             </div>
-
-            
           </div>
         </section>
       </AdminLayout>
@@ -153,44 +173,6 @@ export const ContainerCrearReserva = () => {
 };
 
 export const ContainerBuscarReserva = () => {
-  const [formData, setFormData] = useState({
-    nombre_cliente: "",
-    id: "",
-    correo_electronico: "",
-    telefono: "",
-    fecha_entrada: "",
-    fecha_salida: "",
-    estado: "",
-    id_reserva: "",
-  });
-
-  const navigate = useNavigate();
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    //Validación de campos
-    if (
-      formData.nombre_cliente &&
-      formData.id &&
-      formData.correo_electronico &&
-      formData.telefono &&
-      formData.fecha_entrada &&
-      formData.fecha_salida &&
-      formData.estado &&
-      formData.id_reserva
-    ) {
-      alert("Formulario válido. Redirigiendo...");
-      navigate("/Admin");
-    } else {
-      alert("Por favor, completa todos los campos");
-    }
-  };
   return (
     <>
       <AdminLayout>
@@ -275,14 +257,15 @@ export const ContainerBuscarReserva = () => {
                   <div className="status">
                     <SelectBoxReserva value={formData.estado} />
                   </div>
-                </form>
-                <div className="button-wrap">
+                  <div className="button-wrap">
                   <ButtonAdmin
                     type="submit"
                     value="Crear-reserva"
                     label="Crear reserva"
                   />
                 </div>
+                </form>
+                
               </div>
             </div>
           </div>

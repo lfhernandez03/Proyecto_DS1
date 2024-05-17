@@ -10,38 +10,7 @@ import { Inputs } from "./administradorComponents";
 import { SelectBoxReserva } from "./administradorComponents";
 
 export const ContainerCrearHabitación = () => {
-  const [formData, setFormData] = useState({
-    tipo: "",
-    id_habitacion: "",
-    capacidad: "",
-    precio: "",
-    estado: "",
-  });
-
-  const navigate = useNavigate();
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    if (
-      formData.tipo &&
-      formData.id_habitacion &&
-      formData.capacidad &&
-      formData.precio &&
-      formData.estado
-    ) {
-      alert("Formulario válido. Redirigiendo...");
-      navigate("/Admin");
-    } else {
-      alert("Por favor, completa todos los campos");
-    }
-  };
-
+ 
   return (
     <>
       <AdminLayout>
@@ -115,37 +84,7 @@ export const ContainerCrearHabitación = () => {
 };
 
 export const ContainerBuscarHabitación = () => {
-  const [formData, setFormData] = useState({
-    tipo: "",
-    id_habitacion: "",
-    capacidad: "",
-    precio: "",
-    estado: "",
-  });
-
-  const navigate = useNavigate();
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    if (
-      formData.tipo &&
-      formData.id_habitacion &&
-      formData.capacidad &&
-      formData.precio &&
-      formData.estado
-    ) {
-      alert("Formulario válido. Redirigiendo...");
-      navigate("/Admin");
-    } else {
-      alert("por favor, completa todos los campos");
-    }
-  };
+ 
   return (
     <>
       <AdminLayout>

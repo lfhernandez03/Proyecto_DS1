@@ -10,47 +10,6 @@ import { Inputs } from "./administradorComponents";
 import { SelectBoxEmp } from "./administradorComponents";
 
 export const ContainerCrearEmpleado = () => {
-  const [formData, setFormData] = useState({
-    nombre_empleado: "",
-    id: "",
-    correo_electronico: "",
-    telefono: "",
-    fecha_inicio: "",
-    fecha_nacimiento: "",
-    salario: "",
-    password: "",
-    tipo: "",
-  });
-
-  const navigate = useNavigate();
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    // Validación de campos
-    if (
-      formData.nombre_empleado &&
-      formData.id &&
-      formData.correo_electronico &&
-      formData.telefono &&
-      formData.fecha_inicio &&
-      formData.fecha_nacimiento &&
-      formData.salario &&
-      formData.password &&
-      formData.tipo
-    ) {
-      alert("Formulario válido. Redirigiendo...");
-      navigate("/Admin");
-    } else {
-      alert("Por favor, completa todos los campos");
-    }
-  };
-
   return (
     <>
       <AdminLayout>
@@ -160,42 +119,6 @@ export const ContainerCrearEmpleado = () => {
 };
 
 export const ContainerBuscarEmpleado = () => {
-  const [formData, setFormData] = useState({
-    nombre_empleado: "",
-    id: "",
-    correo_electronico: "",
-    telefono: "",
-    fecha_inicio: "",
-    fecha_nacimiento: "",
-    salario: "",
-    password: "",
-    tipo: "",
-  });
-
-  const navigate = useNavigate();
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    // Validación de campos
-    if (
-      formData.id ||
-      formData.nombre_empleado ||
-      formData.correo_electronico ||
-      formData.password
-    ) {
-      alert("Formulario válido. Redirigiendo...");
-      navigate("/Admin");
-    } else {
-      alert("Por favor, completa al menos un campo");
-    }
-  };
-
   return (
     <>
       <AdminLayout>

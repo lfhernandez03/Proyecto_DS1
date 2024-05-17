@@ -7,27 +7,6 @@ import { Link } from "react-router-dom";
 
 export const Container1 = () => {
 
-  const [formData, setFormData] = useState({
-    nombre: "",
-    id: "",
-    password: "",
-    correo_electronico: "",
-    telefono: "",
-
-  })
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    //Validación de campos
-    if (formData.userName && formData.password) {
-      alert("Formulario válido. Redirigiendo...");
-      navigate("/Admin");
-    } else {
-      alert("Por favor, completa todos los campos");
-    }
-  };
-
   return (
     <EmpleadoLayout>
       <div className="forms" id="1">
