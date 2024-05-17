@@ -85,6 +85,7 @@ export function TextFieldsAdmin(props) {
     />
   );
 }
+
 export const Inputs = (props) => {
   return (
     <div>
@@ -102,54 +103,52 @@ export const Inputs = (props) => {
       <label>
         <span>{props.label}</span>
       </label>
-      <i className={props.class}/>
+      <i className={props.class} />
     </div>
   );
 };
 
 export const SelectBoxReserva = () => {
-
   const options = [
     { value: "Activo", label: "Activo" },
     { value: "Inactivo", label: "Inactivo" },
-  ]
+  ];
 
-  const handleChange = ( {value} ) => {
-    console.log(value)
-  }
+  const handleChange = ({ value }) => {
+    console.log(value);
+  };
 
   return (
     <div className="option">
       <Select
-        defaultValue={{ label: "Estado", value: "empty"}}
+        defaultValue={{ label: "Estado", value: "empty" }}
         options={options}
         onAbort={handleChange}
       />
     </div>
   );
-}
-export const SelectBoxEmp = () => {
+};
 
+export const SelectBoxEmp = () => {
   const options = [
     { value: "Administrador", label: "Administrador" },
     { value: "Corriente", label: "Corriente" },
-  ]
+  ];
 
-  const handleChange = ( {value} ) => {
-    console.log(value)
-  }
+  const handleChange = ({ value }) => {
+    console.log(value);
+  };
 
   return (
     <div className="option">
       <Select
-        defaultValue={{ label: "Tipo", value: "empty"}}
+        defaultValue={{ label: "Tipo", value: "empty" }}
         options={options}
         onAbort={handleChange}
       />
     </div>
   );
-}
-
+};
 
 export function BasicSelect() {
   const [estado, setEstado] = React.useState("");
@@ -159,21 +158,19 @@ export function BasicSelect() {
   };
 
   return (
- 
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Estado</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={estado}
-          label="Estado"
-          onChange={handleChange}
-        >
-          <MenuItem value={1}>Activo</MenuItem>
-          <MenuItem value={0}>Inactivo</MenuItem>
-        </Select>
-      </FormControl>
-
+    <FormControl fullWidth>
+      <InputLabel id="demo-simple-select-label">Estado</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={estado}
+        label="Estado"
+        onChange={handleChange}
+      >
+        <MenuItem value={1}>Activo</MenuItem>
+        <MenuItem value={0}>Inactivo</MenuItem>
+      </Select>
+    </FormControl>
   );
 }
 

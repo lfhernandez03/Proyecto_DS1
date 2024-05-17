@@ -96,7 +96,7 @@ export const LoginTab = () => {
               title="Iniciar Sesión"
               type="submit"
               value="Iniciar Sesión"
-            />
+              />
             <div className="footer">
               <h5>
                 <Link className="ToRecoverTab" to="/CrearContraseña">
