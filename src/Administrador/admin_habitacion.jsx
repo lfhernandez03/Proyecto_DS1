@@ -8,6 +8,19 @@ import { AdminLayout } from "./AdministradorLayout";
 import { useNavigate } from "react-router-dom";
 import { Inputs } from "./administradorComponents";
 import { SelectBoxReserva } from "./administradorComponents";
+import {
+  faIdCard,
+  faUser,
+  faEnvelope,
+  faPhone,
+  faCalendarDays,
+  faSackDollar,
+  faLock,
+  faList,
+  faPassport,
+  faPeopleGroup,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const ContainerCrearHabitación = () => {
   const [formData, setFormData] = useState({
@@ -57,45 +70,57 @@ export const ContainerCrearHabitación = () => {
                     <h3>Información de la habitación</h3>
                   </div>
                   <div className="input-wrap">
-                    <Inputs
-                      className="contact-input"
-                      name="tipo-habitacion"
-                      type="text"
-                      placeholder="Tipo de habitación"
-                      value={formData.tipo}
-                      onChange={handleChange}
-                    />
-                    <Inputs
-                      className="contact-input"
-                      placeholder="ID"
-                      name="id"
-                      type="number"
-                      value={formData.id_habitacion}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faList} />
+                      <Inputs
+                        className="contact-input"
+                        name="tipo-habitacion"
+                        type="text"
+                        placeholder="Tipo de habitación"
+                        value={formData.tipo}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faPassport} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder="ID"
+                        name="id"
+                        type="number"
+                        value={formData.id_habitacion}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="correo">
-                    <Inputs
-                      className="contact-input"
-                      placeholder="Capacidad"
-                      name="Capacidad"
-                      type="text"
-                      value={formData.capacidad}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faPeopleGroup} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder="Capacidad"
+                        name="Capacidad"
+                        type="text"
+                        value={formData.capacidad}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="telefono">
-                    <Inputs
-                      className="contact-input"
-                      placeholder="Precio"
-                      name="Precio"
-                      type="number"
-                      value={formData.precio}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faSackDollar} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder="Precio"
+                        name="Precio"
+                        type="number"
+                        value={formData.precio}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="status">
-                    <SelectBoxReserva value={formData.estado}/>
+                    <SelectBoxReserva value={formData.estado} />
                   </div>
                 </form>
                 <div className="button-wrap">
@@ -160,52 +185,69 @@ export const ContainerBuscarHabitación = () => {
                   <div className="titles">
                     <h3>Buscar por ID</h3>
                   </div>
-                  <div className="id">
-                    <Inputs
-                      className="contact-input"
-                      placeholder="ID"
-                      name="id"
-                      type="number"
-                      value={formData.id_habitacion}
-                      onChange={handleChange}
-                    />
+                  <div className="input-wrap">
+                    <div className="id">
+                      <div className="input-icon">
+                        <FontAwesomeIcon icon={faPassport} />
+                        <Inputs
+                          className="contact-input"
+                          placeholder="ID"
+                          name="id"
+                          type="number"
+                          value={formData.id_habitacion}
+                          onChange={handleChange}
+                        />
+                      </div>
+                    </div>
                   </div>
-
                   <div className="titles">
                     <h3>Información de la habitación</h3>
                   </div>
                   <div className="input-wrap">
-                    <Inputs
-                      className="contact-input"
-                      name="tipo-habitacion"
-                      type="text"
-                      placeholder="Tipo de habitación"
-                      value={formData.tipo}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faList} />
+                      <Inputs
+                        className="contact-input"
+                        name="tipo-habitacion"
+                        type="text"
+                        placeholder="Tipo de habitación"
+                        value={formData.tipo}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
-                  <div className="capacidad">
-                    <Inputs
-                      className="contact-input"
-                      placeholder="Capacidad"
-                      name="Capacidad"
-                      type="text"
-                      value={formData.capacidad}
-                      onChange={handleChange}
-                    />
+                  <div className="input-wrap">
+                    <div className="capacidad">
+                      <div className="input-icon">
+                        <FontAwesomeIcon icon={faPeopleGroup} />
+                        <Inputs
+                          className="contact-input"
+                          placeholder="Capacidad"
+                          name="Capacidad"
+                          type="text"
+                          value={formData.capacidad}
+                          onChange={handleChange}
+                        />
+                      </div>
+                    </div>
+                    <div className="precio">
+                      <div className="input-icon">
+                        <FontAwesomeIcon icon={faSackDollar} />
+                        <Inputs
+                          className="contact-input"
+                          placeholder="Precio"
+                          name="Precio"
+                          type="number"
+                          value={formData.precio}
+                          onChange={handleChange}
+                        />
+                      </div>
+                    </div>
                   </div>
-                  <div className="precio">
-                    <Inputs
-                      className="contact-input"
-                      placeholder="Precio"
-                      name="Precio"
-                      type="number"
-                      value={formData.precio}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="status">
-                    <SelectBoxReserva value={formData.estado} />
+                  <div className="input-wrap">
+                    <div className="status">
+                      <SelectBoxReserva value={formData.estado} />
+                    </div>
                   </div>
                 </form>
                 <div className="button-wrap">

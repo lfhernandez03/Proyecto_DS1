@@ -8,6 +8,8 @@ import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select from "react-select";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 export function BasicMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
