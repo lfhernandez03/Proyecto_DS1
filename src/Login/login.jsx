@@ -66,7 +66,7 @@ export const LoginTab = () => {
         });
     } else {
       alert("Por favor, completa todos los campos");
-    }
+    } 
   };
 
   return (
