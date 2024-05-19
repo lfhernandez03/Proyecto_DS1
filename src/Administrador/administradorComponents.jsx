@@ -91,19 +91,18 @@ export const Inputs = (props) => {
   return (
     <div>
       <label>
-      <input
-        label={props.label}
-        type={props.type}
-        placeholder={props.placeholder}
-        className={props.className}
-        name={props.name}
-        onChange={props.onChange}
-        autoComplete="off"
-        required
-        style={{
-          textAlign: "center"
-        }}
-      />
+        <input
+          type={props.type}
+          placeholder={props.placeholder}
+          className={props.className}
+          name={props.name}
+          onChange={props.onChange}
+          autoComplete="off"
+          required
+          style={{
+            textAlign: "center"
+          }}
+        />
       </label>
     </div>
   );

@@ -89,14 +89,6 @@
     padding: 0rem 1.5rem 0 1.5rem;
 }
 
-.form .input-wrap label{
-    position: relative;
-    top: -50%;
-    left: calc(1.2rem + 2rem);
-    transform: translateY(-50%);
-    font-size: small;
-    pointer-events: none;
-}
 .form .correo{
     grid-column: span 2;
     padding: 0 1.5rem 0 1.5rem;

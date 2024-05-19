@@ -9,7 +9,7 @@ import {
 } from "./administradorComponents";
 import { AdminLayout } from "./AdministradorLayout";
 import { useNavigate } from "react-router-dom";
-import { TextField } from "@mui/material";
+import { Input, TextField } from "@mui/material";
 
 export const ContainerCrearReserva = () => {
   const [formData, setFormData] = useState({
@@ -25,6 +25,8 @@ export const ContainerCrearReserva = () => {
     estado: "",
     precio: "",
     descripcion: "",
+    habitacion: "",
+    empleado: "",
   });
 
   const handleChange = (e) => {
@@ -39,28 +41,42 @@ export const ContainerCrearReserva = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (Object.values(formData).every((value) => value !== "")) {
+    if (formData && Object.values(formData).every((value) => value !== "")) {
       fetch("http://localhost:3000/api/reserva/insertar", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          nombre_cliente: formData.nombre_cliente,
-          id: formData.id,
-          correo_electronico: formData.correo_electronico,
-          telefono: formData.telefono,
-          residencia: formData.residencia,
-          tipo: formData.tipo,
-          f_entrada: formData.fecha_entrada,
-          f_salida: formData.fecha_salida,
-          id_reserva: formData.id_reserva,
-          estado: formData.estado,
-          precio: formData.precio,
-          descripcion: formData.descripcion,
-        }),
+          data: {
+            reserva: {
+              estado: formData.estado,
+              f_entrada: formData.fecha_entrada,
+              f_salida: formData.fecha_salida,
+              id_Cliente: formData.id,
+              descripcion: formData.descripcion,
+              precio: formData.precio,
+              id_Habitacion: formData.habitacion,
+              id_Empleado: formData.empleado
+            },
+            cliente: {
+              id: formData.id,
+              nombre: formData.nombre_cliente,
+              correo: formData.correo_electronico,
+              telefono: formData.telefono,
+              residencia: formData.residencia,
+              tipo: formData.tipo
+            }
+          }
+        })
       })
-        .then((response) => response.json())
+      .then((response => {
+          console.log(response);
+          if(!response.ok){
+            throw new Error("Error en la llamada al servidor");
+          }
+          return response.json();
+        }))
         .then((data) => {
           console.log(data);
           if (data.existe & data.correcto) {
@@ -84,7 +100,7 @@ export const ContainerCrearReserva = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (formData.id === "") {
+    if (!formData || formData.id === "") {
       alert("Por favor ingrese una identificación");
     } else {
       setFormData({
@@ -94,12 +110,7 @@ export const ContainerCrearReserva = () => {
         console.log("Buscando información del cliente con id: ", formData.id);
     }
   };
-  /*<SelectBoxReservaCliente
-                      name="tipo"
-                      id="tipo"
-                      value={formData.tipo}
-                      onChange={handleChange}
-                    />*/
+
   return (
     <>
       <AdminLayout>
@@ -115,7 +126,7 @@ export const ContainerCrearReserva = () => {
                     <h3>Información del cliente</h3>
                   </div>
                   <div className="buscar-id">
-                    <TextFieldsAdmin
+                    <Inputs
                       className="contact-input"
                       placeholder="Identificación"
                       name="id"
@@ -130,11 +141,11 @@ export const ContainerCrearReserva = () => {
                       type="button"
                       value="Buscar"
                       className="buscar-button"
-                      onClick={handleSearch}
+                      
                     />
                   </div>
                   <div className="input-wrap">
-                    <TextFieldsAdmin
+                    <Inputs
                       className="contact-input"
                       name="nombre_cliente"
                       type="text"
@@ -145,7 +156,7 @@ export const ContainerCrearReserva = () => {
                     />
                   </div>
                   <div className="telefono">
-                    <TextFieldsAdmin
+                    <Inputs
                       className="contact-input"
                       placeholder="Teléfono"
                       name="telefono"
@@ -156,7 +167,7 @@ export const ContainerCrearReserva = () => {
                     />
                   </div>
                   <div className="residencia">
-                    <TextFieldsAdmin
+                    <Inputs
                       className="contact-input"
                       placeholder="Residencia"
                       name="residencia"
@@ -172,12 +183,13 @@ export const ContainerCrearReserva = () => {
                       value={formData.tipo}
                       onChange={handleChange}
                     >
+                      <option value="">Tipo</option> 
                       <option value="Corriente">Corriente</option>
                       <option value="Ejecutivo">Ejecutivo</option>
                     </select>
                   </div>
                   <div className="correo">
-                    <TextFieldsAdmin
+                    <Inputs
                       id="correo_electronico"
                       className="contact-input"
                       placeholder="Correo electrónico"
@@ -187,12 +199,11 @@ export const ContainerCrearReserva = () => {
                       onChange={handleChange}
                     />
                   </div>
-
                   <div className="titles">
                     <h3>Información de la reserva</h3>
                   </div>
                   <div className="fechas">
-                    <TextFieldsAdmin
+                    <Inputs
                       id="fecha_entrada"
                       className="fechas-input"
                       name="fecha_entrada"
@@ -200,7 +211,7 @@ export const ContainerCrearReserva = () => {
                       value={formData.fecha_entrada}
                       onChange={handleChange}
                     />
-                    <TextFieldsAdmin
+                    <Inputs
                       id="fecha_salida"
                       className="fechas-input"
                       name="fecha_salida"
@@ -210,7 +221,7 @@ export const ContainerCrearReserva = () => {
                     />
                   </div>
                   <div className="id-reserva">
-                    <TextFieldsAdmin
+                    <Inputs
                       id="id_reserva"
                       className="reserva-input"
                       placeholder="ID de la reserva"
@@ -226,12 +237,13 @@ export const ContainerCrearReserva = () => {
                       value={formData.estado}
                       onChange={handleChange}
                     >
-                      <option value="Pendiente">Pendiente</option>
+                      <option value="">Estado</option>
+                      <option value="PENDIENTE">Pendiente</option>
                       <option value="Terminado">Terminado</option>
                     </select>
                   </div>
                   <div className="precio">
-                    <TextFieldsAdmin
+                    <Inputs
                       id="precio"
                       className="contact-input"
                       placeholder="Precio"
@@ -241,8 +253,30 @@ export const ContainerCrearReserva = () => {
                       onChange={handleChange}
                     />
                   </div>
+                  <div className="habitacion">
+                    <Inputs
+                      id="habitacion"
+                      className="contact-input"
+                      placeholder="Habitación"
+                      name="habitacion"
+                      type="text"
+                      value={formData.habitacion}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="empleado">
+                    <Inputs
+                      id="empleado"
+                      className="contact-input"
+                      placeholder="Id empleado"
+                      name="empleado"
+                      type="text"
+                      value={formData.empleado}
+                      onChange={handleChange}
+                    />
+                  </div>
                   <div className="descripcion">
-                    <TextFieldsAdmin
+                    <Inputs
                       id="descripcion"
                       className="contact-input"
                       placeholder="Descripción"
