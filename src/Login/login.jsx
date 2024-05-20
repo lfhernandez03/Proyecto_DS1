@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { TextFields } from "./loginComponents";
-import { ButtonLogin } from "./loginComponents";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { TextFields, ButtonLogin } from "./loginComponents";
+import { Link, useNavigate } from "react-router-dom";
 
 export const LoginTab = () => {
-  
   const [formData, setFormData] = useState({
     id: "",
     password: ""
@@ -33,8 +30,11 @@ export const LoginTab = () => {
     }
   };*/
 
-  const handleSubmit = (event) => {
+  // PREFERÍ CAMBIARLO, PARA PROBAR, FUERA DE ESO NUNCA CAMBIARON LO DEL LINK .|.
+
+  /*const handleSubmit = (event) => {
     event.preventDefault();
+    console.log("si funciono");
 
     // Validación de campos
     if (formData.id && formData.password) {
@@ -67,6 +67,49 @@ export const LoginTab = () => {
     } else {
       alert("Por favor, completa todos los campos");
     }
+  };*/
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log("sisisisisi");
+  
+    if (!formData.id || !formData.password) {
+      alert("Por favor, completa todos los campos");
+      return;
+    }
+  
+    try {
+      const response = await fetch("http://localhost:3000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: formData.id,
+          pass: formData.password,
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Hubo un problema con la solicitud");
+      }
+  
+      const data = await response.json();
+  
+      if (data.existe && data.correcto) {
+        console.log("Usuario encontrado y contraseña correcta");
+        navigate("/Admin");
+      } else if (data.existe && !data.correcto) {
+        console.log("Contraseña incorrecta");
+        alert("Contraseña incorrecta");
+      } else {
+        console.log("Usuario no encontrado");
+        alert("Usuario no encontrado");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Hubo un problema con la solicitud");
+    }
   };
 
   return (
@@ -92,13 +135,7 @@ export const LoginTab = () => {
               value={formData.password}
               onChange={handleChange}
             />
-            <Link to="/Admin">
-              <ButtonLogin
-              title="Iniciar Sesión"
-              type="submit"
-              value="Iniciar Sesión"
-              />
-            </Link>
+            <ButtonLogin title="Iniciar Sesión" type="submit" />
             <div className="footer">
               <h5>
                 <Link className="ToRecoverTab" to="/CrearContraseña">
