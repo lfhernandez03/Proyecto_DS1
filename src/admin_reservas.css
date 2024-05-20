@@ -136,7 +136,7 @@
 
 .form .residencia{
     grid-column: span 1;
-    padding: 0 1.5rem 0 1.5rem;
+    padding: 1rem 1.5rem 0 1.5rem;
 }
 
 .form .tipo{
@@ -222,3 +222,21 @@
     grid-column: span 2;
 }
 
+/* Formulario de busqueda en Reserva */
+
+.nombre_cliente{
+    grid-column: span 1;
+    padding: 0 1.5rem 0 1.5rem;
+}
+
+.residencia_cliente{
+    grid-column: span 1;
+    padding: 1rem 1.5rem 0 1.5rem;
+}
+
+/* Formulario de busqueda en Empleados*/
+
+.buscar-empleado{
+    grid-column: span 2;
+    padding: 0 1.5rem 0 1.5rem;
+}

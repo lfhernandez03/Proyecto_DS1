@@ -56,6 +56,7 @@ export function ButtonAdmin(props) {
     <Button
       type="submit"
       value={props.value}
+      onClick={props.onClick}
       style={{
         marginTop: "25px",
         backgroundColor: "white",
@@ -96,9 +97,10 @@ export const Inputs = (props) => {
           placeholder={props.placeholder}
           className={props.className}
           name={props.name}
+          readOnly={props.readOnly}
           onChange={props.onChange}
           autoComplete="off"
-          required
+          required={props.required}
           style={{
             textAlign: "center"
           }}

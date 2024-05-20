@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ButtonAdmin,
   TextFieldsAdmin,
-  BasicSelectTipo, // Suponiendo que este es el componente que falta
+  BasicSelectTipo,
 } from "./administradorComponents";
 import { AdminLayout } from "./AdministradorLayout";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,68 @@ import { Inputs } from "./administradorComponents";
 import { SelectBoxEmp } from "./administradorComponents";
 
 export const ContainerCrearEmpleado = () => {
+  const [formData, setFormData] = useState({
+    id: "",
+    contrasenia: "",
+    correo: "",
+    nombre: "",
+    fecha_nacimiento: "",
+    direccion: "",
+    salario: "",
+    telefono: "",
+    tipo: "",
+    fecha_inicio: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (formData && Object.values(formData).every((value) => value !== "")) {
+      fetch("http://localhost:3000/api/empleado/insertar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: formData.id,
+          contrasenia: formData.contrasenia,
+          correo: formData.correo,
+          nombre: formData.nombre,
+          fecha_nacimiento: formData.fecha_nacimiento,
+          direccion: formData.direccion,
+          salario: formData.salario,
+          telefono: formData.telefono,
+          fecha_inicio: formData.fecha_inicio,
+        }),
+      })
+        .then((response) => {
+          console.log(response);
+          if (!response.ok) {
+            throw new Error("Error en la llamada al servidor");
+          } else {
+            alert("Empleado creado exitosamente");
+            navigate("/admin");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    } else {
+      console.log(formData);
+      alert("Por favor, completa todos los campos");
+    }
+  };
+
   return (
     <>
       <AdminLayout>
@@ -27,10 +89,10 @@ export const ContainerCrearEmpleado = () => {
                   <div className="input-wrap">
                     <Inputs
                       className="contact-input"
-                      name="nombre_cliente"
-                      type="text"
                       placeholder="Nombre"
-                      value={formData.nombre_empleado}
+                      name="nombre"
+                      type="text"
+                      value={formData.nombre}
                       onChange={handleChange}
                     />
                     <Inputs
@@ -46,9 +108,9 @@ export const ContainerCrearEmpleado = () => {
                     <Inputs
                       className="contact-input"
                       placeholder="Correo electrónico"
-                      name="correo_electronico"
+                      name="correo"
                       type="email"
-                      value={formData.correo_electronico}
+                      value={formData.correo}
                       onChange={handleChange}
                     />
                   </div>
@@ -62,13 +124,31 @@ export const ContainerCrearEmpleado = () => {
                       onChange={handleChange}
                     />
                   </div>
+                  <div className="direccion">
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Dirección"
+                      name="direccion"
+                      type="text"
+                      value={formData.direccion}
+                      onChange={handleChange}
+                    />
+                  </div>
                   <div className="tipo">
-                    <SelectBoxEmp value={formData.tipo} />
+                    <select
+                      name="tipo"
+                      value={formData.tipo}
+                      onChange={handleChange}
+                    >
+                      <option value="">Tipo</option>
+                      <option value="Empleado">Empleado</option>
+                      <option value="Administrador">Administrador</option>
+                    </select>
                   </div>
                   <div className="fechas">
                     <Inputs
                       className="fechas-input"
-                      name="fecha_entrada"
+                      name="fecha_inicio"
                       type="date"
                       value={formData.fecha_inicio}
                       onChange={handleChange}
@@ -95,20 +175,20 @@ export const ContainerCrearEmpleado = () => {
                     <Inputs
                       className="contact-input"
                       placeholder="Contraseña"
-                      name="password"
+                      name="contrasenia"
                       type="text"
-                      value={formData.password}
+                      value={formData.contrasenia}
                       onChange={handleChange}
                     />
                   </div>
+                  <div className="button-wrap">
+                    <ButtonAdmin
+                      type="submit"
+                      value="Crear-empleado"
+                      label="Crear"
+                    />
+                  </div>
                 </form>
-                <div className="button-wrap">
-                  <ButtonAdmin
-                    type="submit"
-                    value="Crear-empleado"
-                    label="Crear"
-                  />
-                </div>
               </div>
             </div>
           </div>
@@ -119,6 +199,70 @@ export const ContainerCrearEmpleado = () => {
 };
 
 export const ContainerBuscarEmpleado = () => {
+  const [formData, setFormData] = useState({
+    id: "",
+    tipo: "",
+    precio: "",
+    estado: "",
+    capacidad: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (!formData || formData.id === "") {
+      alert("Por favor ingrese una identificación");
+    } else {
+      fetch("http://localhost:3000/api/empleado/consultar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: formData.id,
+        }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Error en la llamada al servidor");
+          }else{
+            return response.json();
+          }
+          
+        })
+        .then((data) => {
+          console.log(data);
+          if (data.rowCount > 0) {
+            alert("Empleado encontrado");
+            setFormData({
+              id: data.rows[0].ID,
+              nombre: data.rows[0].NOMBRE,
+              correo: data.rows[0].CORREO,
+              telefono: data.rows[0].TELEFONO,
+              direccion: data.rows[0].DIRECCION,
+              fecha_nacimiento: data.rows[0].FECHA_NACIMIENTO,
+              fecha_inicio: data.rows[0].FECHA_INICIO,
+              salario: data.rows[0].SALARIO,
+              tipo: data.rows[0].TIPO,
+            });
+          } else {
+            alert("Error al buscar el empleado");
+          }
+        })
+
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
+  };
+
   return (
     <>
       <AdminLayout>
@@ -129,103 +273,155 @@ export const ContainerBuscarEmpleado = () => {
                 <div className="form-heading">
                   <h1>Buscar Empleado</h1>
                 </div>
-                <form className="form" onSubmit={handleSubmit}>
-                  <div className="titles">
-                    <h3>Buscar por identificación</h3>
-                  </div>
-                  <Inputs
-                    className="contact-input"
-                    placeholder="Identificación"
-                    name="id"
-                    type="number"
-                    value={formData.id}
-                    onChange={handleChange}
-                  />
+                <form className="form" onSubmit={handleSearch}>
                   <div className="titles">
                     <h3>Información del empleado</h3>
+                  </div>
+                  <div className="buscar-empleado">
+                    <Inputs
+                      className="contact-input"
+                      placeholder="Identificación"
+                      name="id"
+                      type="number"
+                      value={formData.id}
+                      onChange={handleChange}
+                    />
                   </div>
                   <div className="input-wrap">
                     <Inputs
                       className="contact-input"
-                      name="nombre_cliente"
+                      placeholder={
+                        formData.nombre !== "" ? formData.nombre : "Nombre"
+                      }
+                      name="nombre"
                       type="text"
-                      placeholder="Nombre"
-                      value={formData.nombre_empleado}
+                      value={formData.nombre}
+                      readOnly={true}
                       onChange={handleChange}
                     />
                   </div>
                   <div className="correo">
                     <Inputs
                       className="contact-input"
-                      placeholder="Correo electrónico"
-                      name="correo_electronico"
+                      placeholder={
+                        formData.correo !== ""
+                          ? formData.correo
+                          : "Correo Electrónico"
+                      }
+                      name="correo"
                       type="email"
-                      value={formData.correo_electronico}
+                      value={formData.correo}
+                      readOnly={true}
                       onChange={handleChange}
                     />
                   </div>
                   <div className="telefono">
                     <Inputs
                       className="contact-input"
-                      placeholder="Teléfono"
+                      placeholder={
+                        formData.telefono !== ""
+                          ? formData.telefono
+                          : "Teléfono"
+                      }
                       name="telefono"
                       type="number"
                       value={formData.telefono}
+                      readOnly={true}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="direccion">
+                    <Inputs
+                      className="contact-input"
+                      placeholder={
+                        formData.direccion !== ""
+                          ? formData.direccion
+                          : "Dirección"
+                      }
+                      name="direccion"
+                      type="text"
+                      value={formData.direccion}
+                      readOnly={true}
                       onChange={handleChange}
                     />
                   </div>
                   <div className="tipo">
-                    <SelectBoxEmp value="tipo" />
+                    <select
+                      name="tipo"
+                      value={
+                        formData.tipo !== undefined ? formData.tipo : "Tipo"
+                      }
+                      onChange={handleChange}
+                    >
+                      <option value="">Tipo</option>
+                      <option value="Empleado">Empleado</option>
+                      <option value="Administrador">Administrador</option>
+                    </select>
                   </div>
                   <div className="fechas">
                     <Inputs
                       className="fechas-input"
-                      name="fecha_entrada"
-                      type="date"
+                      name="fecha_inicio"
+                      placeholder={
+                        formData.fecha_inicio !== ""
+                          ? formData.fecha_inicio
+                          : "Fecha de Inicio"
+                      }
+                      type="text"
                       value={formData.fecha_inicio}
+                      readOnly={true}
                       onChange={handleChange}
                     />
                     <Inputs
                       className="fechas-input"
-                      name="fecha_salida"
-                      type="date"
+                      name="fecha_nacimiento"
+                      placeholder={
+                        formData.fecha_nacimiento !== ""
+                          ? formData.fecha_nacimiento
+                          : "Fecha de Nacimiento"
+                      }
+                      type="text"
                       value={formData.fecha_nacimiento}
+                      readOnly={true}
                       onChange={handleChange}
                     />
                   </div>
                   <div className="salario">
                     <Inputs
                       className="contact-input"
-                      placeholder="Salario"
+                      placeholder={
+                        formData.salario !== "" ? formData.salario : "Salario"
+                      }
                       name="salario"
                       type="number"
                       value={formData.salario}
+                      readOnly={true}
                       onChange={handleChange}
                     />
                   </div>
                   <div className="contraseña">
                     <Inputs
                       className="contact-input"
-                      placeholder="Contraseña"
-                      name="password"
-                      type="password"
-                      value={formData.password}
+                      placeholder={
+                        formData.contrasenia !== ""
+                          ? formData.contrasenia
+                          : "Contraseña"
+                      }
+                      name="contrasenia"
+                      type="text"
+                      value={formData.contrasenia}
+                      readOnly={true}
                       onChange={handleChange}
                     />
                   </div>
+                  <div className="button-wrap">
+                    <ButtonAdmin
+                      type="submit"
+                      value="buscar-empleado"
+                      label="Buscar"
+                    />
+                  </div>
                 </form>
-                <div className="button-wrap">
-                  <ButtonAdmin
-                    type="submit"
-                    value="Modificar-empleado"
-                    label="Modificar"
-                  />
-                  <ButtonAdmin
-                    type="submit"
-                    value="Eliminar-empleado"
-                    label="Eliminar"
-                  />
-                </div>
               </div>
             </div>
           </div>
