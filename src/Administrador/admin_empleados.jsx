@@ -28,7 +28,7 @@ export const ContainerCrearEmpleado = () => {
   };
 
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     console.log(formData);
   }, [formData]);
@@ -201,19 +201,24 @@ export const ContainerCrearEmpleado = () => {
 export const ContainerBuscarEmpleado = () => {
   const [formData, setFormData] = useState({
     id: "",
+    contrasenia: "",
+    correo: "",
+    nombre: "",
+    fecha_nacimiento: "",
+    direccion: "",
+    salario: "",
+    telefono: "",
     tipo: "",
-    precio: "",
-    estado: "",
-    capacidad: "",
+    fecha_inicio: "",
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     console.log(formData);
-  }, [formData]);
+  }, [formData]);*/
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -231,11 +236,11 @@ export const ContainerBuscarEmpleado = () => {
       })
         .then((response) => {
           if (!response.ok) {
+            alert("No se encontró un empleado con identificación: " + formData.id);
             throw new Error("Error en la llamada al servidor");
-          }else{
+          } else {
             return response.json();
           }
-          
         })
         .then((data) => {
           console.log(data);
@@ -347,11 +352,10 @@ export const ContainerBuscarEmpleado = () => {
                   </div>
                   <div className="tipo">
                     <select
-                      name="tipo"
-                      value={
-                        formData.tipo !== undefined ? formData.tipo : "Tipo"
-                      }
                       onChange={handleChange}
+                      readOnly={true}
+                      value={formData.tipo}
+                      name="tipo"
                     >
                       <option value="">Tipo</option>
                       <option value="Empleado">Empleado</option>

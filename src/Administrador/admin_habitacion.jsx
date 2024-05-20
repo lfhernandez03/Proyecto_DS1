@@ -149,9 +149,9 @@ export const ContainerBuscarHabitación = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     console.log(formData);
-  }, [formData]);
+  }, [formData]);*/
 
   const handleSearch = (e) => {
     e.preventDefault();
