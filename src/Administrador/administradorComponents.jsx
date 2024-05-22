@@ -56,8 +56,9 @@ export function BasicMenu(props) {
 export function ButtonAdmin(props) {
   return (
     <Button
-      type={props.type}
+      type="submit"
       value={props.value}
+      onClick={props.onClick}
       style={{
         marginTop: "25px",
         backgroundColor: "white",
@@ -78,6 +79,7 @@ export function TextFieldsAdmin(props) {
       type={props.type}
       label={props.label}
       name={props.name}
+      onChange={props.onChange}
       variant="outlined"
       style={{
         marginBottom: "1rem",
@@ -91,47 +93,64 @@ export function TextFieldsAdmin(props) {
 export const Inputs = (props) => {
   return (
     <div>
-      <input
-        type={props.type}
-        placeholder={props.placeholder}
-        className={props.className}
-        name={props.name}
-        autoComplete="off"
-        required
-        style={{
-          textAlign: "center"
-        }}
-      />
       <label>
-        <span>{props.label}</span>
+        <input
+          type={props.type}
+          placeholder={props.placeholder}
+          className={props.className}
+          name={props.name}
+          readOnly={props.readOnly}
+          onChange={props.onChange}
+          autoComplete="off"
+          required={props.required}
+          style={{
+            textAlign: "center"
+          }}
+        />
       </label>
-      <i className={props.class} />
     </div>
   );
 };
 
-export const SelectBoxReserva = () => {
+export const SelectBoxReserva = (props) => {
   const options = [
-    { value: "Activo", label: "Activo" },
-    { value: "Inactivo", label: "Inactivo" },
+    { value: "Pendiente", label: "Pendiente" },
+    { value: "Terminado", label: "Terminado" },
   ];
+  
+  return (
+    <div className="option">
+      <Select
+        name={props.name}
+        defaultValue={{ label: "Tipo", value: "empty" }}
+        options={options}
+        onChange={props.onChange}
+        value={props.value}
+      />
+    </div>
+  );
+};
 
-  const handleChange = ({ value }) => {
-    console.log(value);
-  };
+export const SelectBoxReservaCliente = (props) => {
+  const options = [
+    { value: "Corriente", label: "Corriente" },
+    { value: "Ejecutivo", label: "Ejecutivo" },
+  ];
 
   return (
     <div className="option">
       <Select
-        defaultValue={{ label: "Estado", value: "empty" }}
+        name={props.name}
+        defaultValue={{ label: "Tipo", value: "empty" }}
         options={options}
-        onAbort={handleChange}
+        onChange={props.onChange}
+        value={props.value}
       />
     </div>
   );
 };
 
-export const SelectBoxEmp = () => {
+export const SelectBoxEmp = (props) => {
   const options = [
     { value: "Administrador", label: "Administrador" },
     { value: "Corriente", label: "Corriente" },
@@ -146,13 +165,13 @@ export const SelectBoxEmp = () => {
       <Select
         defaultValue={{ label: "Tipo", value: "empty" }}
         options={options}
-        onAbort={handleChange}
+        onChange={props.onChange}
       />
     </div>
   );
 };
 
-export function BasicSelect() {
+export function BasicSelect(props) {
   const [estado, setEstado] = React.useState("");
 
   const handleChange = (event) => {
@@ -167,7 +186,7 @@ export function BasicSelect() {
         id="demo-simple-select"
         value={estado}
         label="Estado"
-        onChange={handleChange}
+        onChange={props.onChange}
       >
         <MenuItem value={1}>Activo</MenuItem>
         <MenuItem value={0}>Inactivo</MenuItem>
@@ -176,7 +195,7 @@ export function BasicSelect() {
   );
 }
 
-export function BasicSelectTipo() {
+export function BasicSelectTipo(props) {
   const [estado, setEstado] = React.useState("");
 
   const handleChange = (event) => {
@@ -192,7 +211,7 @@ export function BasicSelectTipo() {
           id="demo-simple-select"
           value={estado}
           label="Estado"
-          onChange={handleChange}
+          onChange={props.onChange}
         >
           <MenuItem value={1}>Corriente</MenuItem>
           <MenuItem value={0}>Administrador</MenuItem>
