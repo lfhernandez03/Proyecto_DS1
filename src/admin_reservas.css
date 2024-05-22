@@ -240,3 +240,22 @@
     grid-column: span 2;
     padding: 0 1.5rem 0 1.5rem;
 }
+
+/*Íconos*/
+
+.input-icon {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .input-icon > svg {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .input-icon > input {
+    padding-right: 30px; /* Ajusta este valor según el tamaño de tu icono */
+  }
+  

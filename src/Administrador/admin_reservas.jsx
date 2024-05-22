@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
-import {
-  ButtonAdmin,
-  TextFieldsAdmin,
-  BasicSelect,
-  Inputs,
-  SelectBoxReserva,
-  SelectBoxReservaCliente,
-} from "./administradorComponents";
+import { ButtonAdmin, Inputs } from "./administradorComponents";
 import { AdminLayout } from "./AdministradorLayout";
 import { useNavigate } from "react-router-dom";
-import { Input, TextField } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUser,
+  faSackDollar,
+  faIdCard,
+  faEnvelope,
+  faPhone,
+  faLock,
+  faCalendarDays,
+} from "@fortawesome/free-solid-svg-icons";
 
 export const ContainerCrearReserva = () => {
   const [formData, setFormData] = useState({
-    id: '',
+    id: "",
     nombre_cliente: "",
     telefono: "",
     residencia: "",
@@ -38,10 +40,10 @@ export const ContainerCrearReserva = () => {
   };
   const navigate = useNavigate();
 
-  useEffect(() => {
+  /*useEffect(() => {
     console.log(formData);
-  }, [formData]);
-  
+  }, [formData]);*/
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -52,38 +54,37 @@ export const ContainerCrearReserva = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          
-            reserva: {
-              estado: formData.estado,
-              f_entrada: formData.fecha_entrada,
-              f_salida: formData.fecha_salida,
-              id_Cliente: formData.id,
-              descripcion: formData.descripcion,
-              precio: formData.precio,
-              id_Habitacion: formData.habitacion,
-              id_Empleado: formData.empleado
-            },
-            cliente: {
-              id: formData.id,
-              nombre: formData.nombre_cliente,
-              correo: formData.correo_electronico,
-              telefono: formData.telefono,
-              residencia: formData.residencia,
-              tipo: formData.tipo
-            
-          }
-        })
+          reserva: {
+            estado: formData.estado,
+            f_entrada: formData.fecha_entrada,
+            f_salida: formData.fecha_salida,
+            id_Cliente: formData.id,
+            descripcion: formData.descripcion,
+            precio: formData.precio,
+            id_Habitacion: formData.habitacion,
+            id_Empleado: formData.empleado,
+          },
+          cliente: {
+            id: formData.id,
+            nombre: formData.nombre_cliente,
+            correo: formData.correo_electronico,
+            telefono: formData.telefono,
+            residencia: formData.residencia,
+            tipo: formData.tipo,
+          },
+        }),
       })
-      .then((response => {
-          console.log(response);
-          if(!response.ok){
+        .then((response) => {
+          console.log("part 1",response);
+
+          if (!response.ok) {
             throw new Error("Error en la llamada al servidor");
           }
-          return response.json();
-        }))
+          return response.text();
+        })
         .then((data) => {
-          console.log(data);
-          if (data.existe & data.correcto) {
+          console.log("part 2",data);
+          if (data == "OK") {
             alert("Reserva creada exitosamente");
             navigate("/admin");
           } else if (data.existe & !data.correcto) {
@@ -113,17 +114,9 @@ export const ContainerCrearReserva = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: formData.id
-        })
+          id: formData.id,
+        }),
       })
-        .then((response) => {
-          console.log(response);
-          console.log(formData);
-          if (!response.ok) {
-            throw new Error("Error en la llamada al servidor");
-          }
-          return response.json();
-        })
         .then((data) => {
           console.log(data);
           if (data.rowCount > 0) {
@@ -134,13 +127,12 @@ export const ContainerCrearReserva = () => {
               correo_electronico: data.rows[0].CORREO,
               telefono: data.rows[0].TELEFONO,
               residencia: data.rows[0].RESIDENCIA,
-              tipo: data.rows[0].TIPO
-            })
+              tipo: data.rows[0].TIPO,
+            });
           } else {
-            alert("Error al buscar el cliente");
+            alert("No se encuentra el cliente con id: " + formData.id);
           }
         })
-        
         .catch((error) => {
           console.error("Error:", error);
         });
@@ -179,7 +171,6 @@ export const ContainerCrearReserva = () => {
                       value="Buscar"
                       className="buscar-button"
                       onClick={handleSearch}
-                      
                     />
                   </div>
                   <div className="input-wrap">
@@ -189,14 +180,22 @@ export const ContainerCrearReserva = () => {
                       type="text"
                       id="nombre_cliente"
                       value={formData.nombre}
-                      placeholder={formData.nombre_cliente !== '' ? formData.nombre_cliente: 'Nombre'}
+                      placeholder={
+                        formData.nombre_cliente !== ""
+                          ? formData.nombre_cliente
+                          : "Nombre"
+                      }
                       onChange={handleChange}
                     />
                   </div>
                   <div className="telefono">
                     <Inputs
                       className="contact-input"
-                      placeholder={formData.telefono !== '' ? formData.telefono: 'Teléfono'}
+                      placeholder={
+                        formData.telefono !== ""
+                          ? formData.telefono
+                          : "Teléfono"
+                      }
                       name="telefono"
                       type="number"
                       id="telefono"
@@ -207,7 +206,11 @@ export const ContainerCrearReserva = () => {
                   <div className="residencia">
                     <Inputs
                       className="contact-input"
-                      placeholder={formData.residencia !== '' ? formData.residencia: 'Residencia'}
+                      placeholder={
+                        formData.residencia !== ""
+                          ? formData.residencia
+                          : "Residencia"
+                      }
                       name="residencia"
                       type="text"
                       id="residencia"
@@ -221,7 +224,7 @@ export const ContainerCrearReserva = () => {
                       value={formData.tipo}
                       onChange={handleChange}
                     >
-                      <option value="">Tipo</option> 
+                      <option value="">Tipo</option>
                       <option value="Corriente">Corriente</option>
                       <option value="Ejecutivo">Ejecutivo</option>
                     </select>
@@ -230,7 +233,11 @@ export const ContainerCrearReserva = () => {
                     <Inputs
                       id="correo_electronico"
                       className="contact-input"
-                      placeholder={formData.correo_electronico !== '' ? formData.correo_electronico: 'Correo Electrónico'}
+                      placeholder={
+                        formData.correo_electronico !== ""
+                          ? formData.correo_electronico
+                          : "Correo Electrónico"
+                      }
                       name="correo_electronico"
                       type="email"
                       value={formData.correo_electronico}
@@ -338,30 +345,29 @@ export const ContainerCrearReserva = () => {
 };
 
 export const ContainerBuscarReserva = () => {
-
   const [formData, setFormData] = useState({
-    id: '',
-    descripcion: '',
-    precio: '',
-    estado: '',
-    fecha_entrada: '',
-    fecha_salida: '',
-    id_reserva: '',
-    habitacion: '',
-    empleado: '',
-    habitacion: ''
+    id: "",
+    descripcion: "",
+    precio: "",
+    estado: "",
+    fecha_entrada: "",
+    fecha_salida: "",
+    id_reserva: "",
+    habitacion: "",
+    empleado: "",
+    habitacion: "",
   });
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     console.log(formData);
-  }, [formData]);
+  }, [formData]);*/
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -373,8 +379,8 @@ export const ContainerBuscarReserva = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: formData.id
-        })
+          id: formData.id,
+        }),
       })
         .then((response) => {
           console.log(response);
@@ -395,7 +401,7 @@ export const ContainerBuscarReserva = () => {
               fecha_salida: data.rows[0].F_SALIDA,
               id: data.rows[0].ID,
               habitacion: data.rows[0].ID_HABITACION,
-              empleado: data.rows[0].ID_EMPLEADO
+              empleado: data.rows[0].ID_EMPLEADO,
             });
             console.log(formData);
           } else {
@@ -409,7 +415,7 @@ export const ContainerBuscarReserva = () => {
       console.log(formData);
       alert("Por favor, completa todos los campos");
     }
-  }
+  };
 
   return (
     <>
@@ -426,41 +432,57 @@ export const ContainerBuscarReserva = () => {
                     <h3>Información del cliente</h3>
                   </div>
                   <div className="busca-id">
-                    <Inputs
-                      className="contact-input"
-                      placeholder="Identificación"
-                      name="id"
-                      type="number"
-                      value={formData.id}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faUser} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder="Identificación"
+                        name="id"
+                        type="number"
+                        value={formData.id}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="titles">
                     <h3>Información de la reserva</h3>
                   </div>
                   <div className="fechas">
-                    <Inputs
-                      id="fecha_entrada"
-                      className="fechas-input"
-                      placeholder={formData.fecha_entrada !== '' ? formData.fecha_entrada.toString() : 'Fecha de entrada'}
-                      name="fecha_entrada"
-                      type="text"
-                      value={formData.fecha_entrada}
-                      readOnly={true}
-                      required={false}
-                    />
-                    <Inputs
-                      id="fecha_salida"
-                      className="fechas-input"
-                      placeholder={formData.fecha_salida !== '' ? formData.fecha_salida.toString() : 'Fecha de salida'}
-                      name="fecha_salida"
-                      type="text"
-                      value={formData.fecha_salida}
-                      readOnly={true}
-                      required={false}
-                    />
+                    <div className="input-icon">
+                      <Inputs
+                        id="fecha_entrada"
+                        className="fechas-input"
+                        label="Fecha de entrada"
+                        placeholder={
+                          formData.fecha_entrada !== ""
+                            ? formData.fecha_entrada.toString()
+                            : "Fecha de entrada"
+                        }
+                        name="fecha_entrada"
+                        type="text"
+                        value={formData.fecha_entrada}
+                        readOnly={true}
+                        required={false}
+                      />
+                    </div>
+                    <div className="input-icon">
+                      <Inputs
+                        id="fecha_salida"
+                        className="fechas-input"
+                        placeholder={
+                          formData.fecha_salida !== ""
+                            ? formData.fecha_salida.toString()
+                            : "Fecha de salida"
+                        }
+                        name="fecha_salida"
+                        type="text"
+                        value={formData.fecha_salida}
+                        readOnly={true}
+                        required={false}
+                      />
+                    </div>
                   </div>
-                  
+
                   <div className="status">
                     <select
                       name="estado"
@@ -473,59 +495,82 @@ export const ContainerBuscarReserva = () => {
                     </select>
                   </div>
                   <div className="precio">
-                    <Inputs
-                      id="precio"
-                      className="contact-input"
-                      placeholder={formData.precio !== '' ? formData.precio.toString() : 'Precio'}
-                      name="precio"
-                      type="number"
-                      value={formData.precio}
-                      readOnly={true}
-                      required={false}
-                    />
+                    <div className="input-icon">
+                      <Inputs
+                        id="precio"
+                        className="contact-input"
+                        placeholder={
+                          formData.precio !== ""
+                            ? formData.precio.toString()
+                            : "Precio"
+                        }
+                        name="precio"
+                        type="number"
+                        value={formData.precio}
+                        readOnly={true}
+                        required={false}
+                      />
+                    </div>
                   </div>
                   <div className="habitacion">
-                    <Inputs
-                      id="habitacion"
-                      className="contact-input"
-                      placeholder={formData.habitacion !== '' ? formData.habitacion.toString() : 'Habitación'}
-                      name="habitacion"
-                      type="text"
-                      value={formData.habitacion}
-                      readOnly={true}
-                      required={false}
-
-                    />
+                    <div className="input-icon">
+                      <Inputs
+                        id="habitacion"
+                        className="contact-input"
+                        placeholder={
+                          formData.habitacion !== ""
+                            ? formData.habitacion.toString()
+                            : "Habitación"
+                        }
+                        name="habitacion"
+                        type="text"
+                        value={formData.habitacion}
+                        readOnly={true}
+                        required={false}
+                      />
+                    </div>
                   </div>
                   <div className="empleado">
-                    <Inputs
-                      id="empleado"
-                      className="contact-input"
-                      placeholder={formData.empleado !== '' ? formData.empleado.toString() : 'Empleado'}
-                      name="empleado"
-                      type="text"
-                      value={formData.empleado}
-                      readOnly={true}
-                      required={false}
-                    />
+                    <div className="input-icon">
+                      <Inputs
+                        id="empleado"
+                        className="contact-input"
+                        placeholder={
+                          formData.empleado !== ""
+                            ? formData.empleado.toString()
+                            : "Empleado"
+                        }
+                        name="empleado"
+                        type="text"
+                        value={formData.empleado}
+                        readOnly={true}
+                        required={false}
+                      />
+                    </div>
                   </div>
                   <div className="descripcion">
-                    <Inputs
-                      id="descripcion"
-                      className="contact-input"
-                      placeholder={formData.descripcion !== '' ? formData.descripcion.toString() : 'Descripción'}
-                      name="descripcion"
-                      type="text"
-                      value={formData.descripcion}
-                      readOnly={true}
-                      required={false}
-                    />
+                    <div className="input-icon">
+                      <Inputs
+                        id="descripcion"
+                        className="contact-input"
+                        placeholder={
+                          formData.descripcion !== ""
+                            ? formData.descripcion.toString()
+                            : "Descripción"
+                        }
+                        name="descripcion"
+                        type="text"
+                        value={formData.descripcion}
+                        readOnly={true}
+                        required={false}
+                      />
+                    </div>
                   </div>
                   <div className="button-wrap">
                     <ButtonAdmin
                       type="submit"
                       value="Crear-reserva"
-                      label="Buscar" 
+                      label="Buscar"
                     />
                   </div>
                 </form>
