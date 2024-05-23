@@ -23,9 +23,9 @@ export const ContainerCrearHabitación = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  /*useEffect(() => {
+  useEffect(() => {
     console.log(formData);
-  }, [formData]);*/
+  }, [formData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -69,7 +69,7 @@ export const ContainerCrearHabitación = () => {
             <div className="left">
               <div className="form-wrapper">
                 <div className="form-heading">
-                  <h1>Crear Habitación</h1>
+                  <h1>Crear Empleado</h1>
                 </div>
                 <form className="form" onSubmit={handleSubmit}>
                   <div className="titles">
@@ -206,7 +206,7 @@ export const ContainerBuscarHabitación = () => {
             <div className="left">
               <div className="form-wrapper">
                 <div className="form-heading">
-                  <h1>Buscar Habitación</h1>
+                  <h1>Crear Empleado</h1>
                 </div>
                 <form className="form" onSubmit={handleSearch}>
                   <div className="identificacion">

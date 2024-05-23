@@ -29,9 +29,9 @@ export const ContainerCrearEmpleado = () => {
 
   const navigate = useNavigate();
 
-  /*useEffect(() => {
+  useEffect(() => {
     console.log(formData);
-  }, [formData]);*/
+  }, [formData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
