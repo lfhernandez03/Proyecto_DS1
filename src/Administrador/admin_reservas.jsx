@@ -74,13 +74,15 @@ export const ContainerCrearReserva = () => {
           }
         })
       })
-      .then((response => {
-          console.log(response);
-          if(!response.ok){
-            throw new Error("Error en la llamada al servidor");
-          }
-          return response.json();
-        }))
+      .then((response) => {
+        if (!response.ok) {
+          return response.text().then((text) => {
+            alert(text);
+            throw new Error(text);
+          });
+        }
+        return response.text();
+      })
         .then((data) => {
           console.log(data);
           if (data.existe & data.correcto) {
@@ -117,12 +119,10 @@ export const ContainerCrearReserva = () => {
         })
       })
         .then((response) => {
-          console.log(response);
-          console.log(formData);
           if (!response.ok) {
             throw new Error("Error en la llamada al servidor");
           }
-          return response.json();
+          return response.text;
         })
         .then((data) => {
           console.log(data);
@@ -365,50 +365,54 @@ export const ContainerBuscarReserva = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formData.id && formData.id !== "") {
-      console.log(formData);
-      fetch("http://localhost:3000/api/reserva/consultar", {
-        method: "POST",
+    const action = e.target.getAttribute('data-action');
+  
+    if(!formData.id || formData.id === "") {
+      alert("Por favor ingrese una identificación");
+    } else {
+      let url = '';
+      if (action === 'Buscar') {
+        url = `http://localhost:3000/api/reserva/consultar?id=${formData.id}`;
+      } else if (action === 'Actualizar') {
+        url = `http://localhost:3000/api/reserva/insertar?id=${formData.id}`;
+      }
+  
+      fetch(url, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
+          
         },
-        body: JSON.stringify({
-          id: formData.id
-        })
       })
-        .then((response) => {
-          console.log(response);
-          if (!response.ok) {
-            throw new Error("Error en la llamada al servidor");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-          if (data.rowCount > 0) {
-            alert("Reserva encontrada");
-            setFormData({
-              descripcion: data.rows[0].DESCRIPCION,
-              precio: data.rows[0].PRECIO,
-              estado: data.rows[0].ESTADO,
-              fecha_entrada: data.rows[0].F_ENTRADA,
-              fecha_salida: data.rows[0].F_SALIDA,
-              id: data.rows[0].ID,
-              habitacion: data.rows[0].ID_HABITACION,
-              empleado: data.rows[0].ID_EMPLEADO
-            });
-            console.log(formData);
-          } else {
-            alert("Error al buscar el cliente");
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    } else {
-      console.log(formData);
-      alert("Por favor, completa todos los campos");
-    }
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error en la llamada al servidor");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        if (data.rowCount > 0) {
+          alert("Reserva encontrada");
+          setFormData({
+            descripcion: data.rows[0].DESCRIPCION,
+            precio: data.rows[0].PRECIO,
+            estado: data.rows[0].ESTADO,
+            fecha_entrada: data.rows[0].F_ENTRADA,
+            fecha_salida: data.rows[0].F_SALIDA,
+            id: data.rows[0].ID,
+            habitacion: data.rows[0].ID_HABITACION,
+            empleado: data.rows[0].ID_EMPLEADO
+          });
+          console.log(formData);
+        } else {
+          alert("Error al buscar el cliente");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    } 
   }
 
   return (
@@ -526,6 +530,11 @@ export const ContainerBuscarReserva = () => {
                       type="submit"
                       value="Crear-reserva"
                       label="Buscar" 
+                    />
+                    <ButtonAdmin
+                      type="submit"
+                      value="Crear-reserva"
+                      label="Actualizar"
                     />
                   </div>
                 </form>

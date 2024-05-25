@@ -28,44 +28,31 @@ import {
   ContainerCrearHabitación,
 } from "./Administrador/admin_habitacion.jsx"
 
-
-// ReactDOM.createRoot(document.getElementById("root")).render(
-//   <>
-//     <BrowserRouter>
-//       <Routes>
-//         <Route path="/" element={<LoginTab />}/>
-//         <Route exact path="/CrearContraseña" element={<RecoverTab />} />
-//         <Route path="/Empleados" element={<ContainerEmp />} />
-//         <Route path="/HacerReserva" element={<Container1 />} />
-//         <Route path="/BuscarReserva" element={<Container2 />} />
-//       </Routes>
-//     </BrowserRouter>
-//   </>
-// )
-
 export const Rutas = () =>(
   <>
     <Router>
       <Routes>
 
         //Rutas del Login
-        <Route path="/" element={<LoginTab />} />
-        <Route exact path="/CrearContraseña" element={<RecoverTab />} />
+        <Route path="/api/login" element={<LoginTab />} />
+        <Route path="/api/login/cambiarContra" element={<RecoverTab />} />
 
         //Rutas del Empleado
         <Route path="/Empleados" element={<ContainerEmp />} />
-        <Route path="/HacerReserva" element={<Container1 />} />
-        <Route path="/BuscarReserva" element={<Container2 />} />
+        <Route path="/api/reserva/insertar" element={<ContainerCrearReserva />} />
+        <Route path="/api/reserva/consultar" element={<ContainerBuscarReserva />} />
 
         //Rutas del Administrador
         <Route path="/Admin" element={<Admin />} />
-        <Route path="/CrearReservaAdmin" element={<ContainerCrearReserva />} />
-        <Route path="/CrearHabitación" element={<ContainerCrearHabitación />} />
-        <Route path="/CrearEmpleado" element={<ContainerCrearEmpleado />} />
-        <Route path="/BuscarReservaAdmin" element={<ContainerBuscarReserva />} />
-        <Route path="/BuscarEmpleado" element={<ContainerBuscarEmpleado />} />
-        <Route path="/BuscarHabitación" element={<ContainerBuscarHabitación />} />
+        <Route path="/api/reserva/insertar" element={<ContainerCrearReserva />} />
+        <Route path="/api/habitacion/insertar" element={<ContainerCrearHabitación />} />
+        <Route path="/api/empleado/insertar" element={<ContainerCrearEmpleado />} />
+        <Route path="/api/reserva/consultar" element={<ContainerBuscarReserva />} />
+        <Route path="/api/empleado/consultar" element={<ContainerBuscarEmpleado />} />
+        <Route path="/api/habitacion/consultar" element={<ContainerBuscarHabitación />} />
         
+        //Redirección por defecto
+        <Route path="*" element={<LoginTab />} />
       </Routes>
     </Router>
   </>

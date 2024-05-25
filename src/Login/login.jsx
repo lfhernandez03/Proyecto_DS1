@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextFields } from "./loginComponents";
 import { ButtonLogin } from "./loginComponents";
 import { Link } from "react-router-dom";
@@ -21,17 +21,9 @@ export const LoginTab = () => {
     // si no es exitosa mostrar el error
   };
 
-  /*const handleSubmit = (event) => {
-    event.preventDefault();
-
-    //Validación de campos
-    if (formData.id && formData.password) {
-      alert("Formulario válido. Redirigiendo...");
-      navigate("/Admin");
-    } else {
-      alert("Por favor, completa todos los campos");
-    }
-  };*/
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -48,7 +40,14 @@ export const LoginTab = () => {
           pass: formData.password,
         }),
       })
-        .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok ) {
+          return response.json().then((error) => {
+            throw new Error(error.message);
+          });
+        }
+        return response.json();
+      })
         .then((data) => {
           if (data.existe && data.correcto) {
             console.log("Usuario encontrado y contraseña correcta");
@@ -63,6 +62,7 @@ export const LoginTab = () => {
         })
         .catch((error) => {
           console.error("Error:", error);
+          alert(error.message)
         });
     } else {
       alert("Por favor, completa todos los campos");
