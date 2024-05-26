@@ -101,6 +101,7 @@ export const Inputs = (props) => {
           onChange={props.onChange}
           autoComplete="off"
           required={props.required}
+          disabled={props.disabled}
           style={{
             textAlign: "center"
           }}

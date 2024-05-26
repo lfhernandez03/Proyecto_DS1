@@ -5,30 +5,29 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export const LoginTab = () => {
-  
   const [formData, setFormData] = useState({
     id: "",
-    password: ""
+    password: "",
   });
 
   const navigate = useNavigate();
 
+  // Function to handle form field changes
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
-    // si estan correctos hacer la llamada al backend para valdiar el usuario
-    // si la respuesta es exitosa redireccionar a home
-    // si no es exitosa mostrar el error
   };
 
+  // Effect to log form data whenever it changes
   useEffect(() => {
     console.log(formData);
   }, [formData]);
 
+  // Function to handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Validación de campos
+    // Validation of fields
     if (formData.id && formData.password) {
       fetch("http://localhost:3000/api/login", {
         method: "POST",
@@ -40,33 +39,45 @@ export const LoginTab = () => {
           pass: formData.password,
         }),
       })
-      .then((response) => {
-        if (!response.ok ) {
-          return response.json().then((error) => {
-            throw new Error(error.message);
-          });
-        }
-        return response.json();
-      })
+        .then((response) => {
+          if (!response.ok) {
+            // Verificar el tipo de contenido de la respuesta
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.indexOf("application/json") !== -1) {
+              // Si la respuesta es JSON, analizarla como JSON
+              return response.json().then((error) => {
+                throw new Error(error.message);
+              });
+            } else {
+              // Si la respuesta no es JSON, lanzar un error con el texto de la respuesta
+              return response.text().then((text) => {
+                throw new Error(text);
+              });
+            }
+          }
+          // ...y si la respuesta fue exitosa, devolverla
+          return response.json();
+        })
         .then((data) => {
           if (data.existe && data.correcto) {
             console.log("Usuario encontrado y contraseña correcta");
+            localStorage.setItem("token", data.token);
             navigate("/Admin");
           } else if (data.existe && !data.correcto) {
             console.log("Contraseña incorrecta");
             alert("Contraseña incorrecta");
           } else {
-            alert("Usuario no encontrado")
+            alert("Usuario no encontrado");
             console.log("Usuario no encontrado");
           }
         })
         .catch((error) => {
           console.error("Error:", error);
-          alert(error.message)
+          alert(error.message);
         });
     } else {
       alert("Por favor, completa todos los campos");
-    } 
+    }
   };
 
   return (
@@ -92,11 +103,11 @@ export const LoginTab = () => {
               value={formData.password}
               onChange={handleChange}
             />
-              <ButtonLogin
+            <ButtonLogin
               title="Iniciar Sesión"
               type="submit"
               value="Iniciar Sesión"
-              />
+            />
             <div className="footer">
               <h5>
                 <Link className="ToRecoverTab" to="/CrearContraseña">

@@ -10,10 +10,11 @@ import {
 import { AdminLayout } from "./AdministradorLayout";
 import { useNavigate } from "react-router-dom";
 import { Input, TextField } from "@mui/material";
+import { mergeStyles } from "react-select";
 
 export const ContainerCrearReserva = () => {
-  const [formData, setFormData] = useState({
-    id: '',
+  const initialState = {
+    id: "",
     nombre_cliente: "",
     telefono: "",
     residencia: "",
@@ -27,21 +28,20 @@ export const ContainerCrearReserva = () => {
     descripcion: "",
     habitacion: "",
     empleado: "",
-  });
+  };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((currentFormData) => {
-      const updatedFormData = { ...currentFormData, [name]: value };
-      return updatedFormData;
-    });
+  const [formData, setFormData] = useState(initialState);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
   };
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log(formData);
   }, [formData]);
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -52,49 +52,38 @@ export const ContainerCrearReserva = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          
-            reserva: {
-              estado: formData.estado,
-              f_entrada: formData.fecha_entrada,
-              f_salida: formData.fecha_salida,
-              id_Cliente: formData.id,
-              descripcion: formData.descripcion,
-              precio: formData.precio,
-              id_Habitacion: formData.habitacion,
-              id_Empleado: formData.empleado
-            },
-            cliente: {
-              id: formData.id,
-              nombre: formData.nombre_cliente,
-              correo: formData.correo_electronico,
-              telefono: formData.telefono,
-              residencia: formData.residencia,
-              tipo: formData.tipo
-            
-          }
-        })
+          reserva: {
+            estado: formData.estado,
+            f_entrada: formData.fecha_entrada,
+            f_salida: formData.fecha_salida,
+            id_Cliente: formData.id,
+            descripcion: formData.descripcion,
+            precio: formData.precio,
+            id_Habitacion: formData.habitacion,
+            id_Empleado: formData.empleado,
+          },
+          cliente: {
+            id: formData.id,
+            nombre: formData.nombre_cliente,
+            correo: formData.correo_electronico,
+            telefono: formData.telefono,
+            residencia: formData.residencia,
+            tipo: formData.tipo,
+          },
+        }),
       })
-      .then((response) => {
-        if (!response.ok) {
-          return response.text().then((text) => {
-            alert(text);
-            throw new Error(text);
-          });
-        }
-        return response.text();
-      })
-        .then((data) => {
-          console.log(data);
-          if (data.existe & data.correcto) {
-            alert("Reserva creada exitosamente");
-            navigate("/admin");
-          } else if (data.existe & !data.correcto) {
-            alert(
-              "Error al crear la reserva",
-              console.log("Error al crear la reserva")
-            );
+        .then((response) => {
+          if (!response.ok) {
+            return response.text().then((text) => {
+              alert(text);
+              throw new Error(text);
+            });
           }
+          alert("Reserva creada exitosamente");
+          navigate("/api/reserva/insertar");
+          return response.text();
         })
+
         .catch((error) => {
           console.error("Error:", error);
         });
@@ -106,23 +95,25 @@ export const ContainerCrearReserva = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (!formData || formData.id === "") {
+
+    let url = `http://localhost:3000/api/cliente/consultar/${formData.id}`;
+
+    if (!formData.id || formData.id === "") {
       alert("Por favor ingrese una identificación");
     } else {
-      fetch("http://localhost:3000/api/cliente/consultar", {
-        method: "POST",
+      fetch(url, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          id: formData.id
-        })
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error("Error en la llamada al servidor");
+            return response.json().then((error) => {
+              throw new Error(error.message);
+            });
           }
-          return response.text;
+          return response.json();
         })
         .then((data) => {
           console.log(data);
@@ -134,20 +125,19 @@ export const ContainerCrearReserva = () => {
               correo_electronico: data.rows[0].CORREO,
               telefono: data.rows[0].TELEFONO,
               residencia: data.rows[0].RESIDENCIA,
-              tipo: data.rows[0].TIPO
-            })
+              tipo: data.rows[0].TIPO,
+            });
           } else {
             alert("Error al buscar el cliente");
           }
         })
-        
+
         .catch((error) => {
           console.error("Error:", error);
         });
     }
   };
 
-  /* */
   return (
     <>
       <AdminLayout>
@@ -179,7 +169,6 @@ export const ContainerCrearReserva = () => {
                       value="Buscar"
                       className="buscar-button"
                       onClick={handleSearch}
-                      
                     />
                   </div>
                   <div className="input-wrap">
@@ -189,14 +178,22 @@ export const ContainerCrearReserva = () => {
                       type="text"
                       id="nombre_cliente"
                       value={formData.nombre}
-                      placeholder={formData.nombre_cliente !== '' ? formData.nombre_cliente: 'Nombre'}
+                      placeholder={
+                        formData.nombre_cliente !== ""
+                          ? formData.nombre_cliente
+                          : "Nombre"
+                      }
                       onChange={handleChange}
                     />
                   </div>
                   <div className="telefono">
                     <Inputs
                       className="contact-input"
-                      placeholder={formData.telefono !== '' ? formData.telefono: 'Teléfono'}
+                      placeholder={
+                        formData.telefono !== ""
+                          ? formData.telefono
+                          : "Teléfono"
+                      }
                       name="telefono"
                       type="number"
                       id="telefono"
@@ -207,7 +204,11 @@ export const ContainerCrearReserva = () => {
                   <div className="residencia">
                     <Inputs
                       className="contact-input"
-                      placeholder={formData.residencia !== '' ? formData.residencia: 'Residencia'}
+                      placeholder={
+                        formData.residencia !== ""
+                          ? formData.residencia
+                          : "Residencia"
+                      }
                       name="residencia"
                       type="text"
                       id="residencia"
@@ -221,7 +222,7 @@ export const ContainerCrearReserva = () => {
                       value={formData.tipo}
                       onChange={handleChange}
                     >
-                      <option value="">Tipo</option> 
+                      <option value="">Tipo</option>
                       <option value="Corriente">Corriente</option>
                       <option value="Ejecutivo">Ejecutivo</option>
                     </select>
@@ -230,7 +231,11 @@ export const ContainerCrearReserva = () => {
                     <Inputs
                       id="correo_electronico"
                       className="contact-input"
-                      placeholder={formData.correo_electronico !== '' ? formData.correo_electronico: 'Correo Electrónico'}
+                      placeholder={
+                        formData.correo_electronico !== ""
+                          ? formData.correo_electronico
+                          : "Correo Electrónico"
+                      }
                       name="correo_electronico"
                       type="email"
                       value={formData.correo_electronico}
@@ -338,82 +343,132 @@ export const ContainerCrearReserva = () => {
 };
 
 export const ContainerBuscarReserva = () => {
-
   const [formData, setFormData] = useState({
-    id: '',
-    descripcion: '',
-    precio: '',
-    estado: '',
-    fecha_entrada: '',
-    fecha_salida: '',
-    id_reserva: '',
-    habitacion: '',
-    empleado: '',
-    habitacion: ''
+    id: "",
+    descripcion: "",
+    precio: "",
+    estado: "",
+    fecha_entrada: "",
+    fecha_salida: "",
+    habitacion: "",
+    empleado: "",
+    habitacion: "",
   });
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Función para manejar los cambios en los campos de la reserva, se activa cuando se cambia el valor de un campo
+  // Al momento de querer realizar una actualización
+  const handleUpdateChange = (e) => {
+    setIsChanged(true);
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
     });
   };
 
   useEffect(() => {
     console.log(formData);
   }, [formData]);
+  
+  // Variable para almacenar la acción a realizar
+  const [action, setAction] = useState(null);
+  // Variable para almacenar si se ha buscado la reserva
+  const [isSearched, setIsSearched] = useState(false);
+  // Variable para almacenar si se ha cambiado algun valor de la reserva
+  const [isChanged, setIsChanged] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const action = e.target.getAttribute('data-action');
-  
-    if(!formData.id || formData.id === "") {
+
+    let method = "";
+    let url = "";
+    if (!formData.id || formData.id === "") {
       alert("Por favor ingrese una identificación");
     } else {
-      let url = '';
-      if (action === 'Buscar') {
-        url = `http://localhost:3000/api/reserva/consultar?id=${formData.id}`;
-      } else if (action === 'Actualizar') {
-        url = `http://localhost:3000/api/reserva/insertar?id=${formData.id}`;
+      // Dependiendo de la acción seleccionada se realiza una petición diferente
+        // Si la acción es buscar se realiza una petición GET
+      if (action === "Buscar") {
+        url = `http://localhost:3000/api/reserva/consultar/${formData.id}`;
+        method = "GET";
+        // Si la acción es actualizar se realiza una petición PUT
+      } else if (action === "Actualizar") {
+        // Si no se ha buscado la reserva se muestra un mensaje de alerta
+        if(isSearched === false){
+          alert("Por favor busque la reserva antes de actualizarla");
+          return;
+        // Si se ha buscado la reserva se verifica si se ha cambiado algún campo
+        } else if(!isChanged){
+          alert("Por favor cambie al menos un campo antes de actualizar la reserva");
+          return;
+        }
+
+        url = `http://localhost:3000/api/reserva/actualizar`;
+        method = "PUT";
       }
-  
-      fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          
-        },
-      })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Error en la llamada al servidor");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        if (data.rowCount > 0) {
-          alert("Reserva encontrada");
-          setFormData({
-            descripcion: data.rows[0].DESCRIPCION,
-            precio: data.rows[0].PRECIO,
-            estado: data.rows[0].ESTADO,
-            fecha_entrada: data.rows[0].F_ENTRADA,
-            fecha_salida: data.rows[0].F_SALIDA,
-            id: data.rows[0].ID,
-            habitacion: data.rows[0].ID_HABITACION,
-            empleado: data.rows[0].ID_EMPLEADO
+      
+      if(method !== ""){
+        fetch(url, {
+          method: method,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"), // Asegúrate de reemplazar 'token' con tu token de autenticación
+          },
+          // Si la acción es actualizar se envía el cuerpo de la petición con los datos de la reserva
+          body: method === "PUT" ? JSON.stringify(formData) : null,
+        })
+        .then((response) => {
+          if (!response.ok) {
+            // Verificar el tipo de contenido de la respuesta
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.indexOf("application/json") !== -1) {
+              // Si la respuesta es JSON, analizarla como JSON
+              return response.json().then((error) => {
+                throw new Error(error.message);
+              });
+            } else {
+              // Si la respuesta no es JSON, lanzar un error con el texto de la respuesta
+              return response.text().then((text) => {
+                throw new Error(text);
+              });
+            }
+          }
+          // ...y si la respuesta fue exitosa, devolverla
+          return response.json();
+        })
+          .then((data) => {
+            console.log(data);
+            if (data.rowCount > 0) {
+              alert("Reserva encontrada");
+              setIsSearched(true);
+              setFormData({
+                descripcion: data.rows[0].DESCRIPCION,
+                precio: data.rows[0].PRECIO,
+                estado: data.rows[0].ESTADO,
+                fecha_entrada: data.rows[0].F_ENTRADA,
+                fecha_salida: data.rows[0].F_SALIDA,
+                id: data.rows[0].ID,
+                habitacion: data.rows[0].ID_HABITACION,
+                empleado: data.rows[0].ID_EMPLEADO,
+              });
+              console.log(formData);
+            } else {
+              alert("Error al buscar la reserva");
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
           });
-          console.log(formData);
-        } else {
-          alert("Error al buscar el cliente");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-    } 
-  }
+      }else{
+        alert("Por favor seleccione una acción");
+      }
+    }
+  };
 
   return (
     <>
@@ -446,30 +501,38 @@ export const ContainerBuscarReserva = () => {
                     <Inputs
                       id="fecha_entrada"
                       className="fechas-input"
-                      placeholder={formData.fecha_entrada !== '' ? formData.fecha_entrada.toString() : 'Fecha de entrada'}
+                      placeholder={
+                        formData.fecha_entrada !== ""
+                          ? formData.fecha_entrada.toString()
+                          : "Fecha de entrada"
+                      }
                       name="fecha_entrada"
                       type="text"
                       value={formData.fecha_entrada}
-                      readOnly={true}
+                      disabled={action !== "Actualizar"}
                       required={false}
                     />
                     <Inputs
                       id="fecha_salida"
                       className="fechas-input"
-                      placeholder={formData.fecha_salida !== '' ? formData.fecha_salida.toString() : 'Fecha de salida'}
+                      placeholder={
+                        formData.fecha_salida !== ""
+                          ? formData.fecha_salida.toString()
+                          : "Fecha de salida"
+                      }
                       name="fecha_salida"
                       type="text"
                       value={formData.fecha_salida}
-                      readOnly={true}
+                      disabled={action !== "Actualizar"}
                       required={false}
                     />
                   </div>
-                  
+
                   <div className="status">
                     <select
                       name="estado"
                       value={formData.estado}
-                      onChange={handleChange}
+                      onChange={action === "Actualizar" ? handleUpdateChange : handleChange}
                     >
                       <option value="">Estado</option>
                       <option value="PENDIENTE">Pendiente</option>
@@ -480,11 +543,16 @@ export const ContainerBuscarReserva = () => {
                     <Inputs
                       id="precio"
                       className="contact-input"
-                      placeholder={formData.precio !== '' ? formData.precio.toString() : 'Precio'}
+                      placeholder={
+                        formData.precio !== ""
+                          ? formData.precio.toString()
+                          : "Precio"
+                      }
                       name="precio"
                       type="number"
                       value={formData.precio}
-                      readOnly={true}
+                      disabled={action !== "Actualizar"}
+                      onChange={action === "Actualizar" ? handleUpdateChange : handleChange}
                       required={false}
                     />
                   </div>
@@ -492,24 +560,33 @@ export const ContainerBuscarReserva = () => {
                     <Inputs
                       id="habitacion"
                       className="contact-input"
-                      placeholder={formData.habitacion !== '' ? formData.habitacion.toString() : 'Habitación'}
+                      placeholder={
+                        formData.habitacion !== ""
+                          ? formData.habitacion.toString()
+                          : "Habitación"
+                      }
                       name="habitacion"
                       type="text"
                       value={formData.habitacion}
-                      readOnly={true}
+                      disabled={action !== "Actualizar"}
+                      onChange={action === "Actualizar" ? handleUpdateChange : handleChange}
                       required={false}
-
                     />
                   </div>
                   <div className="empleado">
                     <Inputs
                       id="empleado"
                       className="contact-input"
-                      placeholder={formData.empleado !== '' ? formData.empleado.toString() : 'Empleado'}
+                      placeholder={
+                        formData.empleado !== ""
+                          ? formData.empleado.toString()
+                          : "Empleado"
+                      }
                       name="empleado"
                       type="text"
                       value={formData.empleado}
-                      readOnly={true}
+                      disabled={action !== "Actualizar"}
+                      onChange={action === "Actualizar" ? handleUpdateChange : handleChange}
                       required={false}
                     />
                   </div>
@@ -517,24 +594,31 @@ export const ContainerBuscarReserva = () => {
                     <Inputs
                       id="descripcion"
                       className="contact-input"
-                      placeholder={formData.descripcion !== '' ? formData.descripcion.toString() : 'Descripción'}
+                      placeholder={
+                        formData.descripcion !== ""
+                          ? formData.descripcion.toString()
+                          : "Descripción"
+                      }
                       name="descripcion"
                       type="text"
                       value={formData.descripcion}
-                      readOnly={true}
+                      disabled={action !== "Actualizar"}
+                      onChange={action === "Actualizar" ? handleUpdateChange : handleChange}
                       required={false}
                     />
                   </div>
                   <div className="button-wrap">
                     <ButtonAdmin
-                      type="submit"
+                      type="button"
                       value="Crear-reserva"
-                      label="Buscar" 
+                      label="Buscar"
+                      onClick={() => setAction("Buscar")}
                     />
                     <ButtonAdmin
-                      type="submit"
+                      type="button"
                       value="Crear-reserva"
                       label="Actualizar"
+                      onClick={() => setAction("Actualizar")}
                     />
                   </div>
                 </form>
