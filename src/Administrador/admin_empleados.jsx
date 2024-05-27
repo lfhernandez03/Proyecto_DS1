@@ -16,6 +16,7 @@ import {
   faCalendarDays,
   faSackDollar,
   faLock,
+  faMapLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -97,32 +98,43 @@ export const ContainerCrearEmpleado = () => {
                     <h3>Información del empleado</h3>
                   </div>
                   <div className="input-wrap">
-                    <Inputs
-                      className="contact-input"
-                      placeholder="Nombre"
-                      name="nombre"
-                      type="text"
-                      value={formData.nombre}
-                      onChange={handleChange}
-                    />
-                    <Inputs
-                      className="contact-input"
-                      placeholder="Identificación"
-                      name="id"
-                      type="number"
-                      value={formData.id}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faUser} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder="Nombre"
+                        name="nombre"
+                        type="text"
+                        value={formData.nombre}
+                        onChange={handleChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="input-wrap">
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faIdCard} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder="Identificación"
+                        name="id"
+                        type="number"
+                        value={formData.id}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="correo">
-                    <Inputs
-                      className="contact-input"
-                      placeholder="Correo electrónico"
-                      name="correo"
-                      type="email"
-                      value={formData.correo}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faEnvelope} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder="Correo electrónico"
+                        name="correo"
+                        type="email"
+                        value={formData.correo}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="telefono">
                     <div className="input-icon">
@@ -137,26 +149,19 @@ export const ContainerCrearEmpleado = () => {
                     </div>
                   </div>
                   <div className="direccion">
-                    <Inputs
-                      className="contact-input"
-                      placeholder="Dirección"
-                      name="direccion"
-                      type="text"
-                      value={formData.direccion}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faMapLocationDot} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder="Dirección"
+                        name="direccion"
+                        type="text"
+                        value={formData.direccion}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
-                  <div className="direccion">
-                    <Inputs
-                      className="contact-input"
-                      placeholder="Dirección"
-                      name="direccion"
-                      type="text"
-                      value={formData.direccion}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="tipo">
+                  <div className="tipo1">
                     <select
                       name="tipo"
                       value={formData.tipo}
@@ -187,7 +192,7 @@ export const ContainerCrearEmpleado = () => {
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="salario">
+                  <div className="input-wrap">
                     <div className="input-icon">
                       <FontAwesomeIcon icon={faSackDollar} />
                       <Inputs
@@ -200,15 +205,18 @@ export const ContainerCrearEmpleado = () => {
                       />
                     </div>
                   </div>
-                  <div className="contraseña">
-                    <Inputs
-                      className="contact-input"
-                      placeholder="Contraseña"
-                      name="contrasenia"
-                      type="text"
-                      value={formData.contrasenia}
-                      onChange={handleChange}
-                    />
+                  <div className="input-wrap">
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faLock} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder="Contraseña"
+                        name="contrasenia"
+                        type="text"
+                        value={formData.contrasenia}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="button-wrap">
                     <ButtonAdmin
@@ -265,7 +273,9 @@ export const ContainerBuscarEmpleado = () => {
       })
         .then((response) => {
           if (!response.ok) {
-            alert("No se encontró un empleado con identificación: " + formData.id);
+            alert(
+              "No se encontró un empleado con identificación: " + formData.id
+            );
             throw new Error("Error en la llamada al servidor");
           } else {
             return response.json();
@@ -311,73 +321,88 @@ export const ContainerBuscarEmpleado = () => {
                   <div className="titles">
                     <h3>Información del empleado</h3>
                   </div>
-                  <div className="buscar-empleado">
-                    <Inputs
-                      className="contact-input"
-                      placeholder="Identificación"
-                      name="id"
-                      type="number"
-                      value={formData.id}
-                      onChange={handleChange}
-                    />
+                  <div className="input-wrap">
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faIdCard} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder="Identificación"
+                        name="id"
+                        type="number"
+                        value={formData.id}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="input-wrap">
-                    <Inputs
-                      className="contact-input"
-                      placeholder={
-                        formData.nombre !== "" ? formData.nombre : "Nombre"
-                      }
-                      name="nombre"
-                      type="text"
-                      value={formData.nombre}
-                      readOnly={true}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faUser} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder={
+                          formData.nombre !== "" ? formData.nombre : "Nombre"
+                        }
+                        name="nombre"
+                        type="text"
+                        value={formData.nombre}
+                        readOnly={true}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="correo">
-                    <Inputs
-                      className="contact-input"
-                      placeholder={
-                        formData.correo !== ""
-                          ? formData.correo
-                          : "Correo Electrónico"
-                      }
-                      name="correo"
-                      type="email"
-                      value={formData.correo}
-                      readOnly={true}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faEnvelope} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder={
+                          formData.correo !== ""
+                            ? formData.correo
+                            : "Correo Electrónico"
+                        }
+                        name="correo"
+                        type="email"
+                        value={formData.correo}
+                        readOnly={true}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="telefono">
-                    <Inputs
-                      className="contact-input"
-                      placeholder={
-                        formData.telefono !== ""
-                          ? formData.telefono
-                          : "Teléfono"
-                      }
-                      name="telefono"
-                      type="number"
-                      value={formData.telefono}
-                      readOnly={true}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faPhone} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder={
+                          formData.telefono !== ""
+                            ? formData.telefono
+                            : "Teléfono"
+                        }
+                        name="telefono"
+                        type="number"
+                        value={formData.telefono}
+                        readOnly={true}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="direccion">
-                    <Inputs
-                      className="contact-input"
-                      placeholder={
-                        formData.direccion !== ""
-                          ? formData.direccion
-                          : "Dirección"
-                      }
-                      name="direccion"
-                      type="text"
-                      value={formData.direccion}
-                      readOnly={true}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faMapLocationDot} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder={
+                          formData.direccion !== ""
+                            ? formData.direccion
+                            : "Dirección"
+                        }
+                        name="direccion"
+                        type="text"
+                        value={formData.direccion}
+                        readOnly={true}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="tipo">
                     <select
@@ -396,60 +421,72 @@ export const ContainerBuscarEmpleado = () => {
                     <h4>Fecha de nacimiento</h4>
                   </div>
                   <div className="fechas">
-                    <Inputs
-                      className="fechas-input"
-                      name="fecha_inicio"
-                      placeholder={
-                        formData.fecha_inicio !== ""
-                          ? formData.fecha_inicio
-                          : "Fecha de Inicio"
-                      }
-                      type="text"
-                      value={formData.fecha_inicio}
-                      readOnly={true}
-                      onChange={handleChange}
-                    />
-                    <Inputs
-                      className="fechas-input"
-                      name="fecha_nacimiento"
-                      placeholder={
-                        formData.fecha_nacimiento !== ""
-                          ? formData.fecha_nacimiento
-                          : "Fecha de Nacimiento"
-                      }
-                      type="text"
-                      value={formData.fecha_nacimiento}
-                      readOnly={true}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faCalendarDays} />
+                      <Inputs
+                        className="fechas-input"
+                        name="fecha_inicio"
+                        placeholder={
+                          formData.fecha_inicio !== ""
+                            ? formData.fecha_inicio
+                            : "Fecha de Inicio"
+                        }
+                        type="text"
+                        value={formData.fecha_inicio}
+                        readOnly={true}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faCalendarDays} />
+                      <Inputs
+                        className="fechas-input"
+                        name="fecha_nacimiento"
+                        placeholder={
+                          formData.fecha_nacimiento !== ""
+                            ? formData.fecha_nacimiento
+                            : "Fecha de Nacimiento"
+                        }
+                        type="text"
+                        value={formData.fecha_nacimiento}
+                        readOnly={true}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="salario">
-                    <Inputs
-                      className="contact-input"
-                      placeholder={
-                        formData.salario !== "" ? formData.salario : "Salario"
-                      }
-                      name="salario"
-                      type="number"
-                      value={formData.salario}
-                      readOnly={true}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faSackDollar} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder={
+                          formData.salario !== "" ? formData.salario : "Salario"
+                        }
+                        name="salario"
+                        type="number"
+                        value={formData.salario}
+                        readOnly={true}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="contraseña">
-                    <Inputs
-                      className="contact-input"
-                      placeholder={
-                        formData.contrasenia !== ""
-                          ? formData.contrasenia
-                          : "Contraseña"
-                      }
-                      name="contrasenia"
-                      type="text"
-                      value={formData.contrasenia}
-                      readOnly={true}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faLock} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder={
+                          formData.contrasenia !== ""
+                            ? formData.contrasenia
+                            : "Contraseña"
+                        }
+                        name="contrasenia"
+                        type="text"
+                        value={formData.contrasenia}
+                        readOnly={true}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="button-wrap">
                     <ButtonAdmin

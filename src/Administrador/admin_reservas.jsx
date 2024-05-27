@@ -11,6 +11,12 @@ import {
   faPhone,
   faLock,
   faCalendarDays,
+  faHouseUser,
+  faPassport,
+  faHashtag,
+  faDoorClosed,
+  faUserTie,
+  faBars,
 } from "@fortawesome/free-solid-svg-icons";
 
 export const ContainerCrearReserva = () => {
@@ -75,7 +81,7 @@ export const ContainerCrearReserva = () => {
         }),
       })
         .then((response) => {
-          console.log("part 1",response);
+          console.log("part 1", response);
 
           if (!response.ok) {
             throw new Error("Error en la llamada al servidor");
@@ -83,7 +89,7 @@ export const ContainerCrearReserva = () => {
           return response.text();
         })
         .then((data) => {
-          console.log("part 2",data);
+          console.log("part 2", data);
           if (data == "OK") {
             alert("Reserva creada exitosamente");
             navigate("/admin");
@@ -155,15 +161,18 @@ export const ContainerCrearReserva = () => {
                     <h3>Información del cliente</h3>
                   </div>
                   <div className="buscar-id">
-                    <Inputs
-                      className="contact-input"
-                      placeholder="Identificación"
-                      name="id"
-                      type="text"
-                      id="id"
-                      value={formData.id}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faIdCard} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder="Identificación"
+                        name="id"
+                        type="text"
+                        id="id"
+                        value={formData.id}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="buscar-boton">
                     <input
@@ -174,49 +183,58 @@ export const ContainerCrearReserva = () => {
                     />
                   </div>
                   <div className="input-wrap">
-                    <Inputs
-                      className="contact-input"
-                      name="nombre_cliente"
-                      type="text"
-                      id="nombre_cliente"
-                      value={formData.nombre}
-                      placeholder={
-                        formData.nombre_cliente !== ""
-                          ? formData.nombre_cliente
-                          : "Nombre"
-                      }
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faUser} />
+                      <Inputs
+                        className="contact-input"
+                        name="nombre_cliente"
+                        type="text"
+                        id="nombre_cliente"
+                        value={formData.nombre}
+                        placeholder={
+                          formData.nombre_cliente !== ""
+                            ? formData.nombre_cliente
+                            : "Nombre"
+                        }
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="telefono">
-                    <Inputs
-                      className="contact-input"
-                      placeholder={
-                        formData.telefono !== ""
-                          ? formData.telefono
-                          : "Teléfono"
-                      }
-                      name="telefono"
-                      type="number"
-                      id="telefono"
-                      value={formData.telefono}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faPhone} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder={
+                          formData.telefono !== ""
+                            ? formData.telefono
+                            : "Teléfono"
+                        }
+                        name="telefono"
+                        type="number"
+                        id="telefono"
+                        value={formData.telefono}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="residencia">
-                    <Inputs
-                      className="contact-input"
-                      placeholder={
-                        formData.residencia !== ""
-                          ? formData.residencia
-                          : "Residencia"
-                      }
-                      name="residencia"
-                      type="text"
-                      id="residencia"
-                      value={formData.residencia}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faHouseUser} />
+                      <Inputs
+                        className="contact-input"
+                        placeholder={
+                          formData.residencia !== ""
+                            ? formData.residencia
+                            : "Residencia"
+                        }
+                        name="residencia"
+                        type="text"
+                        id="residencia"
+                        value={formData.residencia}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="tipo">
                     <select
@@ -230,19 +248,22 @@ export const ContainerCrearReserva = () => {
                     </select>
                   </div>
                   <div className="correo">
-                    <Inputs
-                      id="correo_electronico"
-                      className="contact-input"
-                      placeholder={
-                        formData.correo_electronico !== ""
-                          ? formData.correo_electronico
-                          : "Correo Electrónico"
-                      }
-                      name="correo_electronico"
-                      type="email"
-                      value={formData.correo_electronico}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faEnvelope} />
+                      <Inputs
+                        id="correo_electronico"
+                        className="contact-input"
+                        placeholder={
+                          formData.correo_electronico !== ""
+                            ? formData.correo_electronico
+                            : "Correo Electrónico"
+                        }
+                        name="correo_electronico"
+                        type="email"
+                        value={formData.correo_electronico}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="titles">
                     <h3>Información de la reserva</h3>
@@ -270,17 +291,20 @@ export const ContainerCrearReserva = () => {
                     />
                   </div>
                   <div className="id-reserva">
-                    <Inputs
-                      id="id_reserva"
-                      className="reserva-input"
-                      placeholder="ID de la reserva"
-                      name="id_reserva"
-                      type="id"
-                      value={formData.id_reserva}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faHashtag} />
+                      <Inputs
+                        id="id_reserva"
+                        className="reserva-input"
+                        placeholder="ID de la reserva"
+                        name="id_reserva"
+                        type="id"
+                        value={formData.id_reserva}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
-                  <div className="status">
+                  <div className="tipo">
                     <select
                       name="estado"
                       value={formData.estado}
@@ -292,48 +316,60 @@ export const ContainerCrearReserva = () => {
                     </select>
                   </div>
                   <div className="precio">
-                    <Inputs
-                      id="precio"
-                      className="contact-input"
-                      placeholder="Precio"
-                      name="precio"
-                      type="number"
-                      value={formData.precio}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faSackDollar} />
+                      <Inputs
+                        id="precio"
+                        className="contact-input"
+                        placeholder="Precio"
+                        name="precio"
+                        type="number"
+                        value={formData.precio}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
-                  <div className="habitacion">
-                    <Inputs
-                      id="habitacion"
-                      className="contact-input"
-                      placeholder="Habitación"
-                      name="habitacion"
-                      type="text"
-                      value={formData.habitacion}
-                      onChange={handleChange}
-                    />
+                  <div className="input-wrap">
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faDoorClosed} />
+                      <Inputs
+                        id="habitacion"
+                        className="contact-input"
+                        placeholder="Habitación"
+                        name="habitacion"
+                        type="text"
+                        value={formData.habitacion}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
-                  <div className="empleado">
-                    <Inputs
-                      id="empleado"
-                      className="contact-input"
-                      placeholder="Id empleado"
-                      name="empleado"
-                      type="text"
-                      value={formData.empleado}
-                      onChange={handleChange}
-                    />
+                  <div className="input-wrap">
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faUserTie} />
+                      <Inputs
+                        id="empleado"
+                        className="contact-input"
+                        placeholder="Id empleado"
+                        name="empleado"
+                        type="text"
+                        value={formData.empleado}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="descripcion">
-                    <Inputs
-                      id="descripcion"
-                      className="contact-input"
-                      placeholder="Descripción"
-                      name="descripcion"
-                      type="text"
-                      value={formData.descripcion}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faBars} />
+                      <Inputs
+                        id="descripcion"
+                        className="contact-input"
+                        placeholder="Descripción"
+                        name="descripcion"
+                        type="text"
+                        value={formData.descripcion}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="button-wrap">
                     <ButtonAdmin value="Crear-reserva" label="Crear reserva" />
@@ -435,9 +471,9 @@ export const ContainerBuscarReserva = () => {
                   <div className="titles">
                     <h3>Información del cliente</h3>
                   </div>
-                  <div className="busca-id">
+                  <div className="buscar-id">
                     <div className="input-icon">
-                      <FontAwesomeIcon icon={faUser} />
+                      <FontAwesomeIcon icon={faIdCard} />
                       <Inputs
                         className="contact-input"
                         placeholder="Identificación"
@@ -451,8 +487,13 @@ export const ContainerBuscarReserva = () => {
                   <div className="titles">
                     <h3>Información de la reserva</h3>
                   </div>
+                  <div className="title-date">
+                    <h4>Fecha entrada </h4>
+                    <h4>Fecha salida</h4>
+                  </div>
                   <div className="fechas">
                     <div className="input-icon">
+                      <FontAwesomeIcon icon={faCalendarDays} />
                       <Inputs
                         id="fecha_entrada"
                         className="fechas-input"
@@ -470,6 +511,7 @@ export const ContainerBuscarReserva = () => {
                       />
                     </div>
                     <div className="input-icon">
+                      <FontAwesomeIcon icon={faCalendarDays} />
                       <Inputs
                         id="fecha_salida"
                         className="fechas-input"
@@ -487,7 +529,7 @@ export const ContainerBuscarReserva = () => {
                     </div>
                   </div>
 
-                  <div className="status">
+                  <div className="tipo">
                     <select
                       name="estado"
                       value={formData.estado}
@@ -500,6 +542,7 @@ export const ContainerBuscarReserva = () => {
                   </div>
                   <div className="precio">
                     <div className="input-icon">
+                      <FontAwesomeIcon icon={faSackDollar} />
                       <Inputs
                         id="precio"
                         className="contact-input"
@@ -516,8 +559,9 @@ export const ContainerBuscarReserva = () => {
                       />
                     </div>
                   </div>
-                  <div className="habitacion">
+                  <div className="precio">
                     <div className="input-icon">
+                      <FontAwesomeIcon icon={faDoorClosed} />
                       <Inputs
                         id="habitacion"
                         className="contact-input"
@@ -534,8 +578,9 @@ export const ContainerBuscarReserva = () => {
                       />
                     </div>
                   </div>
-                  <div className="empleado">
+                  <div className="input-wrap">
                     <div className="input-icon">
+                      <FontAwesomeIcon icon={faUserTie} />
                       <Inputs
                         id="empleado"
                         className="contact-input"
@@ -554,6 +599,7 @@ export const ContainerBuscarReserva = () => {
                   </div>
                   <div className="descripcion">
                     <div className="input-icon">
+                      <FontAwesomeIcon icon={faBars} />
                       <Inputs
                         id="descripcion"
                         className="contact-input"

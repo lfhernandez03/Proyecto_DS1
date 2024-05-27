@@ -101,16 +101,19 @@ export const ContainerCrearHabitación = () => {
                     </select>
                   </div>
                   <div className="precio">
-                    <Inputs
-                      type="number"
-                      name="precio"
-                      placeholder="Precio"
-                      className="contact-input"
-                      value={formData.precio}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faSackDollar} />
+                      <Inputs
+                        type="number"
+                        name="precio"
+                        placeholder="Precio"
+                        className="contact-input"
+                        value={formData.precio}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
-                  <div className="estado">
+                  <div className="tipo">
                     <select
                       onChange={handleChange}
                       value={formData.estado}
@@ -123,14 +126,17 @@ export const ContainerCrearHabitación = () => {
                     </select>
                   </div>
                   <div className="capacidad">
-                    <Inputs
-                      type="number"
-                      name="capacidad"
-                      placeholder="Capacidad"
-                      className="contact-input"
-                      value={formData.capacidad}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faPeopleGroup} />
+                      <Inputs
+                        type="number"
+                        name="capacidad"
+                        placeholder="Capacidad"
+                        className="contact-input"
+                        value={formData.capacidad}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="button-wrap">
                     <ButtonAdmin
@@ -222,15 +228,18 @@ export const ContainerBuscarHabitación = () => {
                   <h1>Buscar Habitación</h1>
                 </div>
                 <form className="form" onSubmit={handleSearch}>
-                  <div className="identificacion">
-                    <Inputs
-                      type="number"
-                      name="id"
-                      placeholder="Identificación"
-                      className="contact-input"
-                      value={formData.id}
-                      onChange={handleChange}
-                    />
+                  <div className="input-wrap">
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faIdCard} />
+                      <Inputs
+                        type="number"
+                        name="id"
+                        placeholder="Identificación"
+                        className="contact-input"
+                        value={formData.id}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="titles">
                     <h3>Información de la habitación</h3>
@@ -249,19 +258,22 @@ export const ContainerBuscarHabitación = () => {
                     </select>
                   </div>
                   <div className="precio">
-                    <Inputs
-                      type="number"
-                      name="precio"
-                      placeholder={
-                        formData.precio !== "" ? formData.precio : "Precio"
-                      }
-                      className="contact-input"
-                      value={formData.precio}
-                      readOnly={true}
-                      onChange={handleChange}
-                    />
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faSackDollar} />
+                      <Inputs
+                        type="number"
+                        name="precio"
+                        placeholder={
+                          formData.precio !== "" ? formData.precio : "Precio"
+                        }
+                        className="contact-input"
+                        value={formData.precio}
+                        readOnly={true}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
-                  <div className="estado">
+                  <div className="tipo">
                     <select
                       onChange={handleChange}
                       readOnly={true}
@@ -274,20 +286,23 @@ export const ContainerBuscarHabitación = () => {
                       <option value="mantenimiento">Mantenimiento</option>
                     </select>
                   </div>
-                  <div className="capacidad">
-                    <Inputs
-                      type="number"
-                      name="capacidad"
-                      placeholder={
-                        formData.capacidad !== ""
-                          ? formData.capacidad
-                          : "Capacidad"
-                      }
-                      className="contact-input"
-                      value={formData.capacidad}
-                      readOnly={true}
-                      onChange={handleChange}
-                    />
+                  <div className="input-wrap">
+                    <div className="input-icon">
+                      <FontAwesomeIcon icon={faPeopleGroup} />
+                      <Inputs
+                        type="number"
+                        name="capacidad"
+                        placeholder={
+                          formData.capacidad !== ""
+                            ? formData.capacidad
+                            : "Capacidad"
+                        }
+                        className="contact-input"
+                        value={formData.capacidad}
+                        readOnly={true}
+                        onChange={handleChange}
+                      />
+                    </div>
                   </div>
                   <div className="button-wrap">
                     <ButtonAdmin

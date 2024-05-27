@@ -30,22 +30,22 @@
   grid-row: 1/2;
 }
 
-.left{
-    display: grid;
-    grid-column: 1/2;
-    width: 75%;
-    margin: 0 auto;
-    padding: 60px 1.5rem 0;
-    align-items: center;
-    position: relative;
-    justify-content: center;
-    z-index: 3;
+.left {
+  display: grid;
+  grid-column: 1/2;
+  width: 75%;
+  margin: 0 auto;
+  padding: 60px 1.5rem 0;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+  z-index: 3;
 }
 
-.form-wrapper{
-    margin-top: 1rem;
-    border-radius: 10px;
-    padding: 10px;
+.form-wrapper {
+  margin-top: 3rem;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 .form-heading {
@@ -80,22 +80,22 @@
   transform: translateY(-65%);
 }
 
-.form .input-wrap{
-    display: flex;
-    grid-column: span 1;
-    justify-content: space-between;
-    position: relative;
-    padding: 0rem 1.5rem 0 1.5rem;
+.form .input-wrap {
+  display: flex;
+  grid-column: span 1;
+  justify-content: space-between;
+  position: relative;
+  padding: 0rem 0.5rem 0 0.5rem;
 }
 
-.form .correo{
-    grid-column: span 2;
-    padding: 0 1.5rem 0 1.5rem;
+.form .correo {
+  grid-column: span 2;
+  padding: 0rem 0.5rem 0 0.5rem;
 }
 
-.form .telefono{
-    grid-column: span 1;
-    padding: 0 1.5rem 0 1.5rem;
+.form .telefono {
+  grid-column: span 1;
+  padding: 0rem 0.5rem 0 0.5rem;
 }
 
 .form .titles {
@@ -103,6 +103,19 @@
   grid-column: span 2;
   position: relative;
   justify-content: center;
+  margin-top: 15px;
+}
+
+.form .title-date {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem 0 4rem;
+  gap: 5.5rem;
+  margin-top: 7px;
+  margin-bottom: -15px;
 }
 
 .form .contact-input {
@@ -123,37 +136,48 @@
   background-color: rgba(0, 157, 221, 0.3);
 }
 
-.form .buscar-id{
-    grid-column: span 1;
-    padding: 0 1.5rem 0 1.5rem;
+.form .buscar-id {
+  grid-column: span 1;
+  padding: 0rem 0.5rem 0 0.5rem;
 }
-.form .buscar-boton{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.form .residencia{
-    grid-column: span 1;
-    padding: 1rem 1.5rem 0 1.5rem;
+.form .buscar-boton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.form .tipo{
-    grid-column: span 1;
-    padding: 0 1.5rem 0 1.5rem;
-
+.form .residencia {
+  grid-column: span 1;
+  padding: 0rem 0.5rem 0 0.5rem;
 }
-.form .fechas{
-    display: flex;
-    grid-column: span 2;
-    position: relative;
-    justify-content: space-between;
-    text-align: center;
-    padding: 0 1.5rem 0 1.5rem;
+
+.form .tipo {
+  display: grid;
+  grid-column: span 1;
+  padding: 0 1rem 0 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.form .tipo1 {
+  display: grid;
+  grid-column: span 2;
+  padding: 0 1rem 0 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.form .fechas {
+  display: grid;
+  grid-column: span 2;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem 0 1rem;
+  gap: 2rem;
 }
 
 .form .fechas-input {
-  width: 100%;
   background-color: rgba(5, 211, 248, 0.2);
   padding: 1.5rem 1.35rem calc(0.75rem - 2rem) 1.35rem;
   border: none;
@@ -177,8 +201,9 @@
   grid-column: span 1;
   position: relative;
   justify-content: space-between;
-  padding: 0 1.5rem 0 1.5rem;
+  padding: 0rem 0.5rem 0 0.5rem;
 }
+
 .form .id-reserva .reserva-input {
   width: 100%;
   background-color: rgba(5, 211, 248, 0.2);
@@ -198,62 +223,57 @@
   background-color: rgba(0, 157, 221, 0.3);
   cursor: text;
 }
-.form .status{
-    grid-column: span 1;
-    padding: 0 1.5rem 0 1.5rem;
+
+.form .precio {
+  grid-column: span 1;
+  padding: 0rem 0.5rem 0 0.5rem;
 }
 
-.form .precio{
-    grid-column: span 1;
-    padding: 0 1.5rem 0 1.5rem;
+.form .descripcion {
+  grid-column: span 1;
+  padding: 0rem 0.5rem 0 0.5rem;
 }
 
-.form .descripcion{
-    grid-column: span 1;
-    padding: 0 1.5rem 0 1.5rem;
-}
-
-.button-wrap{
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    grid-column: span 2;
+.button-wrap {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  grid-column: span 2;
 }
 
 /* Formulario de busqueda en Reserva */
 
-.nombre_cliente{
-    grid-column: span 1;
-    padding: 0 1.5rem 0 1.5rem;
+.nombre_cliente {
+  grid-column: span 1;
+  padding: 0rem 0.5rem 0 0.5rem;
 }
 
-.residencia_cliente{
-    grid-column: span 1;
-    padding: 1rem 1.5rem 0 1.5rem;
+.residencia_cliente {
+  grid-column: span 1;
+  padding: 1rem 1rem 0 1rem;
 }
 
 /* Formulario de busqueda en Empleados*/
 
-.buscar-empleado{
-    grid-column: span 2;
-    padding: 0 1.5rem 0 1.5rem;
+.buscar-empleado {
+  grid-column: span 2;
+  padding: 0rem 0.5rem 0 0.5rem;
 }
 
 /*Íconos*/
 
 .input-icon {
-    position: relative;
-    cursor: pointer;
-  }
-  
-  .input-icon > svg {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  .input-icon > input {
-    padding-right: 30px; /* Ajusta este valor según el tamaño de tu icono */
-  }
-  
+  position: relative;
+  cursor: pointer;
+}
+
+.input-icon > svg {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.input-icon > input {
+  padding-right: 30px; /* Ajusta este valor según el tamaño de tu icono */
+}
