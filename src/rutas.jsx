@@ -1,6 +1,7 @@
 import React from "react";
 import { LoginTab } from "./Login/login.jsx";
-import { RecoverTab } from "./PasswordRecover/RecoverTab.jsx";
+import { CambiarContra } from "./PasswordRecover/CambiarContra.jsx";
+import { RecuperarContra } from "./PasswordRecover/RecuperarContra.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ROUTES } from './rutasConst.js';
 
@@ -36,7 +37,8 @@ export const Rutas = () => (
 
         //Rutas del Login
         <Route path={ROUTES.LOGIN} element={<LoginTab />} />
-        <Route path={ROUTES.CAMBIAR_CONTRA} element={<RecoverTab />} />
+        <Route path={ROUTES.CAMBIAR_CONTRA} element={<CambiarContra />} />
+        <Route path={ROUTES.RECUPERAR_CONTRA} element={<RecuperarContra />} />
 
         //Rutas del Empleado
         <Route path={ROUTES.EMPLEADOS} element={<ContainerEmp />} />

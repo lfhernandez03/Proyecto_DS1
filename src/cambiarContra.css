@@ -1,21 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-*{
+* {
     font-family: "Roboto";
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #fff;
 }
 
-.recover-container{
-    align-items: center; 
+.recover-container {
+    align-items: center;
     justify-content: center;
     top: 16%;
     position: fixed;
@@ -23,18 +23,18 @@ body{
     background: #fff;
     border: 2px solid rgba(255, 255, 255, .2);
     border-right: 12px solid rgba(0, 128, 255, 5);
-    border-bottom:12px solid rgba(0, 128, 255, 5) ;
+    border-bottom: 12px solid rgba(0, 128, 255, 5);
     box-shadow: -5px -5px 10px rgba(0, 0, 0, .5);
     padding: 40px;
 }
 
-.recover-container form{
+.recover-container form {
     display: flex;
     flex-direction: column;
     padding: 30px 40px;
 }
 
-.recover-container .ButtonRecov{
+.recover-container .ButtonRecov {
     display: flex;
     justify-content: center;
 }

@@ -65,7 +65,11 @@ export const LoginTab = () => {
             localStorage.setItem("token", data.token);
             console.log("Usuario encontrado y contraseña correcta");
 
-            if (data.modo_Recuperacion) navigate(ROUTES.CAMBIAR_CONTRA);
+            if (data.modo_Recuperacion) {
+              navigate(ROUTES.CAMBIAR_CONTRA);
+              return
+            }
+
             data.modo_Admin ? navigate(ROUTES.ADMIN) : navigate(ROUTES.EMPLEADOS);
           }
         })
@@ -108,7 +112,7 @@ export const LoginTab = () => {
             />
             <div className="footer">
               <h5>
-                <Link className="ToRecoverTab" to={ROUTES.CAMBIAR_CONTRA}>
+                <Link className="ToRecoverTab" to={ROUTES.RECUPERAR_CONTRA}>
                   ¿Olvidastes tu contraseña?
                 </Link>
               </h5>

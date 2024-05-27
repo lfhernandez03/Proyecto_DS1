@@ -1,6 +1,7 @@
 export const ROUTES = {
     LOGIN: "/login",
     CAMBIAR_CONTRA: "/login/cambiarContra",
+    RECUPERAR_CONTRA: "/login/recuperarContra",
 
     EMPLEADOS: "/empleados",
     RESERVA_INSERTAR: "/reserva/insertar",
