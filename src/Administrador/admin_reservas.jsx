@@ -25,6 +25,7 @@ import {
   faUserTie,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
+import { ROUTES } from '../rutasConst.js';
 
 export const ContainerCrearReserva = () => {
   const initialState = {
@@ -96,14 +97,14 @@ export const ContainerCrearReserva = () => {
             });
           }
           alert("Reserva creada exitosamente");
-          navigate("/api/reserva/insertar");
+          navigate(ROUTES.RESERVA_INSERTAR);
           return response.text();
         })
         .then((data) => {
           console.log("part 2", data);
           if (data == "OK") {
             alert("Reserva creada exitosamente");
-            navigate("/admin");
+            navigate(ROUTES.ADMIN);
           } else if (data.existe & !data.correcto) {
             alert(
               "Error al crear la reserva",

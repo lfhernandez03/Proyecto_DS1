@@ -40,17 +40,15 @@ export const Rutas = () => (
 
         //Rutas del Empleado
         <Route path={ROUTES.EMPLEADOS} element={<ContainerEmp />} />
-        <Route path={ROUTES.INSERTAR_RESERVA} element={<ContainerCrearReserva />} />
-        <Route path={ROUTES.CONSULTAR_RESERVA} element={<ContainerBuscarReserva />} />
+        <Route path={ROUTES.RESERVA_INSERTAR} element={<ContainerCrearReserva />} />
+        <Route path={ROUTES.RESERVA_CONSULTAR} element={<ContainerBuscarReserva />} />
+        <Route path={ROUTES.HABITACION_INSERTAR} element={<ContainerCrearHabitación />} />
 
         //Rutas del Administrador
         <Route path={ROUTES.ADMIN} element={<Admin />} />
-        <Route path={ROUTES.INSERTAR_RESERVA} element={<ContainerCrearReserva />} />
-        <Route path={ROUTES.INSERTAR_HABITACION} element={<ContainerCrearHabitación />} />
-        <Route path={ROUTES.INSERTAR_EMPLEADO} element={<ContainerCrearEmpleado />} />
-        <Route path={ROUTES.CONSULTAR_RESERVA} element={<ContainerBuscarReserva />} />
-        <Route path={ROUTES.CONSULTAR_EMPLEADO} element={<ContainerBuscarEmpleado />} />
-        <Route path={ROUTES.CONSULTAR_HABITACION} element={<ContainerBuscarHabitación />} />
+        <Route path={ROUTES.EMPLEADO_INSERTAR} element={<ContainerCrearEmpleado />} />
+        <Route path={ROUTES.EMPLEADO_CONSULTAR} element={<ContainerBuscarEmpleado />} />
+        <Route path={ROUTES.HABITACION_CONSULTAR} element={<ContainerBuscarHabitación />} />
 
         //Redirección por defecto
         <Route path="*" element={<LoginTab />} />
