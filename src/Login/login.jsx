@@ -3,6 +3,8 @@ import { TextFields } from "./loginComponents";
 import { ButtonLogin } from "./loginComponents";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { ROUTES } from '../rutasConst.js';
+
 
 export const LoginTab = () => {
   const [formData, setFormData] = useState({
@@ -59,16 +61,12 @@ export const LoginTab = () => {
           return response.json();
         })
         .then((data) => {
-          if (data.existe && data.correcto) {
-            console.log("Usuario encontrado y contraseña correcta");
+          if (data.correcto) {
             localStorage.setItem("token", data.token);
-            navigate("/Admin");
-          } else if (data.existe && !data.correcto) {
-            console.log("Contraseña incorrecta");
-            alert("Contraseña incorrecta");
-          } else {
-            alert("Usuario no encontrado");
-            console.log("Usuario no encontrado");
+            console.log("Usuario encontrado y contraseña correcta");
+
+            if (data.modo_Recuperacion) navigate(ROUTES.CAMBIAR_CONTRA);
+            data.modo_Admin ? navigate(ROUTES.ADMIN) : navigate(ROUTES.EMPLEADOS);
           }
         })
         .catch((error) => {
@@ -110,8 +108,8 @@ export const LoginTab = () => {
             />
             <div className="footer">
               <h5>
-                <Link className="ToRecoverTab" to="/CrearContraseña">
-                  ¿Olvidaste tu contraseña?
+                <Link className="ToRecoverTab" to={ROUTES.CAMBIAR_CONTRA}>
+                  ¿Olvidastes tu contraseña?
                 </Link>
               </h5>
             </div>

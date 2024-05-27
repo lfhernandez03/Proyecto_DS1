@@ -1,6 +1,7 @@
 import React from "react";
 import { BasicMenu } from "./administradorComponents";
 import { Link } from "react-router-dom";
+import { ROUTES } from '../rutasConst.js';
 
 /*
 
@@ -11,7 +12,7 @@ export const Admin = () => {
       <header>
         <div className="logo">
           <Link
-            to="/admin"
+            to={ROUTES.ADMIN}
             style={{ textDecoration: "none", color: "var(--color-titulos)" }}
           >
             <h1>
@@ -25,22 +26,22 @@ export const Admin = () => {
             name="Reservas"
             option1="Crear Reserva"
             option2="Buscar Reserva"
-            link1="/api/reserva/insertar"
-            link2="/api/reserva/consultar"
+            link1={ROUTES.RESERVA_INSERTAR}
+            link2={ROUTES.RESERVA_CONSULTAR}
           />
           <BasicMenu
             name="Empleados"
             option1="Crear Empleados"
             option2="Buscar Empleados"
-            link1="/CrearEmpleado"
-            link2="/BuscarEmpleado"
+            link1={ROUTES.EMPLEADO_INSERTAR}
+            link2={ROUTES.EMPLEADO_CONSULTAR}
           />
           <BasicMenu
             name="Habitaciones"
             option1="Crear Habitación"
             option2="Buscar Habitación"
-            link1="/CrearHabitación"
-            link2="/BuscarHabitación"
+            link1={ROUTES.HABITACION_INSERTAR}
+            link2={ROUTES.HABITACION_CONSULTAR}
           />
         </nav>
       </header>

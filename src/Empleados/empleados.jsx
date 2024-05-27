@@ -4,6 +4,8 @@ import { ButtonEmplo } from "./empleadosComponents";
 import { BasicSelect } from "./empleadosComponents";
 import EmpleadoLayout from "./EmpleadoLayout";
 import { Link } from "react-router-dom";
+import { ROUTES } from '../rutasConst.js';
+
 
 export const Container1 = () => {
 
@@ -18,19 +20,19 @@ export const Container1 = () => {
           <TextFieldsEmplo
             label="Correo electrónico"
             name="email"
-            type="email"/>
+            type="email" />
           <TextFieldsEmplo label="Telefono" name="tel" type="tel" />
         </div>
-      <h3>Informacion de la reserva</h3>
-      <div className="cuerpo-form">
-        <TextFieldsEmplo label="Fecha entrada" name="Fecha-in" type="date" />
-        <TextFieldsEmplo label="Fecha salida" name="Fecha-out" type="date" />
-        <BasicSelect />
-        <TextFieldsEmplo label="ID" name="id" type="id" />
-      </div>
-      <div>
-        <ButtonEmplo type="submit" value="Reservar" label="Hacer reserva" />
-      </div>
+        <h3>Informacion de la reserva</h3>
+        <div className="cuerpo-form">
+          <TextFieldsEmplo label="Fecha entrada" name="Fecha-in" type="date" />
+          <TextFieldsEmplo label="Fecha salida" name="Fecha-out" type="date" />
+          <BasicSelect />
+          <TextFieldsEmplo label="ID" name="id" type="id" />
+        </div>
+        <div>
+          <ButtonEmplo type="submit" value="Reservar" label="Hacer reserva" />
+        </div>
       </div>
     </EmpleadoLayout>
   );
@@ -76,16 +78,16 @@ export const ContainerEmp = () => {
         <div>
           <h1>Bienvenido,</h1>
           <h3>Usuario</h3>
-          <h4 className="ques">¿Que quieres hacer hoy?</h4>
+          <h4 className="ques">¿Qué quieres hacer hoy?</h4>
 
           <div className="botones">
-            <Link className="ToHacerReserva" to="/HacerReserva">
+            <Link className="ToHacerReserva" to={ROUTES.RESERVA_INSERTAR}>
               <ButtonEmplo
-                  className="bot"
-                  label="Hacer Reserva"
-                />
+                className="bot"
+                label="Hacer Reserva"
+              />
             </Link>
-            <Link className="ToBuscarReserva" to="/BuscarReserva">
+            <Link className="ToBuscarReserva" to={ROUTES.RESERVA_CONSULTAR}>
               <ButtonEmplo
                 className="bot"
                 label="Buscar Reserva"
