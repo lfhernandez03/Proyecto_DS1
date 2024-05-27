@@ -21,6 +21,7 @@ import {
   faPeopleGroup,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ROUTES } from '../rutasConst.js';
 
 export const ContainerCrearHabitación = () => {
   const [formData, setFormData] = useState({
@@ -62,7 +63,7 @@ export const ContainerCrearHabitación = () => {
             throw new Error("Error en la llamada al servidor");
           } else {
             alert("Habitación creada exitosamente");
-            navigate("/admin");
+            navigate(ROUTES.ADMIN);
           }
         })
         .catch((error) => {

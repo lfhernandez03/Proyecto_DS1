@@ -19,6 +19,8 @@ import {
   faMapLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ROUTES } from '../rutasConst.js';
+
 
 export const ContainerCrearEmpleado = () => {
   const [formData, setFormData] = useState({
@@ -71,7 +73,7 @@ export const ContainerCrearEmpleado = () => {
             throw new Error("Error en la llamada al servidor");
           } else {
             alert("Empleado creado exitosamente");
-            navigate("/admin");
+            navigate(ROUTES.ADMIN);
           }
         })
         .catch((error) => {

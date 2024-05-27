@@ -3,6 +3,7 @@ import { TextFields } from "../Login/loginComponents";
 import { ButtonLogin } from "../Login/loginComponents";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { ROUTES } from "../rutasConst";
 
 export const RecoverTab = () => {
 
@@ -34,7 +35,7 @@ export const RecoverTab = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData) 
+        body: JSON.stringify(formData)
       })
         .then(response => {
           console.log(response);
@@ -49,13 +50,13 @@ export const RecoverTab = () => {
 
           if (data.success) {
             alert('Formulario válido. Redirigiendo...');
-            navigate('/');
+            navigate(ROUTES.LOGIN);
           } else {
             alert('Error: ' + data.message);
           }
         })
         .catch((error) => {
-          console.error('Error:', error);  
+          console.error('Error:', error);
         });
 
     } else {
@@ -64,41 +65,41 @@ export const RecoverTab = () => {
   }
 
   return (
-      <div className="recover-container">
-        <h1>Actualizar Contraseña</h1>
-        <form onSubmit={handleSubmit}>
-          <TextFields 
-            label="Nombre de usuario" 
-            name="usuario"
-            value={formData.usuario}
-            onChange={handleChange}
-          />
-          <TextFields 
-            label="Identificación" 
-            name="id" 
-            value={formData.id}
-            onChange={handleChange}
-          />
-          <TextFields
-            label="Nueva Contraseña"
-            name="nuevaContraseña"
-            type="password"
-            value={formData.nuevaContraseña}
-            onChange={handleChange}
-          />
-          <TextFields
-            label="Confirmar Contraseña"
-            name="confirmarContraseña"
-            type="password"
-            value={formData.confirmarContraseña}
-            onChange={handleChange}
-          />
-          <ButtonLogin 
-            type="submit" 
-            value="Crear" 
-            title="Crear" 
-          />
-        </form>
-      </div>
+    <div className="recover-container">
+      <h1>Actualizar Contraseña</h1>
+      <form onSubmit={handleSubmit}>
+        <TextFields
+          label="Nombre de usuario"
+          name="usuario"
+          value={formData.usuario}
+          onChange={handleChange}
+        />
+        <TextFields
+          label="Identificación"
+          name="id"
+          value={formData.id}
+          onChange={handleChange}
+        />
+        <TextFields
+          label="Nueva Contraseña"
+          name="nuevaContraseña"
+          type="password"
+          value={formData.nuevaContraseña}
+          onChange={handleChange}
+        />
+        <TextFields
+          label="Confirmar Contraseña"
+          name="confirmarContraseña"
+          type="password"
+          value={formData.confirmarContraseña}
+          onChange={handleChange}
+        />
+        <ButtonLogin
+          type="submit"
+          value="Crear"
+          title="Crear"
+        />
+      </form>
+    </div>
   );
 };
