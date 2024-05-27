@@ -25,7 +25,7 @@
   display: grid;
 }
 
-.form-container .container > div {
+.form-container .container>div {
   grid-column: 1/2;
   grid-row: 1/2;
 }
@@ -140,6 +140,7 @@
   grid-column: span 1;
   padding: 0rem 0.5rem 0 0.5rem;
 }
+
 .form .buscar-boton {
   display: flex;
   justify-content: center;
@@ -267,13 +268,14 @@
   cursor: pointer;
 }
 
-.input-icon > svg {
+.input-icon>svg {
   position: absolute;
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.input-icon > input {
-  padding-right: 30px; /* Ajusta este valor según el tamaño de tu icono */
+.input-icon>input {
+  padding-right: 30px;
+  /* Ajusta este valor según el tamaño de tu icono */
 }

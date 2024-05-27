@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { ButtonAdmin, Inputs } from "./administradorComponents";
+import {
+  ButtonAdmin,
+  TextFieldsAdmin,
+  BasicSelect,
+  Inputs,
+  SelectBoxReserva,
+  SelectBoxReservaCliente,
+} from "./administradorComponents";
 import { AdminLayout } from "./AdministradorLayout";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,7 +27,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export const ContainerCrearReserva = () => {
-  const [formData, setFormData] = useState({
+  const initialState = {
     id: "",
     nombre_cliente: "",
     telefono: "",
@@ -35,20 +42,19 @@ export const ContainerCrearReserva = () => {
     descripcion: "",
     habitacion: "",
     empleado: "",
-  });
+  };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((currentFormData) => {
-      const updatedFormData = { ...currentFormData, [name]: value };
-      return updatedFormData;
-    });
+  const [formData, setFormData] = useState(initialState);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
   };
   const navigate = useNavigate();
 
-  /*useEffect(() => {
+  useEffect(() => {
     console.log(formData);
-  }, [formData]);*/
+  }, [formData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -84,8 +90,13 @@ export const ContainerCrearReserva = () => {
           console.log("part 1", response);
 
           if (!response.ok) {
-            throw new Error("Error en la llamada al servidor");
+            return response.text().then((text) => {
+              alert(text);
+              throw new Error(text);
+            });
           }
+          alert("Reserva creada exitosamente");
+          navigate("/api/reserva/insertar");
           return response.text();
         })
         .then((data) => {
@@ -111,18 +122,26 @@ export const ContainerCrearReserva = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (!formData || formData.id === "") {
+
+    let url = `http://localhost:3000/api/cliente/consultar/${formData.id}`;
+
+    if (!formData.id || formData.id === "") {
       alert("Por favor ingrese una identificación");
     } else {
-      fetch("http://localhost:3000/api/cliente/consultar", {
-        method: "POST",
+      fetch(url, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          id: formData.id,
-        }),
       })
+        .then((response) => {
+          if (!response.ok) {
+            return response.json().then((error) => {
+              throw new Error(error.message);
+            });
+          }
+          return response.json();
+        })
         .then((data) => {
           console.log(data);
           if (data.rowCount > 0) {
@@ -136,16 +155,16 @@ export const ContainerCrearReserva = () => {
               tipo: data.rows[0].TIPO,
             });
           } else {
-            alert("No se encuentra el cliente con id: " + formData.id);
+            alert("Error al buscar el cliente");
           }
         })
+
         .catch((error) => {
           console.error("Error:", error);
         });
     }
   };
 
-  /* */
   return (
     <>
       <AdminLayout>
@@ -392,7 +411,6 @@ export const ContainerBuscarReserva = () => {
     estado: "",
     fecha_entrada: "",
     fecha_salida: "",
-    id_reserva: "",
     habitacion: "",
     empleado: "",
     habitacion: "",
@@ -405,55 +423,111 @@ export const ContainerBuscarReserva = () => {
     });
   };
 
-  /*useEffect(() => {
+  // Función para manejar los cambios en los campos de la reserva, se activa cuando se cambia el valor de un campo
+  // Al momento de querer realizar una actualización
+  const handleUpdateChange = (e) => {
+    setIsChanged(true);
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  useEffect(() => {
     console.log(formData);
-  }, [formData]);*/
+  }, [formData]);
+
+  // Variable para almacenar la acción a realizar
+  const [action, setAction] = useState(null);
+  // Variable para almacenar si se ha buscado la reserva
+  const [isSearched, setIsSearched] = useState(false);
+  // Variable para almacenar si se ha cambiado algun valor de la reserva
+  const [isChanged, setIsChanged] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formData.id && formData.id !== "") {
-      console.log(formData);
-      fetch("http://localhost:3000/api/reserva/consultar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: formData.id,
-        }),
-      })
-        .then((response) => {
-          console.log(response);
-          if (!response.ok) {
-            throw new Error("Error en la llamada al servidor");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-          if (data.rowCount > 0) {
-            alert("Reserva encontrada");
-            setFormData({
-              descripcion: data.rows[0].DESCRIPCION,
-              precio: data.rows[0].PRECIO,
-              estado: data.rows[0].ESTADO,
-              fecha_entrada: data.rows[0].F_ENTRADA,
-              fecha_salida: data.rows[0].F_SALIDA,
-              id: data.rows[0].ID,
-              habitacion: data.rows[0].ID_HABITACION,
-              empleado: data.rows[0].ID_EMPLEADO,
-            });
-            console.log(formData);
-          } else {
-            alert("Error al buscar el cliente");
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+
+    let method = "";
+    let url = "";
+    if (!formData.id || formData.id === "") {
+      alert("Por favor ingrese una identificación");
     } else {
-      console.log(formData);
-      alert("Por favor, completa todos los campos");
+      // Dependiendo de la acción seleccionada se realiza una petición diferente
+      // Si la acción es buscar se realiza una petición GET
+      if (action === "Buscar") {
+        url = `http://localhost:3000/api/reserva/consultar/${formData.id}`;
+        method = "GET";
+        // Si la acción es actualizar se realiza una petición PUT
+      } else if (action === "Actualizar") {
+        // Si no se ha buscado la reserva se muestra un mensaje de alerta
+        if (isSearched === false) {
+          alert("Por favor busque la reserva antes de actualizarla");
+          return;
+          // Si se ha buscado la reserva se verifica si se ha cambiado algún campo
+        } else if (!isChanged) {
+          alert("Por favor cambie al menos un campo antes de actualizar la reserva");
+          return;
+        }
+
+        url = `http://localhost:3000/api/reserva/actualizar`;
+        method = "PUT";
+      }
+
+      if (method !== "") {
+        fetch(url, {
+          method: method,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"), // Asegúrate de reemplazar 'token' con tu token de autenticación
+          },
+          // Si la acción es actualizar se envía el cuerpo de la petición con los datos de la reserva
+          body: method === "PUT" ? JSON.stringify(formData) : null,
+        })
+          .then((response) => {
+            if (!response.ok) {
+              // Verificar el tipo de contenido de la respuesta
+              const contentType = response.headers.get("content-type");
+              if (contentType && contentType.indexOf("application/json") !== -1) {
+                // Si la respuesta es JSON, analizarla como JSON
+                return response.json().then((error) => {
+                  throw new Error(error.message);
+                });
+              } else {
+                // Si la respuesta no es JSON, lanzar un error con el texto de la respuesta
+                return response.text().then((text) => {
+                  throw new Error(text);
+                });
+              }
+            }
+            // ...y si la respuesta fue exitosa, devolverla
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+            if (data.rowCount > 0) {
+              alert("Reserva encontrada");
+              setIsSearched(true);
+              setFormData({
+                descripcion: data.rows[0].DESCRIPCION,
+                precio: data.rows[0].PRECIO,
+                estado: data.rows[0].ESTADO,
+                fecha_entrada: data.rows[0].F_ENTRADA,
+                fecha_salida: data.rows[0].F_SALIDA,
+                id: data.rows[0].ID,
+                habitacion: data.rows[0].ID_HABITACION,
+                empleado: data.rows[0].ID_EMPLEADO,
+              });
+              console.log(formData);
+            } else {
+              alert("Error al buscar la reserva");
+            }
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      } else {
+        alert("Por favor seleccione una acción");
+      }
     }
   };
 
@@ -533,7 +607,7 @@ export const ContainerBuscarReserva = () => {
                     <select
                       name="estado"
                       value={formData.estado}
-                      onChange={handleChange}
+                      onChange={action === "Actualizar" ? handleUpdateChange : handleChange}
                     >
                       <option value="">Estado</option>
                       <option value="PENDIENTE">Pendiente</option>
@@ -618,9 +692,16 @@ export const ContainerBuscarReserva = () => {
                   </div>
                   <div className="button-wrap">
                     <ButtonAdmin
-                      type="submit"
+                      type="button"
                       value="Crear-reserva"
                       label="Buscar"
+                      onClick={() => setAction("Buscar")}
+                    />
+                    <ButtonAdmin
+                      type="button"
+                      value="Crear-reserva"
+                      label="Actualizar"
+                      onClick={() => setAction("Actualizar")}
                     />
                   </div>
                 </form>

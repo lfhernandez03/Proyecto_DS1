@@ -2,6 +2,7 @@ import React from "react";
 import { LoginTab } from "./Login/login.jsx";
 import { RecoverTab } from "./PasswordRecover/RecoverTab.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ROUTES } from './rutasConst.js';
 
 import {
   ContainerEmp,
@@ -22,50 +23,37 @@ import {
   ContainerCrearEmpleado,
   ContainerBuscarEmpleado
 } from "./Administrador/admin_empleados.jsx";
-  
+
 import {
   ContainerBuscarHabitación,
   ContainerCrearHabitación,
 } from "./Administrador/admin_habitacion.jsx"
 
-
-// ReactDOM.createRoot(document.getElementById("root")).render(
-//   <>
-//     <BrowserRouter>
-//       <Routes>
-//         <Route path="/" element={<LoginTab />}/>
-//         <Route exact path="/CrearContraseña" element={<RecoverTab />} />
-//         <Route path="/Empleados" element={<ContainerEmp />} />
-//         <Route path="/HacerReserva" element={<Container1 />} />
-//         <Route path="/BuscarReserva" element={<Container2 />} />
-//       </Routes>
-//     </BrowserRouter>
-//   </>
-// )
-
-export const Rutas = () =>(
+export const Rutas = () => (
   <>
     <Router>
       <Routes>
 
         //Rutas del Login
-        <Route path="/" element={<LoginTab />} />
-        <Route exact path="/CrearContraseña" element={<RecoverTab />} />
+        <Route path={ROUTES.LOGIN} element={<LoginTab />} />
+        <Route path={ROUTES.CAMBIAR_CONTRA} element={<RecoverTab />} />
 
         //Rutas del Empleado
-        <Route path="/Empleados" element={<ContainerEmp />} />
-        <Route path="/HacerReserva" element={<Container1 />} />
-        <Route path="/BuscarReserva" element={<Container2 />} />
+        <Route path={ROUTES.EMPLEADOS} element={<ContainerEmp />} />
+        <Route path={ROUTES.INSERTAR_RESERVA} element={<ContainerCrearReserva />} />
+        <Route path={ROUTES.CONSULTAR_RESERVA} element={<ContainerBuscarReserva />} />
 
         //Rutas del Administrador
-        <Route path="/Admin" element={<Admin />} />
-        <Route path="/CrearReservaAdmin" element={<ContainerCrearReserva />} />
-        <Route path="/CrearHabitación" element={<ContainerCrearHabitación />} />
-        <Route path="/CrearEmpleado" element={<ContainerCrearEmpleado />} />
-        <Route path="/BuscarReservaAdmin" element={<ContainerBuscarReserva />} />
-        <Route path="/BuscarEmpleado" element={<ContainerBuscarEmpleado />} />
-        <Route path="/BuscarHabitación" element={<ContainerBuscarHabitación />} />
-        
+        <Route path={ROUTES.ADMIN} element={<Admin />} />
+        <Route path={ROUTES.INSERTAR_RESERVA} element={<ContainerCrearReserva />} />
+        <Route path={ROUTES.INSERTAR_HABITACION} element={<ContainerCrearHabitación />} />
+        <Route path={ROUTES.INSERTAR_EMPLEADO} element={<ContainerCrearEmpleado />} />
+        <Route path={ROUTES.CONSULTAR_RESERVA} element={<ContainerBuscarReserva />} />
+        <Route path={ROUTES.CONSULTAR_EMPLEADO} element={<ContainerBuscarEmpleado />} />
+        <Route path={ROUTES.CONSULTAR_HABITACION} element={<ContainerBuscarHabitación />} />
+
+        //Redirección por defecto
+        <Route path="*" element={<LoginTab />} />
       </Routes>
     </Router>
   </>
