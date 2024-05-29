@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   ButtonAdmin,
-  TextFieldsAdmin,
-  BasicSelectTipo,
 } from "./administradorComponents";
 import { AdminLayout } from "./AdministradorLayout";
 import { useNavigate } from "react-router-dom";
 import { Inputs } from "./administradorComponents";
-import { SelectBoxEmp } from "./administradorComponents";
 import {
   faIdCard,
   faUser,
@@ -20,7 +17,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ROUTES } from '../rutasConst.js';
-
+import { useUpdateEffect, handleChange, handleUpdateChange } from "../globalFunctions.js";
 
 export const ContainerCrearEmpleado = () => {
   const [formData, setFormData] = useState({
@@ -36,15 +33,9 @@ export const ContainerCrearEmpleado = () => {
     fecha_inicio: "",
   });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleLocalChange = handleChange(setFormData, formData);
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -108,7 +99,7 @@ export const ContainerCrearEmpleado = () => {
                         name="nombre"
                         type="text"
                         value={formData.nombre}
-                        onChange={handleChange}
+                        onChange={handleLocalChange}
                       />
                     </div>
                   </div>
@@ -121,7 +112,7 @@ export const ContainerCrearEmpleado = () => {
                         name="id"
                         type="number"
                         value={formData.id}
-                        onChange={handleChange}
+                        onChange={handleLocalChange}
                       />
                     </div>
                   </div>
@@ -134,7 +125,7 @@ export const ContainerCrearEmpleado = () => {
                         name="correo"
                         type="email"
                         value={formData.correo}
-                        onChange={handleChange}
+                        onChange={handleLocalChange}
                       />
                     </div>
                   </div>
@@ -146,7 +137,7 @@ export const ContainerCrearEmpleado = () => {
                         placeholder="Teléfono"
                         name="telefono"
                         value={formData.telefono}
-                        onChange={handleChange}
+                        onChange={handleLocalChange}
                       />
                     </div>
                   </div>
@@ -159,7 +150,7 @@ export const ContainerCrearEmpleado = () => {
                         name="direccion"
                         type="text"
                         value={formData.direccion}
-                        onChange={handleChange}
+                        onChange={handleLocalChange}
                       />
                     </div>
                   </div>
@@ -167,7 +158,7 @@ export const ContainerCrearEmpleado = () => {
                     <select
                       name="tipo"
                       value={formData.tipo}
-                      onChange={handleChange}
+                      onChange={handleLocalChange}
                     >
                       <option value="">Tipo</option>
                       <option value="Empleado">Empleado</option>
@@ -184,14 +175,14 @@ export const ContainerCrearEmpleado = () => {
                       name="fecha_inicio"
                       type="date"
                       value={formData.fecha_inicio}
-                      onChange={handleChange}
+                      onChange={handleLocalChange}
                     />
                     <Inputs
                       className="fechas-input"
                       name="fecha_nacimiento"
                       type="date"
                       value={formData.fecha_nacimiento}
-                      onChange={handleChange}
+                      onChange={handleLocalChange}
                     />
                   </div>
                   <div className="input-wrap">
@@ -203,7 +194,7 @@ export const ContainerCrearEmpleado = () => {
                         name="salario"
                         type="number"
                         value={formData.salario}
-                        onChange={handleChange}
+                        onChange={handleLocalChange}
                       />
                     </div>
                   </div>
@@ -216,7 +207,7 @@ export const ContainerCrearEmpleado = () => {
                         name="contrasenia"
                         type="text"
                         value={formData.contrasenia}
-                        onChange={handleChange}
+                        onChange={handleLocalChange}
                       />
                     </div>
                   </div>
@@ -251,13 +242,7 @@ export const ContainerBuscarEmpleado = () => {
     fecha_inicio: "",
   });
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  /*useEffect(() => {
-    console.log(formData);
-  }, [formData]);*/
+  const handleLocalChange = handleChange(setFormData, formData);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -332,7 +317,7 @@ export const ContainerBuscarEmpleado = () => {
                         name="id"
                         type="number"
                         value={formData.id}
-                        onChange={handleChange}
+                        onChange={handleLocalChange}
                       />
                     </div>
                   </div>
@@ -348,7 +333,7 @@ export const ContainerBuscarEmpleado = () => {
                         type="text"
                         value={formData.nombre}
                         readOnly={true}
-                        onChange={handleChange}
+                        onChange={handleLocalChange}
                       />
                     </div>
                   </div>
@@ -366,7 +351,7 @@ export const ContainerBuscarEmpleado = () => {
                         type="email"
                         value={formData.correo}
                         readOnly={true}
-                        onChange={handleChange}
+                        onChange={handleLocalChange}
                       />
                     </div>
                   </div>
@@ -384,7 +369,7 @@ export const ContainerBuscarEmpleado = () => {
                         type="number"
                         value={formData.telefono}
                         readOnly={true}
-                        onChange={handleChange}
+                        onChange={handleLocalChange}
                       />
                     </div>
                   </div>
@@ -402,13 +387,13 @@ export const ContainerBuscarEmpleado = () => {
                         type="text"
                         value={formData.direccion}
                         readOnly={true}
-                        onChange={handleChange}
+                        onChange={handleLocalChange}
                       />
                     </div>
                   </div>
                   <div className="tipo">
                     <select
-                      onChange={handleChange}
+                      onChange={handleLocalChange}
                       readOnly={true}
                       value={formData.tipo}
                       name="tipo"
@@ -436,7 +421,7 @@ export const ContainerBuscarEmpleado = () => {
                         type="text"
                         value={formData.fecha_inicio}
                         readOnly={true}
-                        onChange={handleChange}
+                        onChange={handleLocalChange}
                       />
                     </div>
                     <div className="input-icon">
@@ -452,7 +437,7 @@ export const ContainerBuscarEmpleado = () => {
                         type="text"
                         value={formData.fecha_nacimiento}
                         readOnly={true}
-                        onChange={handleChange}
+                        onChange={handleLocalChange}
                       />
                     </div>
                   </div>
@@ -468,7 +453,7 @@ export const ContainerBuscarEmpleado = () => {
                         type="number"
                         value={formData.salario}
                         readOnly={true}
-                        onChange={handleChange}
+                        onChange={handleLocalChange}
                       />
                     </div>
                   </div>
@@ -486,7 +471,7 @@ export const ContainerBuscarEmpleado = () => {
                         type="text"
                         value={formData.contrasenia}
                         readOnly={true}
-                        onChange={handleChange}
+                        onChange={handleLocalChange}
                       />
                     </div>
                   </div>
