@@ -47,6 +47,7 @@ export const ContainerCrearHabitación = () => {
     if (formData && Object.values(formData).every((value) => value !== "")) {
       fetch("http://localhost:3000/api/habitacion/insertar", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -180,6 +181,7 @@ export const ContainerBuscarHabitación = () => {
     } else {
       fetch("http://localhost:3000/api/habitacion/consultar", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

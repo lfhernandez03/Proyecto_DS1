@@ -43,6 +43,7 @@ export const ContainerCrearEmpleado = () => {
     if (formData && Object.values(formData).every((value) => value !== "")) {
       fetch("http://localhost:3000/api/empleado/insertar", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -251,6 +252,7 @@ export const ContainerBuscarEmpleado = () => {
     } else {
       fetch("http://localhost:3000/api/empleado/consultar", {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

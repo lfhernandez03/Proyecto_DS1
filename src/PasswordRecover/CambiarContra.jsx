@@ -29,6 +29,7 @@ export const CambiarContra = () => {
     if (formData.nuevaContraseña && formData.confirmarContraseña) {
       fetch('http://localhost:3000/api/login/cambiarContra', {
         method: 'PUT',
+        credentials: "include",
         headers: {
           'Content-Type': 'application/json'
         },

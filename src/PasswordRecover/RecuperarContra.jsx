@@ -28,6 +28,7 @@ export const RecuperarContra = () => {
     if (formData.id) {
       fetch('http://localhost:3000/api/login/recuperarContra', {
         method: 'POST',
+        credentials: "include",
         headers: {
           'Content-Type': 'application/json'
         },

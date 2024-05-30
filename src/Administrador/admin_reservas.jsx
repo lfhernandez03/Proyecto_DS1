@@ -131,16 +131,17 @@ export const ContainerCrearReserva = () => {
     } else {
       fetch(url, {
         method: "GET",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
       })
         .then(async (response) => {
           if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.message);
-          }
-          return response.json();
+            return response.text().then((text) => {
+              throw new Error(text);
+            });
+          } else return response.json();
         })
         .then((data) => {
           console.log(data);
@@ -160,6 +161,7 @@ export const ContainerCrearReserva = () => {
         })
 
         .catch((error) => {
+          alert(error.message)
           console.error("Error:", error);
         });
     }
@@ -470,9 +472,9 @@ export const ContainerBuscarReserva = () => {
       if (method !== "") {
         fetch(url, {
           method: method,
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer " + localStorage.getItem("token"), // Asegúrate de reemplazar 'token' con tu token de autenticación
           },
           // Si la acción es actualizar se envía el cuerpo de la petición con los datos de la reserva
           body: method === "PUT" ? JSON.stringify(formData) : null,
@@ -501,35 +503,24 @@ export const ContainerBuscarReserva = () => {
           })
           .then((data) => {
             console.log(data);
-            if (data.rowCount === 0) {
-              alert("No se encontró la reserva con el id ingresado");
-              return;
-            }
-            if (data.rowCount > 0) {
-              alert("Reserva encontrada");
-              setIsSearched(true);
-              // Se actualiza el estado de la reserva con los datos obtenidos
-              setFormData({
-                id: data.rows[0].ID ? data.rows[0].ID : "",
-                descripcion: data.rows[0].DESCRIPCION
-                  ? data.rows[0].DESCRIPCION
-                  : "",
-                precio: data.rows[0].PRECIO ? data.rows[0].PRECIO : "",
-                estado: data.rows[0].ESTADO ? data.rows[0].ESTADO : "",
-                f_entrada: data.rows[0].F_ENTRADA ? data.rows[0].F_ENTRADA : "",
-                f_salida: data.rows[0].F_SALIDA ? data.rows[0].F_SALIDA : "",
-                
-                id_habitacion: data.rows[0].ID_HABITACION
-                  ? data.rows[0].ID_HABITACION
-                  : "",
-                id_empleado: data.rows[0].ID_EMPLEADO
-                  ? data.rows[0].ID_EMPLEADO
-                  : "",
-              });
-              console.log(formData);
-            } else {
-              alert("Error al buscar la reserva");
-            }
+            data = JSON.parse(data);
+
+            alert("Reserva encontrada");
+            setIsSearched(true);
+            // Se actualiza el estado de la reserva con los datos obtenidos
+            setFormData({
+              id: data.rows[0].ID,
+              descripcion: data.rows[0].DESCRIPCION ? data.rows[0].DESCRIPCION : "",
+              precio: data.rows[0].PRECIO,
+              estado: data.rows[0].ESTADO,
+              f_entrada: data.rows[0].F_ENTRADA,
+              f_salida: data.rows[0].F_SALIDA,
+
+              id_habitacion: data.rows[0].ID_HABITACION,
+              id_empleado: data.rows[0].ID_EMPLEADO,
+            });
+            console.log(formData);
+
           })
           .catch((error) => {
             console.error("Error:", error);

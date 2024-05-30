@@ -62,7 +62,7 @@ export const LoginTab = () => {
         })
         .then((data) => {
           if (data.correcto) {
-            localStorage.setItem("token", data.token);
+            document.cookie = `token=${data.token}; path=/`;
             console.log("Usuario encontrado y contraseña correcta");
 
             if (data.modo_Recuperacion) {
