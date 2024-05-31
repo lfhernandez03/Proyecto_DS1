@@ -482,6 +482,9 @@ export const ContainerBuscarReserva = () => {
           body: method === "PUT" ? JSON.stringify(formData) : null,
         })
         .then((response) => {
+          if(response.status === 200 && method === "PUT") {
+            return alert("Reserva actualizada exitosamente");
+          }
           if (!response.ok) {
             alert(
               "No se encontró una reserva con identificación: " + formData.id
@@ -492,22 +495,23 @@ export const ContainerBuscarReserva = () => {
           }
         })  
           .then((data) => {
-
-            data = JSON.parse(data);
+            if(data){
+              data = JSON.parse(data);
           
-            alert("Reserva encontrada");
-            setIsSearched(true);
-            // Se actualiza el estado de la reserva con los datos obtenidos
-            setFormData({
-              id: data.rows[0].ID.toString(),
-              descripcion: data.rows[0].DESCRIPCION ? data.rows[0].DESCRIPCION : "",
-              precio: data.rows[0].PRECIO.toString(),
-              estado: data.rows[0].ESTADO,
-              f_entrada: data.rows[0].F_ENTRADA,
-              f_salida: data.rows[0].F_SALIDA,
-              id_habitacion: data.rows[0].ID_HABITACION.toString(),
-              id_empleado: data.rows[0].ID_EMPLEADO.toString(),
-            });
+              alert("Reserva encontrada");
+              setIsSearched(true);
+              // Se actualiza el estado de la reserva con los datos obtenidos
+              setFormData({
+                id: data.rows[0].ID.toString(),
+                descripcion: data.rows[0].DESCRIPCION ? data.rows[0].DESCRIPCION : "",
+                precio: data.rows[0].PRECIO.toString(),
+                estado: data.rows[0].ESTADO,
+                f_entrada: data.rows[0].F_ENTRADA,
+                f_salida: data.rows[0].F_SALIDA,
+                id_habitacion: data.rows[0].ID_HABITACION.toString(),
+                id_empleado: data.rows[0].ID_EMPLEADO.toString(),
+              });
+            }
           })
           .catch((error) => {
             console.error("Error:", error);

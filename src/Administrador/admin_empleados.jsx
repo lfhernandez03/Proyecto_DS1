@@ -303,6 +303,9 @@ export const ContainerBuscarEmpleado = () => {
           body: method === "PUT" ? JSON.stringify(formData) : null,
         })
           .then((response) => {
+            if (response.status === 200 && method === "PUT") {
+              return alert("Empleado actualizado exitosamente");
+            }
             if (!response.ok) {
               alert(
                 "No se encontró un empleado con identificación: " + formData.id
@@ -313,23 +316,25 @@ export const ContainerBuscarEmpleado = () => {
             }
           })
           .then((data) => {
-            data = JSON.parse(data);
+            if (data) {
+              data = JSON.parse(data);
 
-            alert("Empleado encontrado");
-            setIsSearched(true);
-            setFormData({
-              id: data.rows[0].ID.toString(),
-              contrasenia: data.rows[0].CONTRASENIA,
-              correo: data.rows[0].CORREO,
-              nombre: data.rows[0].NOMBRE,
-              fecha_nacimiento: data.rows[0].FECHA_NACIMIENTO,
-              direccion: data.rows[0].DIRECCION,
-              salario: data.rows[0].SALARIO.toString(),
-              telefono: data.rows[0].TELEFONO.toString(),
-              admin: data.rows[0].ADMIN,
-              fecha_inicio: data.rows[0].FECHA_INICIO,
-              habilitado: data.rows[0].HABILITADO,
-            });
+              alert("Empleado encontrado");
+              setIsSearched(true);
+              setFormData({
+                id: data.rows[0].ID.toString(),
+                contrasenia: data.rows[0].CONTRASENIA,
+                correo: data.rows[0].CORREO,
+                nombre: data.rows[0].NOMBRE,
+                fecha_nacimiento: data.rows[0].FECHA_NACIMIENTO,
+                direccion: data.rows[0].DIRECCION,
+                salario: data.rows[0].SALARIO.toString(),
+                telefono: data.rows[0].TELEFONO.toString(),
+                admin: data.rows[0].ADMIN,
+                fecha_inicio: data.rows[0].FECHA_INICIO,
+                habilitado: data.rows[0].HABILITADO,
+              });
+            }
           })
           .catch((error) => {
             console.error("Error:", error);

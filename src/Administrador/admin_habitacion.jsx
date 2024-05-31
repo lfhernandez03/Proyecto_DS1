@@ -214,6 +214,9 @@ export const ContainerBuscarHabitación = () => {
           body: method === "PUT" ? JSON.stringify(formData) : null,
         })
           .then((response) => {
+            if (response.status === 200 && method === "PUT") {
+              return alert("Habitación actualizada exitosamente");
+            }
             if (!response.ok) {
               alert(
                 "No se encontró una habitación con identificación: " +
@@ -225,18 +228,20 @@ export const ContainerBuscarHabitación = () => {
             }
           })
           .then((data) => {
-            data = JSON.parse(data);
+            if (data) {
+              data = JSON.parse(data);
 
-            alert("Habitación encontrada");
-            setIsSearched(true);
-            setFormData({
-              id: data.rows[0].ID.toString(),
-              tipo: data.rows[0].TIPO,
-              precio: data.rows[0].PRECIO.toString(),
-              estado: data.rows[0].ESTADO,
-              capacidad: data.rows[0].CAPACIDAD.toString(),
-              habilitado: data.rows[0].HABILITADO,
-            });
+              alert("Habitación encontrada");
+              setIsSearched(true);
+              setFormData({
+                id: data.rows[0].ID.toString(),
+                tipo: data.rows[0].TIPO,
+                precio: data.rows[0].PRECIO.toString(),
+                estado: data.rows[0].ESTADO,
+                capacidad: data.rows[0].CAPACIDAD.toString(),
+                habilitado: data.rows[0].HABILITADO,
+              });
+            }
           })
           .catch((error) => {
             console.error("Error:", error);
