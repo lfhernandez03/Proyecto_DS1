@@ -41,20 +41,18 @@ export const LoginTab = () => {
           pass: formData.password,
         }),
       })
-        .then((response) => {
+        .then(async (response) => {
           if (!response.ok) {
             // Verificar el tipo de contenido de la respuesta
             const contentType = response.headers.get("content-type");
             if (contentType && contentType.indexOf("application/json") !== -1) {
               // Si la respuesta es JSON, analizarla como JSON
-              return response.json().then((error) => {
-                throw new Error(error.message);
-              });
+              const error = await response.json();
+              throw new Error(error.message);
             } else {
               // Si la respuesta no es JSON, lanzar un error con el texto de la respuesta
-              return response.text().then((text) => {
-                throw new Error(text);
-              });
+              const text = await response.text();
+              throw new Error(text);
             }
           }
           // ...y si la respuesta fue exitosa, devolverla

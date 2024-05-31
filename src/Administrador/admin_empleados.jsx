@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import {
-  ButtonAdmin,
-} from "./administradorComponents";
+import { ButtonAdmin } from "./administradorComponents";
 import { AdminLayout } from "./AdministradorLayout";
 import { useNavigate } from "react-router-dom";
 import { Inputs } from "./administradorComponents";
@@ -16,8 +14,12 @@ import {
   faMapLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ROUTES } from '../rutasConst.js';
-import { useUpdateEffect, handleChange, handleUpdateChange } from "../globalFunctions.js";
+import { ROUTES } from "../rutasConst.js";
+import {
+  useUpdateEffect,
+  handleChange,
+  handleUpdateChange,
+} from "../globalFunctions.js";
 
 export const ContainerCrearEmpleado = () => {
   const [formData, setFormData] = useState({
@@ -239,60 +241,102 @@ export const ContainerBuscarEmpleado = () => {
     direccion: "",
     salario: "",
     telefono: "",
-    tipo: "",
+    admin: "",
     fecha_inicio: "",
+    habilitado: "",
   });
 
   const handleLocalChange = handleChange(setFormData, formData);
 
-  const handleSearch = (e) => {
+  const [action, setAction] = useState(null);
+
+  const [isSearched, setIsSearched] = useState(false);
+
+  const [isChanged, setIsChanged] = useState(false);
+
+  const handleLocalUpdateChange = handleUpdateChange(
+    setIsChanged,
+    setFormData,
+    formData
+  );
+
+  useUpdateEffect(formData);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData || formData.id === "") {
+
+    let method = "";
+    let url = "";
+
+    if (!formData.id || formData.id === "") {
       alert("Por favor ingrese una identificación");
     } else {
-      fetch("http://localhost:3000/api/empleado/consultar", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: formData.id,
-        }),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            alert(
-              "No se encontró un empleado con identificación: " + formData.id
-            );
-            throw new Error("Error en la llamada al servidor");
-          } else {
-            return response.json();
-          }
-        })
-        .then((data) => {
-          console.log(data);
-          if (data.rowCount > 0) {
-            alert("Empleado encontrado");
-            setFormData({
-              id: data.rows[0].ID,
-              nombre: data.rows[0].NOMBRE,
-              correo: data.rows[0].CORREO,
-              telefono: data.rows[0].TELEFONO,
-              direccion: data.rows[0].DIRECCION,
-              fecha_nacimiento: data.rows[0].FECHA_NACIMIENTO,
-              fecha_inicio: data.rows[0].FECHA_INICIO,
-              salario: data.rows[0].SALARIO,
-              tipo: data.rows[0].TIPO,
-            });
-          } else {
-            alert("Error al buscar el empleado");
-          }
-        })
+      if (action === "Buscar") {
+        url = `http://localhost:3000/api/empleado/consultar/${formData.id}`;
+        method = "GET";
+        // Si la acción es actualizar se realiza una petición PUT
+      } else if (action === "Actualizar") {
+        // Si no se ha buscado la reserva se muestra un mensaje de alerta
 
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+        if (isSearched === false) {
+          alert("Por favor busque un empleado antes de actualizar");
+          return;
+          // Si se ha buscado la reserva se verifica si se ha cambiado algún campo
+        } else if (!isChanged) {
+          alert(
+            "Por favor cambie al menos un campo antes de actualizar el empleado"
+          );
+          return;
+        }
+
+        url = `http://localhost:3000/api/empleado/actualizar`;
+        method = "PUT";
+      }
+
+      if (method !== "") {
+        fetch(url, {
+          method: method,
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: method === "PUT" ? JSON.stringify(formData) : null,
+        })
+          .then((response) => {
+            if (!response.ok) {
+              alert(
+                "No se encontró un empleado con identificación: " + formData.id
+              );
+              throw new Error("Error en la llamada al servidor");
+            } else {
+              return response.text();
+            }
+          })
+          .then((data) => {
+            data = JSON.parse(data);
+
+            alert("Empleado encontrado");
+            setIsSearched(true);
+            setFormData({
+              id: data.rows[0].ID.toString(),
+              contrasenia: data.rows[0].CONTRASENIA,
+              correo: data.rows[0].CORREO,
+              nombre: data.rows[0].NOMBRE,
+              fecha_nacimiento: data.rows[0].FECHA_NACIMIENTO,
+              direccion: data.rows[0].DIRECCION,
+              salario: data.rows[0].SALARIO.toString(),
+              telefono: data.rows[0].TELEFONO.toString(),
+              admin: data.rows[0].ADMIN,
+              fecha_inicio: data.rows[0].FECHA_INICIO,
+              habilitado: data.rows[0].HABILITADO,
+            });
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      } else {
+        alert("Por favor seleccione una acción");
+      }
     }
   };
 
@@ -306,11 +350,11 @@ export const ContainerBuscarEmpleado = () => {
                 <div className="form-heading">
                   <h1>Buscar Empleado</h1>
                 </div>
-                <form className="form" onSubmit={handleSearch}>
+                <form className="form" onSubmit={handleSubmit}>
                   <div className="titles">
                     <h3>Información del empleado</h3>
                   </div>
-                  <div className="input-wrap">
+                  <div className="buscar-id">
                     <div className="input-icon">
                       <FontAwesomeIcon icon={faIdCard} />
                       <Inputs
@@ -319,7 +363,11 @@ export const ContainerBuscarEmpleado = () => {
                         name="id"
                         type="number"
                         value={formData.id}
-                        onChange={handleLocalChange}
+                        onChange={
+                          action === "Buscar"
+                            ? handleLocalUpdateChange
+                            : handleLocalChange
+                        }
                       />
                     </div>
                   </div>
@@ -334,8 +382,12 @@ export const ContainerBuscarEmpleado = () => {
                         name="nombre"
                         type="text"
                         value={formData.nombre}
-                        readOnly={true}
-                        onChange={handleLocalChange}
+                        disabled={action !== "Actualizar"}
+                        onChange={
+                          action === "Actualizar"
+                            ? handleLocalUpdateChange
+                            : handleLocalChange
+                        }
                       />
                     </div>
                   </div>
@@ -352,8 +404,12 @@ export const ContainerBuscarEmpleado = () => {
                         name="correo"
                         type="email"
                         value={formData.correo}
-                        readOnly={true}
-                        onChange={handleLocalChange}
+                        disabled={action !== "Actualizar"}
+                        onChange={
+                          action === "Actualizar"
+                            ? handleLocalUpdateChange
+                            : handleLocalChange
+                        }
                       />
                     </div>
                   </div>
@@ -370,8 +426,12 @@ export const ContainerBuscarEmpleado = () => {
                         name="telefono"
                         type="number"
                         value={formData.telefono}
-                        readOnly={true}
-                        onChange={handleLocalChange}
+                        disabled={action !== "Actualizar"}
+                        onChange={
+                          action === "Actualizar"
+                            ? handleLocalUpdateChange
+                            : handleLocalChange
+                        }
                       />
                     </div>
                   </div>
@@ -388,21 +448,45 @@ export const ContainerBuscarEmpleado = () => {
                         name="direccion"
                         type="text"
                         value={formData.direccion}
-                        readOnly={true}
-                        onChange={handleLocalChange}
+                        disabled={action !== "Actualizar"}
+                        onChange={
+                          action === "Actualizar"
+                            ? handleLocalUpdateChange
+                            : handleLocalChange
+                        }
                       />
                     </div>
                   </div>
                   <div className="tipo">
                     <select
-                      onChange={handleLocalChange}
-                      readOnly={true}
+                      disabled={action !== "Actualizar"}
+                      onChange={
+                        action === "Actualizar"
+                          ? handleLocalUpdateChange
+                          : handleLocalChange
+                      }
                       value={formData.tipo}
                       name="tipo"
                     >
-                      <option value="">Tipo</option>
-                      <option value="Empleado">Empleado</option>
-                      <option value="Administrador">Administrador</option>
+                      <option value="">Admin</option>
+                      <option value="True">True</option>
+                      <option value="False">False</option>
+                    </select>
+                  </div>
+                  <div className="habilitado">
+                    <select
+                      disabled={action !== "Actualizar"}
+                      onChange={
+                        action === "Actualizar"
+                          ? handleLocalUpdateChange
+                          : handleLocalChange
+                      }
+                      value={formData.habilitado}
+                      name="habilitado"
+                    >
+                      <option value="">Habilitado</option>
+                      <option value="True">True</option>
+                      <option value="False">False</option>
                     </select>
                   </div>
                   <div className="title-date">
@@ -422,8 +506,12 @@ export const ContainerBuscarEmpleado = () => {
                         }
                         type="text"
                         value={formData.fecha_inicio}
-                        readOnly={true}
-                        onChange={handleLocalChange}
+                        disabled={action !== "Actualizar"}
+                        onChange={
+                          action === "Actualizar"
+                            ? handleLocalUpdateChange
+                            : handleLocalChange
+                        }
                       />
                     </div>
                     <div className="input-icon">
@@ -438,8 +526,12 @@ export const ContainerBuscarEmpleado = () => {
                         }
                         type="text"
                         value={formData.fecha_nacimiento}
-                        readOnly={true}
-                        onChange={handleLocalChange}
+                        disabled={action !== "Actualizar"}
+                        onChange={
+                          action === "Actualizar"
+                            ? handleLocalUpdateChange
+                            : handleLocalChange
+                        }
                       />
                     </div>
                   </div>
@@ -454,8 +546,12 @@ export const ContainerBuscarEmpleado = () => {
                         name="salario"
                         type="number"
                         value={formData.salario}
-                        readOnly={true}
-                        onChange={handleLocalChange}
+                        disabled={action !== "Actualizar"}
+                        onChange={
+                          action === "Actualizar"
+                            ? handleLocalUpdateChange
+                            : handleLocalChange
+                        }
                       />
                     </div>
                   </div>
@@ -472,8 +568,12 @@ export const ContainerBuscarEmpleado = () => {
                         name="contrasenia"
                         type="text"
                         value={formData.contrasenia}
-                        readOnly={true}
-                        onChange={handleLocalChange}
+                        disabled={action !== "Actualizar"}
+                        onChange={
+                          action === "Actualizar"
+                            ? handleLocalUpdateChange
+                            : handleLocalChange
+                        }
                       />
                     </div>
                   </div>
@@ -482,6 +582,13 @@ export const ContainerBuscarEmpleado = () => {
                       type="submit"
                       value="buscar-empleado"
                       label="Buscar"
+                      onClick={() => setAction("Buscar")}
+                    />
+                    <ButtonAdmin
+                      type="button"
+                      value="actualizar-empleado"
+                      label="Actualizar"
+                      onClick={() => setAction("Actualizar")}
                     />
                   </div>
                 </form>

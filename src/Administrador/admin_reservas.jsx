@@ -436,6 +436,8 @@ export const ContainerBuscarReserva = () => {
     formData
   );
 
+  useUpdateEffect(formData);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -479,48 +481,33 @@ export const ContainerBuscarReserva = () => {
           // Si la acción es actualizar se envía el cuerpo de la petición con los datos de la reserva
           body: method === "PUT" ? JSON.stringify(formData) : null,
         })
-          .then(async (response) => {
-            if (!response.ok) {
-              // Verificar el tipo de contenido de la respuesta
-              const contentType = response.headers.get("content-type");
-              if (
-                contentType &&
-                contentType.indexOf("application/json") !== -1
-              ) {
-                // Si la respuesta es JSON, analizarla como JSON
-                const error = await response.json();
-                alert(error.message);
-                throw new Error(error.message);
-              } else {
-                // Si la respuesta no es JSON, lanzar un error con el texto de la respuesta
-                const text = await response.text();
-                alert(text);
-                throw new Error(text);
-              }
-            }
-            // ...y si la respuesta fue exitosa, devolverla
+        .then((response) => {
+          if (!response.ok) {
+            alert(
+              "No se encontró una reserva con identificación: " + formData.id
+            );
+            throw new Error("Error en la llamada al servidor");
+          } else {
             return response.text();
-          })
+          }
+        })  
           .then((data) => {
-            console.log(data);
-            data = JSON.parse(data);
 
+            data = JSON.parse(data);
+          
             alert("Reserva encontrada");
             setIsSearched(true);
             // Se actualiza el estado de la reserva con los datos obtenidos
             setFormData({
-              id: data.rows[0].ID,
+              id: data.rows[0].ID.toString(),
               descripcion: data.rows[0].DESCRIPCION ? data.rows[0].DESCRIPCION : "",
-              precio: data.rows[0].PRECIO,
+              precio: data.rows[0].PRECIO.toString(),
               estado: data.rows[0].ESTADO,
               f_entrada: data.rows[0].F_ENTRADA,
               f_salida: data.rows[0].F_SALIDA,
-
-              id_habitacion: data.rows[0].ID_HABITACION,
-              id_empleado: data.rows[0].ID_EMPLEADO,
+              id_habitacion: data.rows[0].ID_HABITACION.toString(),
+              id_empleado: data.rows[0].ID_EMPLEADO.toString(),
             });
-            console.log(formData);
-
           })
           .catch((error) => {
             console.error("Error:", error);
@@ -649,9 +636,7 @@ export const ContainerBuscarReserva = () => {
                         value={formData.precio}
                         disabled={action !== "Actualizar"}
                         onChange={
-                          action === "Actualizar"
-                            ? handleLocalUpdateChange
-                            : handleLocalChange
+                          action === "Actualizar" ? handleLocalUpdateChange: handleLocalChange
                         }
                         required={false}
                       />
