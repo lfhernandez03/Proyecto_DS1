@@ -7,9 +7,12 @@ import { ROUTES } from './rutasConst.js';
 
 import {
   ContainerEmp,
-  Container1,
-  Container2,
 } from "./Empleados/empleados.jsx";
+
+import {
+  ContainerCrearReservaEmp,
+  ContainerBuscarReservaEmp,
+} from "./Empleados/empleados_reserva.jsx";
 
 import {
   Admin
@@ -28,7 +31,7 @@ import {
 import {
   ContainerBuscarHabitación,
   ContainerCrearHabitación,
-} from "./Administrador/admin_habitacion.jsx"
+} from "./Administrador/admin_habitacion.jsx";
 
 export const Rutas = () => (
   <>
@@ -42,12 +45,14 @@ export const Rutas = () => (
 
         //Rutas del Empleado
         <Route path={ROUTES.EMPLEADOS} element={<ContainerEmp />} />
-        <Route path={ROUTES.RESERVA_INSERTAR} element={<ContainerCrearReserva />} />
-        <Route path={ROUTES.RESERVA_CONSULTAR} element={<ContainerBuscarReserva />} />
-        <Route path={ROUTES.HABITACION_INSERTAR} element={<ContainerCrearHabitación />} />
+        <Route path={ROUTES.RESERVA_INSERTAR_EMP} element={<ContainerCrearReservaEmp />} />
+        <Route path={ROUTES.RESERVA_CONSULTAR_EMP} element={<ContainerBuscarReservaEmp />} />
 
         //Rutas del Administrador
         <Route path={ROUTES.ADMIN} element={<Admin />} />
+        <Route path={ROUTES.RESERVA_INSERTAR} element={<ContainerCrearReserva />} />
+        <Route path={ROUTES.RESERVA_CONSULTAR} element={<ContainerBuscarReserva />} />
+        <Route path={ROUTES.HABITACION_INSERTAR} element={<ContainerCrearHabitación />} />
         <Route path={ROUTES.EMPLEADO_INSERTAR} element={<ContainerCrearEmpleado />} />
         <Route path={ROUTES.EMPLEADO_CONSULTAR} element={<ContainerBuscarEmpleado />} />
         <Route path={ROUTES.HABITACION_CONSULTAR} element={<ContainerBuscarHabitación />} />

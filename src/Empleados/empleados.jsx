@@ -1,112 +1,63 @@
 import React from "react";
-import { TextFieldsEmplo } from "./empleadosComponents";
-import { ButtonEmplo } from "./empleadosComponents";
-import { BasicSelect } from "./empleadosComponents";
-import EmpleadoLayout from "./EmpleadoLayout";
 import { Link } from "react-router-dom";
-import { ROUTES } from '../rutasConst.js';
-
-
-export const Container1 = () => {
-
-  return (
-    <EmpleadoLayout>
-      <div className="forms" id="1">
-        <h1>Formulario de Reserva</h1>
-        <h3>Informacion del cliente</h3>
-        <div className="cuerpo-form">
-          <TextFieldsEmplo label="Nombre" name="name" type="name" />
-          <TextFieldsEmplo label="Identificación" name="id" type="id" />
-          <TextFieldsEmplo
-            label="Correo electrónico"
-            name="email"
-            type="email" />
-          <TextFieldsEmplo label="Telefono" name="tel" type="tel" />
-        </div>
-        <h3>Informacion de la reserva</h3>
-        <div className="cuerpo-form">
-          <TextFieldsEmplo label="Fecha entrada" name="Fecha-in" type="date" />
-          <TextFieldsEmplo label="Fecha salida" name="Fecha-out" type="date" />
-          <BasicSelect />
-          <TextFieldsEmplo label="ID" name="id" type="id" />
-        </div>
-        <div>
-          <ButtonEmplo type="submit" value="Reservar" label="Hacer reserva" />
-        </div>
-      </div>
-    </EmpleadoLayout>
-  );
-};
-
-export const Container2 = () => {
-  return (
-    <EmpleadoLayout>
-      <div className="forms" id="2">
-        <h1>Busqueda de Reserva</h1>
-        <h3>Informacion del cliente</h3>
-        <div className="cuerpo-form">
-          <TextFieldsEmplo label="Identificación" name="ida" type="id" />
-        </div>
-        <h3>Informacion de la reserva</h3>
-        <div className="cuerpo-form">
-          <TextFieldsEmplo label="Fecha entrada" name="Fecha-in" type="date" />
-          <TextFieldsEmplo label="Fecha salida" name="Fecha-out" type="date" />
-          <BasicSelect />
-          <TextFieldsEmplo label="ID" name="id" type="id" />
-        </div>
-        <div className="botones">
-          <ButtonEmplo
-            type="submit"
-            value="Eliminar-reserva"
-            label="Eliminar reserva"
-          />
-          <ButtonEmplo
-            type="submit"
-            value="Modificar-reserva"
-            label="Modificar reserva"
-          />
-        </div>
-      </div>
-    </EmpleadoLayout>
-  );
-};
+import { ROUTES } from "../rutasConst.js";
+import { BasicMenu } from "./empleadosComponents.jsx";
 
 export const ContainerEmp = () => {
   return (
     <>
-      <div className="cuerpo">
-        <div>
-          <h1>Bienvenido,</h1>
-          <h3>Usuario</h3>
-          <h4 className="ques">¿Qué quieres hacer hoy?</h4>
-
-          <div className="botones">
-            <Link className="ToHacerReserva" to={ROUTES.RESERVA_INSERTAR}>
-              <ButtonEmplo
-                className="bot"
-                label="Hacer Reserva"
-              />
-            </Link>
-            <Link className="ToBuscarReserva" to={ROUTES.RESERVA_CONSULTAR}>
-              <ButtonEmplo
-                className="bot"
-                label="Buscar Reserva"
-              />
-            </Link>
+      <header>
+        <div className="logo">
+          <Link
+            to={ROUTES.EMPLEADOS}
+            style={{ textDecoration: "none", color: "var(--color-titulos)" }}
+          >
+            <h1>
+              Caribbean Paradise
+              <span style={{ color: "#05D3F8" }}>.</span>
+            </h1>
+          </Link>
+        </div>
+        <nav className="container-menu">
+          <BasicMenu
+            name="Reservas"
+            option1="Crear Reserva"
+            option2="Buscar Reserva"
+            link1={ROUTES.RESERVA_INSERTAR_EMP}
+            link2={ROUTES.RESERVA_CONSULTAR_EMP}
+          />
+        </nav>
+      </header>
+      <main>
+        <div className="contact">
+          <div className="container">
+            <div className="right">
+              <div className="image-wrapper">
+                <img
+                  className="img"
+                  src="src\Multimedia\right.png"
+                  alt="img-reservas"
+                />
+                <div className="wave-wrap">
+                  <svg
+                    className="wave"
+                    viewBox="0 0 783 1536"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      id="wave"
+                      d="M236.705 1356.18C200.542 1483.72 64.5004 1528.54 1 1535V1H770.538C793.858 63.1213 797.23 196.197 624.165 231.531C407.833 275.698 274.374 331.715 450.884 568.709C627.393 805.704 510.079 815.399 347.561 939.282C185.043 1063.17 281.908 1196.74 236.705 1356.18Z"
+                      fill="#D9D9D9"
+                      stroke="white"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </main>
     </>
   );
 };
-
-// cons button = document.querySelector('button');
-// button.addEventListener('click', function () {
-//   const value = button.getAttribute('value');
-
-//   if (value == "Modificar-reserva") {
-//       console.log("Modifi");
-//   } else {
-//       console.log("Elimi");
-//   }
-// });

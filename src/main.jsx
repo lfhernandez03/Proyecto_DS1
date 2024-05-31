@@ -5,7 +5,6 @@ import { Rutas } from "./rutas"
 
 import "./login.css";
 import "./cambiarContra.css";
-import "./empleados.css";
 import "./admin.css";
 import "./admin_reservas.css";
 

@@ -1,6 +1,6 @@
 import { ContainerEmp } from "./empleados";
 
-export default function EmpleadoLayout({ children }) {
+export function EmpleadosLayout({ children }) {
   return (
     <main>
       <ContainerEmp/>

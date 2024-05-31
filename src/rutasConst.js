@@ -4,10 +4,12 @@ export const ROUTES = {
     RECUPERAR_CONTRA: "/login/recuperarContra",
 
     EMPLEADOS: "/empleados",
+    RESERVA_INSERTAR_EMP: "/empleados/reserva/inserta",
+    RESERVA_CONSULTAR_EMP: "/empleados/reserva/consulta",
+    
+    ADMIN: "/admin",
     RESERVA_INSERTAR: "/reserva/insertar",
     RESERVA_CONSULTAR: "/reserva/consultar",
-
-    ADMIN: "/admin",
     HABITACION_INSERTAR: "/habitacion/insertar",
     HABITACION_CONSULTAR: "/habitacion/consultar",
     EMPLEADO_INSERTAR: "/empleado/insertar",

@@ -67,12 +67,6 @@ header .logo {
     pointer-events: none;
 }
 
-.leftiz {
-  width: 100%;
-  background-color: red;
-  left: 0;
-}
-
 .image-wrapper{
     position: relative;
     grid-column: 2;
