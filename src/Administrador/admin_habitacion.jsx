@@ -51,7 +51,8 @@ export const ContainerCrearHabitación = () => {
         .then(async (response) => {
           if (!response.ok) throw new Error(await response.text());
 
-          alert("Habitación creada exitosamente.");
+          const data = await response.json();
+          alert("Habitación creada exitosamente con ID " + data.id + ".");
           navigate(ROUTES.ADMIN);
         })
         .catch((error) => {

@@ -45,8 +45,8 @@ export const Rutas = () => (
 
         //Rutas del Empleado
         <Route path={ROUTES.EMPLEADOS} element={<ContainerEmp />} />
-        <Route path={ROUTES.RESERVA_INSERTAR_EMP} element={<ContainerCrearReservaEmp />} />
-        <Route path={ROUTES.RESERVA_CONSULTAR_EMP} element={<ContainerBuscarReservaEmp />} />
+        <Route path={ROUTES.RESERVA_INSERTAR_EMP} element={<ContainerCrearReserva />} />
+        <Route path={ROUTES.RESERVA_CONSULTAR_EMP} element={<ContainerBuscarReserva />} />
 
         //Rutas del Administrador
         <Route path={ROUTES.ADMIN} element={<Admin />} />

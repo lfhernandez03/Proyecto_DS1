@@ -4,14 +4,14 @@ export const ROUTES = {
     RECUPERAR_CONTRA: "/login/recuperarContra",
 
     EMPLEADOS: "/empleados",
-    RESERVA_INSERTAR_EMP: "/empleados/reserva/inserta",
-    RESERVA_CONSULTAR_EMP: "/empleados/reserva/consulta",
-    
+    RESERVA_INSERTAR_EMP: "/empleados/reserva/insertar",
+    RESERVA_CONSULTAR_EMP: "/empleados/reserva/consultar",
+
     ADMIN: "/admin",
-    RESERVA_INSERTAR: "/reserva/insertar",
-    RESERVA_CONSULTAR: "/reserva/consultar",
-    HABITACION_INSERTAR: "/habitacion/insertar",
-    HABITACION_CONSULTAR: "/habitacion/consultar",
-    EMPLEADO_INSERTAR: "/empleado/insertar",
-    EMPLEADO_CONSULTAR: "/empleado/consultar",
+    RESERVA_INSERTAR: "/admin/reserva/insertar",
+    RESERVA_CONSULTAR: "/admin/reserva/consultar",
+    HABITACION_INSERTAR: "/admin/habitacion/insertar",
+    HABITACION_CONSULTAR: "/admin/habitacion/consultar",
+    EMPLEADO_INSERTAR: "/admin/empleado/insertar",
+    EMPLEADO_CONSULTAR: "/admin/empleado/consultar",
 };

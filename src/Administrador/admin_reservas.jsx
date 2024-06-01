@@ -8,7 +8,7 @@ import {
   SelectBoxReservaCliente,
 } from "./administradorComponents";
 import { AdminLayout } from "./AdministradorLayout";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   handleChange,
   handleUpdateChange,
@@ -55,6 +55,7 @@ export const ContainerCrearReserva = () => {
   const handleLocalChange = handleChange(setFormData, formData);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   useUpdateEffect(formData);
 
@@ -92,8 +93,9 @@ export const ContainerCrearReserva = () => {
         .then(async response => {
           if (!response.ok) throw new Error(await response.text());
 
-          alert("Reserva creada exitosamente.");
-          navigate(ROUTES.ADMIN);
+          const data = await response.json();
+          alert("Reserva creada exitosamente con ID " + data.id + ".");
+          (location.pathname === ROUTES.RESERVA_INSERTAR_EMP) ? navigate(ROUTES.EMPLEADOS) : navigate(ROUTES.ADMIN);
         })
         .catch((error) => {
           alert(error.message)
