@@ -34,23 +34,12 @@ export const RecuperarContra = () => {
         },
         body: JSON.stringify(formData)
       })
-        .then(response => {
+        .then(async response => {
           console.log(response);
-          if (!response.ok) {
-            return response.text().then((text) => {
-              throw new Error(text);
-            });
-          }
+          if (!response.ok) throw new Error(await response.text());
 
-          return response.json();
-        })
-        .then(data => {
-          if (data.correo) {
-            alert('Correo de recuperación enviado a ' + data.correo);
-            navigate(ROUTES.LOGIN);
-          } else {
-            alert('Error: ' + data.message);
-          }
+          alert('Correo de recuperación enviado a ' + data.correo);
+          navigate(ROUTES.LOGIN);
         })
         .catch((error) => {
           console.error('Error:', error);

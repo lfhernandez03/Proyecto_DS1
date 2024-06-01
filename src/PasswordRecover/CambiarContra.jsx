@@ -34,30 +34,18 @@ export const CambiarContra = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          id: "", //aquí va la id que se extrae del token
           passNuevo: formData.nuevaContraseña,
         }),
       })
-        .then(response => {
-          console.log(response);
-          if (!response.ok) {
-            throw new Error('Error en la respuesta del servidor');
-          }
+        .then(async response => {
+          if (!response.ok) throw new Error(await response.text());
 
-          return response.json();
-        })
-        .then(data => {
-          if (data.success) {
-            alert('Formulario válido. Redirigiendo...');
-            navigate(ROUTES.LOGIN);
-          } else {
-            alert('Error: ' + data.message);
-          }
+          alert('Contraseña actualizada. Por favor, vuelve a iniciar sesión...');
+          navigate(ROUTES.LOGIN);
         })
         .catch((error) => {
-          console.error('Error:', error);
+          alert(error.message)
         });
-
     } else {
       alert('Por favor, completa todos los campos');
     }

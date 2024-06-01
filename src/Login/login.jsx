@@ -42,37 +42,16 @@ export const LoginTab = () => {
         }),
       })
         .then(async (response) => {
-          if (!response.ok) {
-            // Verificar el tipo de contenido de la respuesta
-            const contentType = response.headers.get("content-type");
-            if (contentType && contentType.indexOf("application/json") !== -1) {
-              // Si la respuesta es JSON, analizarla como JSON
-              const error = await response.json();
-              throw new Error(error.message);
-            } else {
-              // Si la respuesta no es JSON, lanzar un error con el texto de la respuesta
-              const text = await response.text();
-              throw new Error(text);
-            }
-          }
-          // ...y si la respuesta fue exitosa, devolverla
-          return response.json();
-        })
-        .then((data) => {
-          if (data.correcto) {
-            document.cookie = `token=${data.token}; path=/`;
-            console.log("Usuario encontrado y contraseña correcta");
+          if (!response.ok) throw new Error(await response.text());
 
-            if (data.modo_Recuperacion) {
-              navigate(ROUTES.CAMBIAR_CONTRA);
-              return
-            }
+          const data = await response.json();
 
-            data.modo_Admin ? navigate(ROUTES.ADMIN) : navigate(ROUTES.EMPLEADOS);
-          }
+          document.cookie = `token=${data.token}; path=/`;
+          if (data.modo_Recuperacion) return navigate(ROUTES.CAMBIAR_CONTRA);
+
+          data.modo_Admin ? navigate(ROUTES.ADMIN) : navigate(ROUTES.EMPLEADOS);
         })
         .catch((error) => {
-          console.error("Error:", error);
           alert(error.message);
         });
     } else {

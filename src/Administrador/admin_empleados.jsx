@@ -61,17 +61,15 @@ export const ContainerCrearEmpleado = () => {
           fecha_inicio: formData.fecha_inicio,
         }),
       })
-        .then((response) => {
+        .then(async (response) => {
           console.log(response);
-          if (!response.ok) {
-            throw new Error("Error en la llamada al servidor");
-          } else {
-            alert("Empleado creado exitosamente");
-            navigate(ROUTES.ADMIN);
-          }
+          if (!response.ok) throw new Error(await response.text());
+
+          alert("Empleado creado exitosamente.");
+          navigate(ROUTES.ADMIN);
         })
         .catch((error) => {
-          console.error("Error:", error);
+          alert(error.message)
         });
     } else {
       console.log(formData);
@@ -269,7 +267,7 @@ export const ContainerBuscarEmpleado = () => {
     let url = "";
 
     if (!formData.id || formData.id === "") {
-      alert("Por favor ingrese una identificación");
+      alert("Por favor, ingrese una identificación.");
     } else {
       if (action === "Buscar") {
         url = `http://localhost:3000/api/empleado/consultar/${formData.id}`;
@@ -302,24 +300,17 @@ export const ContainerBuscarEmpleado = () => {
           },
           body: method === "PUT" ? JSON.stringify(formData) : null,
         })
-          .then((response) => {
-            if (response.status === 200 && method === "PUT") {
-              return alert("Empleado actualizado exitosamente");
-            }
-            if (!response.ok) {
-              alert(
-                "No se encontró un empleado con identificación: " + formData.id
-              );
-              throw new Error("Error en la llamada al servidor");
-            } else {
-              return response.text();
-            }
+          .then(async (response) => {
+            if (!response.ok) throw new Error(await response.text());
+            if (method === "PUT") return alert("Empleado actualizado exitosamente.");
+
+            return response.text();
           })
           .then((data) => {
             if (data) {
               data = JSON.parse(data);
 
-              alert("Empleado encontrado");
+              alert("Empleado encontrado.");
               setIsSearched(true);
               setFormData({
                 id: data.rows[0].ID.toString(),
@@ -337,10 +328,10 @@ export const ContainerBuscarEmpleado = () => {
             }
           })
           .catch((error) => {
-            console.error("Error:", error);
+            alert(error.message)
           });
       } else {
-        alert("Por favor seleccione una acción");
+        alert("Por favor, seleccione una acción.");
       }
     }
   };

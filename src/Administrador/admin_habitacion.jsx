@@ -48,21 +48,18 @@ export const ContainerCrearHabitación = () => {
           capacidad: formData.capacidad,
         }),
       })
-        .then((response) => {
-          console.log(response);
-          if (!response.ok) {
-            throw new Error("Error en la llamada al servidor");
-          } else {
-            alert("Habitación creada exitosamente");
-            navigate(ROUTES.ADMIN);
-          }
+        .then(async (response) => {
+          if (!response.ok) throw new Error(await response.text());
+
+          alert("Habitación creada exitosamente.");
+          navigate(ROUTES.ADMIN);
         })
         .catch((error) => {
-          console.error("Error:", error);
+          alert(error.message)
         });
     } else {
       console.log(formData);
-      alert("Por favor, completa todos los campos");
+      alert("Por favor, completa todos los campos.");
     }
   };
 
@@ -180,7 +177,7 @@ export const ContainerBuscarHabitación = () => {
     let url = "";
 
     if (!formData.id || formData.id === "") {
-      alert("Por favor ingrese una identificación");
+      alert("Por favor, ingrese una identificación.");
     } else {
       if (action === "Buscar") {
         url = `http://localhost:3000/api/habitacion/consultar/${formData.id}`;
@@ -213,25 +210,17 @@ export const ContainerBuscarHabitación = () => {
           },
           body: method === "PUT" ? JSON.stringify(formData) : null,
         })
-          .then((response) => {
-            if (response.status === 200 && method === "PUT") {
-              return alert("Habitación actualizada exitosamente");
-            }
-            if (!response.ok) {
-              alert(
-                "No se encontró una habitación con identificación: " +
-                  formData.id
-              );
-              throw new Error("Error en la llamada al servidor");
-            } else {
-              return response.text();
-            }
+          .then(async (response) => {
+            if (!response.ok) throw new Error(await response.text());
+            if (method === "PUT") return alert("Habitación actualizada exitosamente.");
+
+            return response.text();
           })
           .then((data) => {
             if (data) {
               data = JSON.parse(data);
 
-              alert("Habitación encontrada");
+              alert("Habitación encontrada.");
               setIsSearched(true);
               setFormData({
                 id: data.rows[0].ID.toString(),
@@ -244,10 +233,10 @@ export const ContainerBuscarHabitación = () => {
             }
           })
           .catch((error) => {
-            console.error("Error:", error);
+            alert(error.message)
           });
       } else {
-        alert("Por favor seleccione una acción");
+        alert("Por favor, seleccione una acción.");
       }
     }
   };
