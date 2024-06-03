@@ -90,15 +90,17 @@ export const ContainerCrearReserva = () => {
           },
         }),
       })
-        .then(async response => {
+        .then(async (response) => {
           if (!response.ok) throw new Error(await response.text());
 
           const data = await response.json();
           alert("Reserva creada exitosamente con ID " + data.id + ".");
-          (location.pathname === ROUTES.RESERVA_INSERTAR_EMP) ? navigate(ROUTES.EMPLEADOS) : navigate(ROUTES.ADMIN);
+          location.pathname === ROUTES.RESERVA_INSERTAR_EMP
+            ? navigate(ROUTES.EMPLEADOS)
+            : navigate(ROUTES.ADMIN);
         })
         .catch((error) => {
-          alert(error.message)
+          alert(error.message);
         });
     } else {
       alert("Por favor, completa todos los campos");
@@ -145,7 +147,7 @@ export const ContainerCrearReserva = () => {
         })
 
         .catch((error) => {
-          alert(error.message)
+          alert(error.message);
           console.error("Error:", error);
         });
     }
@@ -441,7 +443,9 @@ export const ContainerBuscarReserva = () => {
         // Si no se ha buscado la reserva se muestra un mensaje de alerta
 
         if (isSearched === false) {
-          alert("Por favor, ingrese la ID de la reserva en el campo correspondiente.");
+          alert(
+            "Por favor, ingrese la ID de la reserva en el campo correspondiente."
+          );
           return;
           // Si se ha buscado la reserva se verifica si se ha cambiado algún campo
         } else if (!isChanged) {
@@ -467,7 +471,8 @@ export const ContainerBuscarReserva = () => {
         })
           .then(async (response) => {
             if (!response.ok) throw new Error(await response.text());
-            if (method === "PUT") return alert("Reserva actualizada exitosamente");
+            if (method === "PUT")
+              return alert("Reserva actualizada exitosamente");
 
             return response.text();
           })
@@ -480,7 +485,9 @@ export const ContainerBuscarReserva = () => {
               // Se actualiza el estado de la reserva con los datos obtenidos
               setFormData({
                 id: data.rows[0].ID.toString(),
-                descripcion: data.rows[0].DESCRIPCION ? data.rows[0].DESCRIPCION : "",
+                descripcion: data.rows[0].DESCRIPCION
+                  ? data.rows[0].DESCRIPCION
+                  : "",
                 precio: data.rows[0].PRECIO.toString(),
                 estado: data.rows[0].ESTADO,
                 f_entrada: data.rows[0].F_ENTRADA,
@@ -491,7 +498,7 @@ export const ContainerBuscarReserva = () => {
             }
           })
           .catch((error) => {
-            alert(error.message)
+            alert(error.message);
           });
       } else {
         alert("Por favor, seleccione una acción.");
@@ -617,7 +624,9 @@ export const ContainerBuscarReserva = () => {
                         value={formData.precio}
                         disabled={action !== "Actualizar"}
                         onChange={
-                          action === "Actualizar" ? handleLocalUpdateChange : handleLocalChange
+                          action === "Actualizar"
+                            ? handleLocalUpdateChange
+                            : handleLocalChange
                         }
                         required={false}
                       />
@@ -658,7 +667,7 @@ export const ContainerBuscarReserva = () => {
                             ? formData.id_empleado.toString()
                             : "Empleado"
                         }
-                        name="empleado"
+                        name="id_empleado"
                         type="text"
                         value={formData.id_empleado}
                         disabled={action !== "Actualizar"}
