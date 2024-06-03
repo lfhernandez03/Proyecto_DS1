@@ -38,6 +38,7 @@ export const RecuperarContra = () => {
           console.log(response);
           if (!response.ok) throw new Error(await response.text());
 
+          const data = await response.json();
           alert('Correo de recuperación enviado a ' + data.correo);
           navigate(ROUTES.LOGIN);
         })
