@@ -40,8 +40,8 @@ export const ContainerCrearReserva = () => {
     residencia: "",
     tipo: "",
     correo_electronico: "",
-    f_entrada: "",
-    f_salida: "",
+    fecha_entrada: "",
+    fecha_salida: "",
     id_reserva: "",
     estado: "",
     precio: "",
@@ -70,10 +70,10 @@ export const ContainerCrearReserva = () => {
         credentials: "include",
         body: JSON.stringify({
           reserva: {
+            id_Cliente: formData.id,
             estado: formData.estado,
             f_entrada: formData.fecha_entrada,
             f_salida: formData.fecha_salida,
-            id_Cliente: formData.id,
             descripcion: formData.descripcion,
             precio: formData.precio,
             id_Habitacion: formData.habitacion,
@@ -89,14 +89,23 @@ export const ContainerCrearReserva = () => {
           },
         }),
       })
-        .then(async response => {
-          if (!response.ok) throw new Error(await response.text());
-
-          alert("Reserva creada exitosamente.");
-          navigate(ROUTES.ADMIN);
+        .then(async (response) => {
+          if (!response.ok){
+            throw new Error(await response.text());
+          }else{
+            const data = await response.json();
+            const id_reserva = data[0].ID;
+            
+            setFormData({
+              ...formData,
+              id_reserva: id_reserva,
+            });
+            alert("Reserva creada exitosamente con id: " + id_reserva);
+            navigate(ROUTES.ADMINISTRADOR);
+          }
         })
         .catch((error) => {
-          alert(error.message)
+          alert(error.message);
         });
     } else {
       alert("Por favor, completa todos los campos");
@@ -143,7 +152,7 @@ export const ContainerCrearReserva = () => {
         })
 
         .catch((error) => {
-          alert(error.message)
+          alert(error.message);
           console.error("Error:", error);
         });
     }
@@ -439,7 +448,9 @@ export const ContainerBuscarReserva = () => {
         // Si no se ha buscado la reserva se muestra un mensaje de alerta
 
         if (isSearched === false) {
-          alert("Por favor, ingrese la ID de la reserva en el campo correspondiente.");
+          alert(
+            "Por favor, ingrese la ID de la reserva en el campo correspondiente."
+          );
           return;
           // Si se ha buscado la reserva se verifica si se ha cambiado algún campo
         } else if (!isChanged) {
@@ -465,7 +476,8 @@ export const ContainerBuscarReserva = () => {
         })
           .then(async (response) => {
             if (!response.ok) throw new Error(await response.text());
-            if (method === "PUT") return alert("Reserva actualizada exitosamente");
+            if (method === "PUT")
+              return alert("Reserva actualizada exitosamente");
 
             return response.text();
           })
@@ -478,7 +490,9 @@ export const ContainerBuscarReserva = () => {
               // Se actualiza el estado de la reserva con los datos obtenidos
               setFormData({
                 id: data.rows[0].ID.toString(),
-                descripcion: data.rows[0].DESCRIPCION ? data.rows[0].DESCRIPCION : "",
+                descripcion: data.rows[0].DESCRIPCION
+                  ? data.rows[0].DESCRIPCION
+                  : "",
                 precio: data.rows[0].PRECIO.toString(),
                 estado: data.rows[0].ESTADO,
                 f_entrada: data.rows[0].F_ENTRADA,
@@ -489,7 +503,7 @@ export const ContainerBuscarReserva = () => {
             }
           })
           .catch((error) => {
-            alert(error.message)
+            alert(error.message);
           });
       } else {
         alert("Por favor, seleccione una acción.");
@@ -553,7 +567,7 @@ export const ContainerBuscarReserva = () => {
                             : "Fecha de entrada"
                         }
                         name="fecha_entrada"
-                        type="text"
+                        type="date"
                         value={formData.f_entrada}
                         disabled={action !== "Actualizar"}
                         required={false}
@@ -575,7 +589,7 @@ export const ContainerBuscarReserva = () => {
                             : "Fecha de salida"
                         }
                         name="fecha_salida"
-                        type="text"
+                        type="date"
                         value={formData.f_salida}
                         disabled={action !== "Actualizar"}
                         required={false}
@@ -615,7 +629,9 @@ export const ContainerBuscarReserva = () => {
                         value={formData.precio}
                         disabled={action !== "Actualizar"}
                         onChange={
-                          action === "Actualizar" ? handleLocalUpdateChange : handleLocalChange
+                          action === "Actualizar"
+                            ? handleLocalUpdateChange
+                            : handleLocalChange
                         }
                         required={false}
                       />
