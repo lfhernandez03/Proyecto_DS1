@@ -53,7 +53,7 @@ export const Admin = () => {
                 <img
                   className="img"
                   src="src\Multimedia\right.png"
-                  alt="img-reservas"
+                  alt="imgreservas"
                 />
                 <div className="wave-wrap">
                   <svg
