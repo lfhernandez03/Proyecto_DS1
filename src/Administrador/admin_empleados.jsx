@@ -59,6 +59,7 @@ export const ContainerCrearEmpleado = () => {
           salario: formData.salario,
           telefono: formData.telefono,
           fecha_inicio: formData.fecha_inicio,
+          admin: formData.tipo
         }),
       })
         .then(async (response) => {
