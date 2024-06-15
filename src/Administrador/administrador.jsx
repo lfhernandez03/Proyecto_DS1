@@ -2,11 +2,33 @@ import React from "react";
 import { BasicMenu } from "./administradorComponents";
 import { Link } from "react-router-dom";
 import { ROUTES } from '../rutasConst.js';
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPowerOff
+} from "@fortawesome/free-solid-svg-icons";
 
 /*
 
  */
 export const Admin = () => {
+
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    try {
+      fetch('http://localhost:3000/api/logout', {
+        method: 'POST',
+      })
+      document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
+      alert("Sesión cerrada");
+      navigate(ROUTES.LOGIN);
+    }
+    catch (error) {
+      alert(error.message);
+    }
+  }
+  
   return (
     <>
       <header>
@@ -43,6 +65,15 @@ export const Admin = () => {
             link1={ROUTES.HABITACION_INSERTAR}
             link2={ROUTES.HABITACION_CONSULTAR}
           />
+          <div className="input icon">
+            <Link
+              to="/"
+              onClick={handleLogOut}
+              style={{ textDecoration: "none", color: "var(--color-titulos)" }}
+            >
+              <FontAwesomeIcon icon={faPowerOff} style={{color: "red"}}/>
+            </Link>
+          </div>
         </nav>
       </header>
       <main>
