@@ -40,8 +40,8 @@ export const ContainerCrearReserva = () => {
     residencia: "",
     tipo: "",
     correo_electronico: "",
-    f_entrada: "",
-    f_salida: "",
+    fecha_entrada: "",
+    fecha_salida: "",
     id_reserva: "",
     estado: "",
     precio: "",
@@ -71,10 +71,10 @@ export const ContainerCrearReserva = () => {
         credentials: "include",
         body: JSON.stringify({
           reserva: {
+            id_Cliente: formData.id,
             estado: formData.estado,
             f_entrada: formData.fecha_entrada,
             f_salida: formData.fecha_salida,
-            id_Cliente: formData.id,
             descripcion: formData.descripcion,
             precio: formData.precio,
             id_Habitacion: formData.habitacion,
@@ -562,7 +562,7 @@ export const ContainerBuscarReserva = () => {
                             : "Fecha de entrada"
                         }
                         name="fecha_entrada"
-                        type="text"
+                        type="date"
                         value={formData.f_entrada}
                         disabled={action !== "Actualizar"}
                         required={false}
@@ -584,7 +584,7 @@ export const ContainerBuscarReserva = () => {
                             : "Fecha de salida"
                         }
                         name="fecha_salida"
-                        type="text"
+                        type="date"
                         value={formData.f_salida}
                         disabled={action !== "Actualizar"}
                         required={false}

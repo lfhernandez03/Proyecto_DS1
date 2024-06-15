@@ -500,7 +500,7 @@ export const ContainerBuscarEmpleado = () => {
                             ? formData.fecha_inicio
                             : "Fecha de Inicio"
                         }
-                        type="text"
+                        type="date"
                         value={formData.fecha_inicio}
                         disabled={action !== "Actualizar"}
                         onChange={
@@ -520,7 +520,7 @@ export const ContainerBuscarEmpleado = () => {
                             ? formData.fecha_nacimiento
                             : "Fecha de Nacimiento"
                         }
-                        type="text"
+                        type="date"
                         value={formData.fecha_nacimiento}
                         disabled={action !== "Actualizar"}
                         onChange={
