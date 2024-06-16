@@ -42,20 +42,18 @@ export const ContainerCrearReserva = () => {
     correo_electronico: "",
     fecha_entrada: "",
     fecha_salida: "",
-    id_reserva: "",
     estado: "",
     precio: "",
     descripcion: "",
     habitacion: "",
-    empleado: "",
   };
 
   const [formData, setFormData] = useState(initialState);
 
   const handleLocalChange = handleChange(setFormData, formData);
-  
+
   const [action, setAction] = useState(null);
-  
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -187,7 +185,7 @@ export const ContainerCrearReserva = () => {
                       type="button"
                       value="Buscar"
                       className="buscar-button"
-                      onClick={() => {setAction("Buscar"); handleSearch()}}
+                      onClick={() => { setAction("Buscar"); handleSearch() }}
                     />
                   </div>
                   <div className="input-wrap">
