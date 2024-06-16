@@ -72,7 +72,7 @@ export const ContainerCrearHabitación = () => {
             <div className="left">
               <div className="form-wrapper">
                 <div className="form-heading">
-                  <h1>Crear Empleado</h1>
+                  <h1>Crear habitación</h1>
                 </div>
                 <form className="form" onSubmit={handleSubmit}>
                   <div className="titles">
@@ -250,7 +250,7 @@ export const ContainerBuscarHabitación = () => {
             <div className="left">
               <div className="form-wrapper">
                 <div className="form-heading">
-                  <h1>Crear Empleado</h1>
+                  <h1>Buscar habitación</h1>
                 </div>
                 <form className="form" onSubmit={handleSubmit}>
                   <div className="buscar-id">
@@ -258,7 +258,7 @@ export const ContainerBuscarHabitación = () => {
                       <FontAwesomeIcon icon={faIdCard} />
                       <Inputs
                         className="contact-input"
-                        placeholder="Identificación"
+                        placeholder="ID de la habitación"
                         name="id"
                         type="number"
                         value={formData.id}
