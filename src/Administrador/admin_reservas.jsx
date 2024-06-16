@@ -161,7 +161,7 @@ export const ContainerCrearReserva = () => {
             <div className="left">
               <div className="form-wrapper">
                 <div className="form-heading">
-                  <h1>Crear Reserva</h1>
+                  <h1>Crear reserva</h1>
                 </div>
                 <form className="form" onSubmit={handleSubmit}>
                   <div className="titles">
@@ -514,18 +514,18 @@ export const ContainerBuscarReserva = () => {
             <div className="left">
               <div className="form-wrapper">
                 <div className="form-heading">
-                  <h1>Buscar</h1>
+                  <h1>Buscar reserva</h1>
                 </div>
                 <form className="form" onSubmit={handleSubmit}>
                   <div className="titles">
-                    <h3>Información del cliente</h3>
+                    <h3>Información de la reserva</h3>
                   </div>
                   <div className="buscar-id">
                     <div className="input-icon">
                       <FontAwesomeIcon icon={faIdCard} />
                       <Inputs
                         className="contact-input"
-                        placeholder="Identificación"
+                        placeholder="ID de la reserva"
                         name="id"
                         type="number"
                         value={formData.id}
@@ -538,7 +538,6 @@ export const ContainerBuscarReserva = () => {
                     </div>
                   </div>
                   <div className="titles">
-                    <h3>Información de la reserva</h3>
                   </div>
                   <div className="title-date">
                     <h4>Fecha entrada </h4>

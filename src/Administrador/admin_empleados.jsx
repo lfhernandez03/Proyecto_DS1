@@ -44,12 +44,12 @@ export const ContainerCrearEmpleado = () => {
     });
   };
 
-  
+
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const reorderedFormData = {
       id: formData.id,
       ...formData,
@@ -78,7 +78,7 @@ export const ContainerCrearEmpleado = () => {
         .then(async (response) => {
           console.log(response);
           if (!response.ok) throw new Error(await response.text());
-          
+
           alert("Empleado creado exitosamente.");
           navigate(ROUTES.ADMIN);
         })
@@ -99,7 +99,7 @@ export const ContainerCrearEmpleado = () => {
             <div className="left">
               <div className="form-wrapper">
                 <div className="form-heading">
-                  <h1>Crear Empleado</h1>
+                  <h1>Crear empleado</h1>
                 </div>
                 <form className="form" onSubmit={handleSubmit}>
                   <div className="titles">
@@ -171,15 +171,15 @@ export const ContainerCrearEmpleado = () => {
                   </div>
                   <div className="tipo1">
                     <input
-                    id="admin"
-                    type="checkbox"
-                    name="admin"
-                    checked={formData.admin}
-                    onChange={handleCheckboxChange}
-          
-                    />  
-                    <label htmlFor ="admin">Admin</label>
-                  
+                      id="admin"
+                      type="checkbox"
+                      name="admin"
+                      checked={formData.admin}
+                      onChange={handleCheckboxChange}
+
+                    />
+                    <label htmlFor="admin">Admin</label>
+
                   </div>
                   <div className="title-date">
                     <h4>Fecha entrada </h4>
@@ -359,7 +359,7 @@ export const ContainerBuscarEmpleado = () => {
             <div className="left">
               <div className="form-wrapper">
                 <div className="form-heading">
-                  <h1>Buscar Empleado</h1>
+                  <h1>Buscar empleado</h1>
                 </div>
                 <form className="form" onSubmit={handleSubmit}>
                   <div className="titles">
