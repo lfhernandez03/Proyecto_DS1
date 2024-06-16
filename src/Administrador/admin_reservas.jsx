@@ -53,7 +53,9 @@ export const ContainerCrearReserva = () => {
   const [formData, setFormData] = useState(initialState);
 
   const handleLocalChange = handleChange(setFormData, formData);
-
+  
+  const [action, setAction] = useState(null);
+  
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -108,7 +110,6 @@ export const ContainerCrearReserva = () => {
   };
 
   const handleSearch = (e) => {
-    e.preventDefault();
 
     let url = `http://localhost:3000/api/cliente/consultar/${formData.id}`;
 
@@ -186,13 +187,14 @@ export const ContainerCrearReserva = () => {
                       type="button"
                       value="Buscar"
                       className="buscar-button"
-                      onClick={handleSearch}
+                      onClick={() => {setAction("Buscar"); handleSearch()}}
                     />
                   </div>
                   <div className="input-wrap">
                     <div className="input-icon">
                       <FontAwesomeIcon icon={faUser} />
                       <Inputs
+                        disabled={action !== "Buscar"}
                         className="contact-input"
                         name="nombre_cliente"
                         type="text"
@@ -211,6 +213,7 @@ export const ContainerCrearReserva = () => {
                     <div className="input-icon">
                       <FontAwesomeIcon icon={faPhone} />
                       <Inputs
+                        disabled={action !== "Buscar"}
                         className="contact-input"
                         placeholder={
                           formData.telefono !== ""
@@ -229,6 +232,7 @@ export const ContainerCrearReserva = () => {
                     <div className="input-icon">
                       <FontAwesomeIcon icon={faHouseUser} />
                       <Inputs
+                        disabled={action !== "Buscar"}
                         className="contact-input"
                         placeholder={
                           formData.residencia !== ""
@@ -245,6 +249,7 @@ export const ContainerCrearReserva = () => {
                   </div>
                   <div className="tipo">
                     <select
+                      disabled={action !== "Buscar"}
                       name="tipo"
                       value={formData.tipo}
                       onChange={handleLocalChange}
@@ -258,6 +263,7 @@ export const ContainerCrearReserva = () => {
                     <div className="input-icon">
                       <FontAwesomeIcon icon={faEnvelope} />
                       <Inputs
+                        disabled={action !== "Buscar"}
                         id="correo_electronico"
                         className="contact-input"
                         placeholder={
@@ -297,20 +303,6 @@ export const ContainerCrearReserva = () => {
                       onChange={handleLocalChange}
                     />
                   </div>
-                  <div className="id-reserva">
-                    <div className="input-icon">
-                      <FontAwesomeIcon icon={faHashtag} />
-                      <Inputs
-                        id="id_reserva"
-                        className="reserva-input"
-                        placeholder="ID de la reserva"
-                        name="id_reserva"
-                        type="id"
-                        value={formData.id_reserva}
-                        onChange={handleLocalChange}
-                      />
-                    </div>
-                  </div>
                   <div className="tipo">
                     <select
                       name="estado"
@@ -346,20 +338,6 @@ export const ContainerCrearReserva = () => {
                         name="habitacion"
                         type="text"
                         value={formData.habitacion}
-                        onChange={handleLocalChange}
-                      />
-                    </div>
-                  </div>
-                  <div className="input-wrap">
-                    <div className="input-icon">
-                      <FontAwesomeIcon icon={faUserTie} />
-                      <Inputs
-                        id="empleado"
-                        className="contact-input"
-                        placeholder="Id empleado"
-                        name="empleado"
-                        type="text"
-                        value={formData.empleado}
                         onChange={handleLocalChange}
                       />
                     </div>
@@ -645,30 +623,6 @@ export const ContainerBuscarReserva = () => {
                         name="habitacion"
                         type="text"
                         value={formData.id_habitacion}
-                        disabled={action !== "Actualizar"}
-                        onChange={
-                          action === "Actualizar"
-                            ? handleLocalUpdateChange
-                            : handleLocalChange
-                        }
-                        required={false}
-                      />
-                    </div>
-                  </div>
-                  <div className="input-wrap">
-                    <div className="input-icon">
-                      <FontAwesomeIcon icon={faUserTie} />
-                      <Inputs
-                        id="empleado"
-                        className="contact-input"
-                        placeholder={
-                          formData.id_empleado !== ""
-                            ? formData.id_empleado.toString()
-                            : "Empleado"
-                        }
-                        name="id_empleado"
-                        type="text"
-                        value={formData.id_empleado}
                         disabled={action !== "Actualizar"}
                         onChange={
                           action === "Actualizar"

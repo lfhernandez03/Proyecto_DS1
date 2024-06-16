@@ -284,10 +284,11 @@ export const ContainerBuscarHabitación = () => {
                       value={formData.tipo}
                       name="tipo"
                     >
-                      <option value="tipo">Tipo</option>
+                      <option value="">Tipo</option>
                       <option value="simple">Simple</option>
                       <option value="doble">Doble</option>
                       <option value="triple">Triple</option>
+                      <option value="JACUZZI">Jacuzzi</option>
                     </select>
                   </div>
                   <div className="precio">
@@ -321,7 +322,7 @@ export const ContainerBuscarHabitación = () => {
                       value={formData.estado}
                       name="estado"
                     >
-                      <option value="estado">Estado</option>
+                      <option value="">Estado</option>
                       <option value="disponible">Disponible</option>
                       <option value="ocupado">Ocupado</option>
                       <option value="mantenimiento">Mantenimiento</option>
