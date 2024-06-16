@@ -254,13 +254,13 @@ export const ContainerBuscarEmpleado = () => {
     direccion: "",
     salario: "",
     telefono: "",
-    admin: "",
+    admin: false,
     fecha_inicio: "",
     habilitado: "",
   });
 
   const handleLocalChange = handleChange(setFormData, formData);
-
+  
   const [action, setAction] = useState(null);
 
   const [isSearched, setIsSearched] = useState(false);
@@ -272,6 +272,14 @@ export const ContainerBuscarEmpleado = () => {
     setFormData,
     formData
   );
+
+  const handleCheckboxChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.checked ? true : false,
+    });
+    setIsChanged(true);
+  };
 
   useUpdateEffect(formData);
 
@@ -469,20 +477,16 @@ export const ContainerBuscarEmpleado = () => {
                     </div>
                   </div>
                   <div className="tipo">
-                    <select
-                      disabled={action !== "Actualizar"}
-                      onChange={
-                        action === "Actualizar"
-                          ? handleLocalUpdateChange
-                          : handleLocalChange
-                      }
-                      value={formData.tipo}
-                      name="tipo"
-                    >
-                      <option value="">Admin</option>
-                      <option value="True">True</option>
-                      <option value="False">False</option>
-                    </select>
+                      <input
+                    id="admin"
+                    type="checkbox"
+                    name="admin"
+                    disabled={action !== "Actualizar"}
+                    checked={formData.admin}
+                    onChange={action === "Actualizar" ? handleCheckboxChange : undefined}
+          
+                    />  
+                    <label htmlFor ="admin">Admin</label>
                   </div>
                   <div className="habilitado">
                     <select
