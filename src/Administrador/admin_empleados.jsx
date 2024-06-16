@@ -31,16 +31,29 @@ export const ContainerCrearEmpleado = () => {
     direccion: "",
     salario: "",
     telefono: "",
-    tipo: "",
+    admin: false,
     fecha_inicio: "",
   });
 
   const handleLocalChange = handleChange(setFormData, formData);
 
+  const handleCheckboxChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.checked ? true : false,
+    });
+  };
+
+  
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    const reorderedFormData = {
+      id: formData.id,
+      ...formData,
+    };
 
     if (formData && Object.values(formData).every((value) => value !== "")) {
       fetch("http://localhost:3000/api/empleado/insertar", {
@@ -50,22 +63,22 @@ export const ContainerCrearEmpleado = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: formData.id,
-          contrasenia: formData.contrasenia,
-          correo: formData.correo,
-          nombre: formData.nombre,
-          fecha_nacimiento: formData.fecha_nacimiento,
-          direccion: formData.direccion,
-          salario: formData.salario,
-          telefono: formData.telefono,
-          fecha_inicio: formData.fecha_inicio,
-          admin: formData.tipo
+          id: reorderedFormData.id,
+          contrasenia: reorderedFormData.contrasenia,
+          correo: reorderedFormData.correo,
+          nombre: reorderedFormData.nombre,
+          fecha_nacimiento: reorderedFormData.fecha_nacimiento,
+          direccion: reorderedFormData.direccion,
+          salario: reorderedFormData.salario,
+          telefono: reorderedFormData.telefono,
+          fecha_inicio: reorderedFormData.fecha_inicio,
+          admin: reorderedFormData.admin,
         }),
       })
         .then(async (response) => {
           console.log(response);
           if (!response.ok) throw new Error(await response.text());
-
+          
           alert("Empleado creado exitosamente.");
           navigate(ROUTES.ADMIN);
         })
@@ -157,15 +170,16 @@ export const ContainerCrearEmpleado = () => {
                     </div>
                   </div>
                   <div className="tipo1">
-                    <select
-                      name="tipo"
-                      value={formData.tipo}
-                      onChange={handleLocalChange}
-                    >
-                      <option value="">Tipo</option>
-                      <option value="Empleado">Empleado</option>
-                      <option value="Administrador">Administrador</option>
-                    </select>
+                    <input
+                    id="admin"
+                    type="checkbox"
+                    name="admin"
+                    checked={formData.admin}
+                    onChange={handleCheckboxChange}
+          
+                    />  
+                    <label htmlFor ="admin">Admin</label>
+                  
                   </div>
                   <div className="title-date">
                     <h4>Fecha entrada </h4>
