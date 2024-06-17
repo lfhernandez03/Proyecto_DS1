@@ -1,9 +1,31 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ROUTES } from "../rutasConst.js";
 import { BasicMenu } from "./empleadosComponents.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPowerOff
+} from "@fortawesome/free-solid-svg-icons";
+
 
 export const ContainerEmp = () => {
+
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    try {
+      fetch('http://localhost:3000/api/logout', {
+        method: 'POST',
+      })
+      document.cookie = `token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT`;
+      alert("Sesión cerrada");
+      navigate(ROUTES.LOGIN);
+    }
+    catch (error) {
+      alert(error.message);
+    }
+  }
+  
   return (
     <>
       <header>
@@ -26,6 +48,15 @@ export const ContainerEmp = () => {
             link1={ROUTES.RESERVA_INSERTAR_EMP}
             link2={ROUTES.RESERVA_CONSULTAR_EMP}
           />
+          <div className="input icon">
+            <Link
+              to="/"
+              onClick={handleLogOut}
+              style={{ textDecoration: "none", color: "var(--color-titulos)" }}
+            >
+              <FontAwesomeIcon icon={faPowerOff} style={{color: "red"}}/>
+            </Link>
+          </div>
         </nav>
       </header>
       <main>

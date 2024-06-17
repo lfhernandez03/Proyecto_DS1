@@ -613,14 +613,14 @@ export const ContainerBuscarReserva = () => {
                     <div className="input-icon">
                       <FontAwesomeIcon icon={faDoorClosed} />
                       <Inputs
-                        id="habitacion"
+                        id="id_habitacion"
                         className="contact-input"
                         placeholder={
                           formData.id_habitacion !== ""
                             ? formData.id_habitacion.toString()
                             : "Habitación"
                         }
-                        name="habitacion"
+                        name="id_habitacion"
                         type="text"
                         value={formData.id_habitacion}
                         disabled={action !== "Actualizar"}

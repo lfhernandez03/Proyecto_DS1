@@ -83,11 +83,13 @@ export const ContainerCrearHabitación = () => {
                       onChange={handleChange}
                       value={formData.tipo}
                       name="tipo"
+                     
                     >
-                      <option value="tipo">Tipo</option>
+                      <option disabled value="">Tipo</option>
                       <option value="simple">Simple</option>
                       <option value="doble">Doble</option>
                       <option value="triple">Triple</option>
+                      <option value="JACUZZI">Jacuzzi</option>
                     </select>
                   </div>
                   <div className="precio">
@@ -284,7 +286,7 @@ export const ContainerBuscarHabitación = () => {
                       value={formData.tipo}
                       name="tipo"
                     >
-                      <option value="">Tipo</option>
+                      <option disabled value="">Tipo</option>
                       <option value="simple">Simple</option>
                       <option value="doble">Doble</option>
                       <option value="triple">Triple</option>
@@ -299,7 +301,7 @@ export const ContainerBuscarHabitación = () => {
                         placeholder={
                           formData.precio !== "" ? formData.precio : "Precio"
                         }
-                        name="Precio"
+                        name="precio"
                         type="number"
                         value={formData.precio}
                         disabled={action !== "Actualizar"}
@@ -322,7 +324,7 @@ export const ContainerBuscarHabitación = () => {
                       value={formData.estado}
                       name="estado"
                     >
-                      <option value="">Estado</option>
+                      <option disabled value="">Estado</option>
                       <option value="disponible">Disponible</option>
                       <option value="ocupado">Ocupado</option>
                       <option value="mantenimiento">Mantenimiento</option>
@@ -337,9 +339,9 @@ export const ContainerBuscarHabitación = () => {
                           : handleLocalChange
                       }
                       value={formData.habilitado}
-                      name="estado"
+                      name="habilitado"
                     >
-                      <option value="Habilitado">Habilitado</option>
+                      <option disabled value="">Habilitado</option>
                       <option value="True">True</option>
                       <option value="False">False</option>
                     </select>
