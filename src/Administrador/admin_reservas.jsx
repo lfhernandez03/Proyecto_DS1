@@ -523,7 +523,7 @@ export const ContainerBuscarReserva = () => {
                     <div className="input-icon">
                       <FontAwesomeIcon icon={faCalendarDays} />
                       <Inputs
-                        id="fecha_entrada"
+                        id="f_entrada"
                         className="fechas-input"
                         label="Fecha de entrada"
                         onChange={
@@ -536,7 +536,7 @@ export const ContainerBuscarReserva = () => {
                             ? formData.f_entrada.toString()
                             : "Fecha de entrada"
                         }
-                        name="fecha_entrada"
+                        name="f_entrada"
                         type="date"
                         value={formData.f_entrada}
                         disabled={action !== "Actualizar"}
@@ -546,7 +546,7 @@ export const ContainerBuscarReserva = () => {
                     <div className="input-icon">
                       <FontAwesomeIcon icon={faCalendarDays} />
                       <Inputs
-                        id="fecha_salida"
+                        id="f_salida"
                         className="fechas-input"
                         onChange={
                           action === "Actualizar"
@@ -558,7 +558,7 @@ export const ContainerBuscarReserva = () => {
                             ? formData.f_salida.toString()
                             : "Fecha de salida"
                         }
-                        name="fecha_salida"
+                        name="f_salida"
                         type="date"
                         value={formData.f_salida}
                         disabled={action !== "Actualizar"}
